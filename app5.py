@@ -452,25 +452,23 @@ if not st.session_state.selected_module:
 row1_cols = st.columns(2)
 with row1_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
-    if st.button("ECB\nEasy Conversion Base Deployments.", key="mod_ecb"):
+    if st.button("ECB\n", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
 
 with row1_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
-    if st.button("LENDING\nMerchant evaluation and pitch scripts.", key="mod_lending"):
+    if st.button("LENDING\n", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
 
 row2_cols = st.columns(2)
 with row2_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
-    if st.button("GATE MEETING RITUALS\n
-    Morning optimization and attendance routines.", key="mod_gate"):
+    if st.button("GATE MEETING RITUALS\n", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
 
 with row2_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("MERCHANT VISIT RITUALS\n    
-    Ground deployment checklist and merchant journey.", key="mod_visit"):
+    if st.button("MERCHANT VISIT RITUALS\n", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
