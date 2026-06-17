@@ -7,6 +7,12 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# Initialize Session State tracking variables to remember user clicks
+if "selected_module" not in st.session_state:
+    st.session_state.selected_module = None
+if "selected_competitor" not in st.session_state:
+    st.session_state.selected_competitor = None
+
 # 2. PREMIUM DARK MODE DESIGN SYSTEM (COLORS & FONTS)
 st.markdown("""
     <style>
@@ -17,7 +23,7 @@ st.markdown("""
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     
-    /* Clean Hide Defaut Elements */
+    /* Clean Hide Default Elements */
     header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; }
     
     /* Custom Header Typography */
@@ -46,37 +52,7 @@ st.markdown("""
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
     }
-    .swipe-container::-webkit-scrollbar { display: none; } /* Hide Scrollbars */
-    
-    .task-swipe-card {
-        scroll-snap-align: start;
-        flex: 0 0 240px;
-        background: linear-gradient(135deg, #1C1C1E 0%, #121214 100%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-    }
-    .card-badge {
-        font-size: 9px;
-        color: #A1A1AA;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        font-weight: 700;
-        margin-bottom: 6px;
-    }
-    .card-heading {
-        color: #FFFFFF;
-        font-size: 18px;
-        font-weight: 800;
-        margin: 0 0 4px 0;
-    }
-    .card-details {
-        color: #8E8E93;
-        font-size: 12px;
-        margin: 0;
-        line-height: 1.4;
-    }
+    .swipe-container::-webkit-scrollbar { display: none; }
     
     /* Native Dropdown Element Overrides */
     div.stSelectbox > label {
@@ -106,12 +82,13 @@ st.markdown("""
         background: #FFFFFF;
         border-radius: 28px;
         padding: 26px;
-        margin-top: 24px;
+        margin-top: 12px;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         animation: springPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
     }
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
     .solution-popup-card.obj-border { border-left: 6px solid #5856D6; }
+    .solution-popup-card.pitch-border { border-left: 6px solid #00CD52; }
     
     .status-pill {
         display: inline-block;
@@ -124,6 +101,7 @@ st.markdown("""
     }
     .status-pill.err-color { background: #FFEBEE; color: #D32F2F; }
     .status-pill.obj-color { background: #E8EAF6; color: #3F51B5; }
+    .status-pill.pitch-color { background: #E8F9EE; color: #007A31; }
     
     .popup-title {
         color: #1C1C1E;
@@ -170,7 +148,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. INTERACTIVE DATA DICTIONARIES
+# 3. TECHNICAL & OBJECTIONS MASTER DATA MATRIX
 LOAN_ERRORS_DATA = {
     "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card और Aadhaar Card में नाम अलग है।", "actions": ["सही नाम अपडेट कराएं।", "PAN में नाम सुधारकर फिर से KYC करें।"]},
     "kyc_link_failed": {"title": "KYC Verification Failed", "reason": "PAN और Aadhaar आपस में Link नहीं है।", "actions": ["PAN को Aadhaar से Link करवाएं।", "Link होने के बाद 24 घंटे बाद Retry करें।"]},
@@ -194,60 +172,105 @@ OBJECTIONS_DATA = {
     "edi_vs_emi": {"title": "मैं EMI की बजाय EDI क्यों लूँ?", "reason": "व्यवसाय के कैशफ्लो पर बिना दबाव डाले आसान दैनिक अदायगी।", "actions": ["EMI में हर महीने बड़ी Fixed Amount देनी पड़ती है।", "EDI में आपकी Daily Sales से छोटी-छोटी Amount कटती है, जिससे Repayment आसान हो जाता है।"]}
 }
 
+COMPETITION_PITCH_DATA = {
+    "BharatPe": {
+        "points": ["No daily auto-debit friction setup like BharatPe.", "PhonePe offers clear settlement logs right inside the app.", "Lower hidden processing fees compared to competitor models."],
+        "script": "Sir, BharatPe me settlement delays aur internal hidden charges ka issue rehta hai. PhonePe Merchant Loan me aapko pure clear settlement breakdown milte hain aur instant clear payout hota hai bina kisi extra platform fees ke!",
+    },
+    "Paytm": {
+        "points": ["Zero subscription soundbox bundle locks.", "Direct processing through top trusted lending public partners.", "Flexible daily EDI collection based on running transactional health metrics."],
+        "script": "Sir, Paytm ka model setup fix rules pe chalta hai jahan sales kam hone par bhi stress badhta hai. PhonePe ka EDI system aapki running business account capability ke hisab se balanced hai, jisse workload bilkul nahi banta!"
+    }
+}
+
 # 4. APP BRAND SURFACE HEADERS
 st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-main-title">Lending Army Active Workspace</div>', unsafe_allow_html=True)
 
-# 5. HORIZONTAL SWIPE TASK BAR (Replicating Video 1 Layout)
-st.markdown("""
-    <div class="swipe-container">
-        <div class="task-swipe-card">
-            <div class="card-badge">Module 01</div>
-            <div class="card-heading">ECB</div>
-            <div class="card-desc">External commercial settlement configurations.</div>
-        </div>
-        <div class="task-swipe-card">
-            <div class="card-badge">Module 02</div>
-            <div class="card-heading">LENDING</div>
-            <div class="card-desc">Merchant evaluation profiles & pitch scripts.</div>
-        </div>
-        <div class="task-swipe-card">
-            <div class="card-badge">Module 03</div>
-            <div class="card-heading">OBJECTIONS</div>
-            <div class="card-desc">Instant merchant dynamic question resolution engine.</div>
-        </div>
-        <div class="task-swipe-card">
-            <div class="card-badge">Module 04</div>
-            <div class="card-heading">LOAN ERRORS</div>
-            <div class="card-desc">Technical troubleshooting, logs & instant solutions.</div>
-        </div>
-    </div>
-""", unsafe_allow_html=True)
+# 5. STREAMLIT-NATIVE INTERACTIVE MODULE CAROUSEL (Replaces raw HTML buttons for click detection)
+cols = st.columns(2)
+
+with cols[0]:
+    ecb_clicked = st.button("📊 MODULE 01: ECB", use_container_width=True)
+    if ecb_clicked:
+        st.session_state.selected_module = "ECB"
+
+with cols[1]:
+    lending_clicked = st.button("💼 MODULE 02: LENDING", use_container_width=True)
+    if lending_clicked:
+        st.session_state.selected_module = "LENDING"
 
 st.markdown("<hr/>", unsafe_allow_html=True)
 
-# 6. FILTER SELECTION COLS
-col1, col2 = st.columns(2)
+# 6. EXECUTING DYNAMIC LENDING COMPETITION FLOW
+if st.session_state.selected_module == "LENDING":
+    st.markdown('<div class="meta-label">Selected Focus: Merchant Pitching Guide</div>', unsafe_allow_html=True)
+    
+    # Choose Competitor Selector Dropdown
+    competitor_choice = st.selectbox(
+        "Choose Your On-Ground Competition:",
+        options=["Select Competitor...", "BharatPe", "Paytm"]
+    )
+    
+    if competitor_choice != "Select Competitor...":
+        pitch_node = COMPETITION_PITCH_DATA[competitor_choice]
+        points_html = "".join([f"<li><span class='check-icon'>✓</span> {pt}</li>" for pt in pitch_node["points"]])
+        
+        # Spring-loaded Popup Animation Container
+        st.markdown(f"""
+            <div class="solution-popup-card pitch-border">
+                <div class="status-pill pitch-color">🔥 PITCHING STRATEGY VS {competitor_choice.upper()}</div>
+                <div class="popup-title">Key Battleground Talking Points</div>
+                <div class="meta-label">Points to Highlight / मुख्य बातें</div>
+                <div class="action-steps-box" style="background: #F0FDF4; border-color: #DCFCE7;">
+                    <ul>{points_html}</ul>
+                </div>
+                <div style="margin-top: 20px;"></div>
+                <div class="meta-label">Customized Pitch Script / मर्चेंट को क्या बोलें</div>
+                <div class="diagnostic-reason-text" style="background: #FAFAFA; border: 1px solid #E4E4E7;">
+                    🗣️ "{pitch_node['script']}"
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        # Audio Playback Simulator Component
+        st.write("")
+        st.markdown('<div class="meta-label">Listen to Pitch Delivery Audio Practice:</div>', unsafe_allow_html=True)
+        st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
 
-with col1:
+elif st.session_state.selected_module == "ECB":
+    st.markdown("""
+        <div class="solution-popup-card" style="border-left: 6px solid #A1A1AA;">
+            <div class="status-pill" style="background: #F4F4F5; color: #71717A;">📊 CORE COMPLIANCE</div>
+            <div class="popup-title">External Commercial Borrowings Matrix</div>
+            <div class="diagnostic-reason-text">ECB parameters and limits structure are handled automatically via regional gateway nodes.</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+# 7. TROUBLESHOOT TECHNICAL ACTIONS SECTION (UNTOUCHED)
+st.markdown("<div style='margin-top: 40px;'></div>", unsafe_allow_html=True)
+st.markdown('<div class="app-brand-tag">Direct Resolution Centers</div>', unsafe_allow_html=True)
+
+col_err, col_obj = st.columns(2)
+
+with col_err:
     selected_err = st.selectbox(
         "Troubleshoot Technical Errors",
         options=["None"] + list(LOAN_ERRORS_DATA.keys()),
         format_func=lambda x: "Select Error Signature..." if x == "None" else LOAN_ERRORS_DATA[x]["title"]
     )
 
-with col2:
+with col_obj:
     selected_obj = st.selectbox(
         "Resolve Counter Objections",
         options=["None"] + list(OBJECTIONS_DATA.keys()),
         format_func=lambda x: "Select Merchant Objection..." if x == "None" else OBJECTIONS_DATA[x]["title"]
     )
 
-# 7. DYNAMIC POPUP RENDERING (Replicating Video 2 Pop Animation)
+# Render Diagnostic Solution output cards matching Selection
 if selected_err != "None":
     node = LOAN_ERRORS_DATA[selected_err]
     actions_html = "".join([f"<li><span class='check-icon'>✓</span> {act}</li>" for act in node["actions"]])
-    
     st.markdown(f"""
         <div class="solution-popup-card err-border">
             <div class="status-pill err-color">🚫 LENDING ERROR DIAGNOSTIC</div>
@@ -262,7 +285,6 @@ if selected_err != "None":
 elif selected_obj != "None":
     node = OBJECTIONS_DATA[selected_obj]
     actions_html = "".join([f"<li><span class='check-icon'>✓</span> {act}</li>" for act in node["actions"]])
-    
     st.markdown(f"""
         <div class="solution-popup-card obj-border">
             <div class="status-pill obj-color">💬 OBJECTION RESOLUTION ENGINE</div>
@@ -271,11 +293,5 @@ elif selected_obj != "None":
             <div class="diagnostic-reason-text">{node['reason']}</div>
             <div class="meta-label">Immediate Action / क्या करें</div>
             <div class="action-steps-box"><ul>{actions_html}</ul></div>
-        </div>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-        <div style='text-align: center; padding: 40px; color: #3A3A3C; font-size: 14px; font-weight: 500;'>
-            ▲ Select an active error log or dynamic counter query to trigger the execution card.
         </div>
     """, unsafe_allow_html=True)
