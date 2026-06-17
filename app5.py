@@ -86,7 +86,7 @@ st.markdown("""
         margin-bottom: 24px;
     }
     
-    /* Symmetrical Native Module Block Layout Engine (Fixes image_14.png disparity) */
+    /* Fixed Styling Engine for Symmetrical Cards without breaking labels */
     div.stButton > button {
         background-color: #1C1C1E !important;
         border: 1px solid rgba(255,255,255,0.08) !important;
@@ -94,7 +94,7 @@ st.markdown("""
         padding: 24px 20px !important;
         text-align: left !important;
         width: 100% !important;
-        min-height: 142px !important; /* Forces total box level row symmetry */
+        min-height: 142px !important; /* Perfect Row Symmetry */
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
@@ -106,19 +106,30 @@ st.markdown("""
         transform: translateY(-2px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
-    /* Enlarged module bold typography layout values */
+    
+    /* Custom formatting rules targetting button string rows cleanly */
     div.stButton > button p {
         color: #FFFFFF !important;
         text-align: left !important;
-        line-height: 1.4 !important;
+        line-height: 1.5 !important;
+        font-size: 13px !important;
+        font-weight: 400 !important;
+        opacity: 0.7 !important;
+        white-space: normal !important;
     }
     
-    /* Pitch CTA Accent Button elements */
+    /* Make the first line (the main module name) larger and fully opaque */
+    div.stButton > button p::first-line {
+        font-size: 18px !important;
+        font-weight: 800 !important;
+        color: #FFFFFF !important;
+        opacity: 1 !important;
+    }
+    
+    /* Pitch CTA Accent Button elements overrides */
     div.pitch-trigger-box button {
         background-color: #00CD52 !important;
         border: none !important;
-        font-weight: 700 !important;
-        color: #000000 !important;
         text-align: center !important;
         min-height: auto !important;
         padding: 14px 20px !important;
@@ -127,6 +138,11 @@ st.markdown("""
         color: #000000 !important;
         text-align: center !important;
         font-weight: 700 !important;
+        opacity: 1 !important;
+    }
+    div.pitch-trigger-box button p::first-line {
+        font-size: 14px !important;
+        color: #000000 !important;
     }
     
     /* Selection Fields */
@@ -304,7 +320,7 @@ DATA_FLOW_MATRIX = {
                 "Position the local Sector Incharge as an advocate who monitors your QR health to unlock bigger limits.",
                 "Emphasize that reliable, human ground-support is unmatched by corporate apps."
             ],
-            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jab aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai."
+            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jag aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai."
         },
         "Google Pay": {
             "points": [
@@ -328,7 +344,7 @@ DATA_FLOW_MATRIX = {
 }
 
 TECHNICAL_ERRORS = {
-    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type या E-NACH Consent में Problem hai.", "actions": ["Bank Details dobara Check karen.", "Sahi Account Type (Savings) aur IFSC chunen."]},
+    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent में Problem hai.", "actions": ["Bank Details dobara Check karen.", "Sahi Account Type (Savings) aur IFSC chunen."]},
     "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur Aadhaar Card mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC karen."]},
     "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process KYC Process beech mein ruk gaya.", "actions": ["Samay (TAT) ke poora hone ka intezar karen.", "War room operations me ticket raise kare."]},
     "face_match_failed": {"title": "Face Match Verification Fault", "reason": "Selfie capture criteria fails to cross check with background document parameters.", "actions": ["Take clean selfie under ambient bright setup.", "Avoid wearing verification blocking accessories like lenses or caps."]}
@@ -346,27 +362,27 @@ st.markdown('<div class="active-workspace-surface">', unsafe_allow_html=True)
 st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-main-title">Pitch Pro</div>', unsafe_allow_html=True)
 
-# Symmetric Grid Generation Systems (Enforces symmetrical card alignments across boundaries)
+# Symmetrical Card Grid Generation Systems (Clean line breaks using \n)
 row1_cols = st.columns(2)
 with row1_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
-    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>ECB</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>External commercial settlement configurations.</span>", key="mod_ecb"):
+    if st.button("ECB\nExternal commercial settlement configurations.", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
 
 with row1_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
-    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>LENDING</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Merchant evaluation profiles and pitch scripts.</span>", key="mod_lending"):
+    if st.button("LENDING\nMerchant evaluation profiles and pitch scripts.", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
 
 row2_cols = st.columns(2)
 with row2_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
-    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>GATE MEETING RITUALS</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Morning optimization and attendance routines.</span>", key="mod_gate"):
+    if st.button("GATE MEETING RITUALS\nMorning optimization and attendance routines.", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
 
 with row2_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>MERCHANT VISIT RITUALS</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Ground deployment checklist and merchant journey.</span>", key="mod_visit"):
+    if st.button("MERCHANT VISIT RITUALS\nGround deployment checklist and merchant journey.", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
@@ -423,7 +439,7 @@ if st.session_state.selected_module:
                 st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">Interactive Pitch Training Audio:</div>', unsafe_allow_html=True)
                 st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
 
-    # SYSTEM INTERACTION 2: GATE MEETINGS (10 KA DUM - image_11.png Matrix tracking)
+    # SYSTEM INTERACTION 2: GATE MEETINGS
     elif current_mod == "Gate Meeting Rituals":
         st.markdown("""
             <div class="solution-popup-card ritual-border">
@@ -445,7 +461,7 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-    # SYSTEM INTERACTION 3: VISITATION RITUALS (5 KA PUNCH - image_12.png Step roadmap)
+    # SYSTEM INTERACTION 3: VISITATION RITUALS
     elif current_mod == "Merchant Visit Rituals":
         st.markdown("""
             <div class="solution-popup-card ritual-border">
