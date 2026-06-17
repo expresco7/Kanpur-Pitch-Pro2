@@ -70,6 +70,7 @@ st.markdown("""
     
     .active-workspace-surface {
         animation: workspaceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
+        margin-bottom: 80px; /* Space out room for the sticky back-button layer */
     }
 
     /* Typography & Header Blocks */
@@ -178,7 +179,6 @@ st.markdown("""
         color: #FFFFFF;
         line-height: 1.3;
         margin-top: 4px;
-        /* Uniformly contain long text fields to avoid breaking grid structures */
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
@@ -238,6 +238,37 @@ st.markdown("""
     }
     div.pitch-trigger-box button p::first-line {
         font-size: 14px !important;
+        color: #000000 !important;
+    }
+
+    /* Fixed Floating Corner Back Button Interface Styles */
+    div.floating-back-container {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        z-index: 9999;
+    }
+    div.floating-back-container button {
+        background-color: #1C1C1E !important;
+        border: 1px solid rgba(255,255,255,0.15) !important;
+        border-radius: 30px !important;
+        padding: 8px 18px !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+        min-height: auto !important;
+        width: auto !important;
+    }
+    div.floating-back-container button:hover {
+        background-color: #FFFFFF !important;
+        border-color: #FFFFFF !important;
+    }
+    div.floating-back-container button p {
+        color: #FFFFFF !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+    }
+    div.floating-back-container button:hover p {
         color: #000000 !important;
     }
     
@@ -646,25 +677,37 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
+    # FLOATING CORNER BACK BUTTON (Appears at bottom corner of every page EXCEPT landing page)
+    st.markdown('<div class="floating-back-container">', unsafe_allow_html=True)
+    if st.button("← Back to Dashboard", key="floating_back_nav_action"):
+        st.session_state.selected_module = None
+        st.session_state.selected_competitor = "Select Competitor..."
+        st.session_state.pitch_customized = False
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
+
 # 7. ILLUMINATED ASSISTANCE PORTALS
 if not st.session_state.selected_module:
     st.markdown('<div class="illuminated-triage-panel">', unsafe_allow_html=True)
     st.markdown('<div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>', unsafe_allow_html=True)
     
-    col_err, col_obj = st.columns(2)
+    # Grid layout aligning technical diagnostics and customer responses completely in-line
+    triage_cols = st.columns(2)
     
-    with col_err:
+    with triage_cols[0]:
         selected_err = st.selectbox(
             "Troubleshoot Technical Errors",
             options=["None"] + list(TECHNICAL_ERRORS.keys()),
-            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"]
+            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
+            key="tech_errors_aligned_dropdown"
         )
         
-    with col_obj:
+    with triage_cols[1]:
         selected_obj = st.selectbox(
             "Resolve Counter Objections",
             options=["None"] + list(COUNTER_OBJECTIONS.keys()),
-            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"]
+            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
+            key="counter_objections_aligned_dropdown"
         )
         
     if selected_err != "None":
