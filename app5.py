@@ -18,7 +18,7 @@ def reset_pitch_flow(target_module):
     st.session_state.selected_module = target_module
     st.session_state.pitch_customized = False
 
-# 2. APP DESIGN SYSTEM & NATIVE MODULE BUTTON CSS
+# 2. APP DESIGN SYSTEM & TERMINAL NATIVE CSS
 st.markdown("""
     <style>
     /* Base Engine UI Configuration */
@@ -48,7 +48,7 @@ st.markdown("""
         margin-bottom: 24px;
     }
     
-    /* Native Button Styling Overrides to replicate image_8.png layout */
+    /* Native Button Styling Overrides to replicate image_13.png layout */
     div.stButton > button {
         background-color: #1C1C1E !important;
         border: 1px solid rgba(255,255,255,0.08) !important;
@@ -102,7 +102,7 @@ st.markdown("""
         color: white !important;
     }
     
-    /* Interactive Dashboard Response Cards (image_10.png fix) */
+    /* Interactive Dashboard Response Cards */
     @keyframes springPop {
         0% { transform: scale(0.96) translateY(15px); opacity: 0; }
         100% { transform: scale(1) translateY(0); opacity: 1; }
@@ -118,6 +118,7 @@ st.markdown("""
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
     .solution-popup-card.obj-border { border-left: 6px solid #5856D6; }
     .solution-popup-card.flow-border { border-left: 6px solid #00CD52; }
+    .solution-popup-card.ritual-border { border-left: 6px solid #FF9500; }
     
     .status-pill {
         display: inline-block;
@@ -131,6 +132,7 @@ st.markdown("""
     .status-pill.err-color { background: #FFEBEE; color: #D32F2F; }
     .status-pill.obj-color { background: #E8EAF6; color: #3F51B5; }
     .status-pill.flow-color { background: #E8F9EE; color: #007A31; }
+    .status-pill.ritual-color { background: #FFF3E0; color: #E65100; }
     
     .popup-title {
         color: #1C1C1E;
@@ -162,24 +164,43 @@ st.markdown("""
         border-radius: 14px;
         padding: 16px;
     }
-    .action-steps-box ul { list-style: none; padding: 0; margin: 0; }
-    .action-steps-box li {
-        color: #1B5E20;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: flex-start;
-        line-height: 1.4;
+    
+    /* Custom Styling for Table Layouts inside Cards */
+    .ritual-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        color: #1C1C1E;
     }
-    .action-steps-box li:last-child { margin-bottom: 0; }
-    .check-icon { color: #4CAF50; font-weight: 900; margin-right: 10px; }
+    .ritual-table th {
+        background: #F4F4F5;
+        text-align: left;
+        padding: 10px;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #71717A;
+        border-bottom: 2px solid #E4E4E7;
+    }
+    .ritual-table td {
+        padding: 12px 10px;
+        font-size: 14px;
+        border-bottom: 1px solid #E4E4E7;
+        vertical-align: top;
+    }
+    .ritual-table tr:last-child td {
+        border-bottom: none;
+    }
+    .step-highlight {
+        font-weight: 700;
+        color: #000000;
+    }
     
     hr { border-color: rgba(255,255,255,0.08) !important; margin: 24px 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. COMPETITIVE MATRICES DATA REPOSITORY
+# 3. KNOWLEDGE MATRICES DATA REPOSITORY
 DATA_FLOW_MATRIX = {
     "Smart Speaker": {
         "Paytm": {
@@ -245,7 +266,7 @@ DATA_FLOW_MATRIX = {
                 "Contrast GPay's complicated third-party NBFC approvals with PhonePe's streamlined processing.",
                 "Emphasize that the local Sector Incharge can expedite and verify any glitch on the spot."
             ],
-            "pitch": "Bhaiya, market mein kahin bhi loan lene jaoge toh itne documents maangenge ki aap pareshan ho jaoge. PhonePe par agar aapka loan offer aaya hai, toh aapko koi collateral ya paperwork nahi chahiye. Sirf basic Aadhaar aur PAN card verify karna hai screen par, aur 24 se 48 ghante ke andar paisa seedha aapke linked bank account mein credit! Google Pay par teesri party ka jhamela rehta hai, unka customer care kabhi phone nahi uthata. Humare yahan agar aapka loan process hote waqt koi technical glitch aa bhi gaya, toh aapko pareshan nahi hona hai. Aap seedha humare area ke Sector Incharge ko batayiye, woh piche system par baat karke aapka temporary block turant clear karwayega. Fast capital ke sath fast aur reliable ground service sirf humare paas hai."
+            "pitch": "Bhaiya, market mein kahin bhi loan lene jaoge toh itne documents maangenge ki aap pareshan ho jaoge. PhonePe par agar aapka loan offer aaya hai, toh aapko koi collateral ya paperwork nahi chahiye. Sirf basic Aadhaar aur PAN card verify karna hai screen par, aur 24 se 48 ghante ke andar paise seedha aapke linked bank account mein credit! Google Pay par teesri party ka jhamela rehta hai, unka customer care kabhi phone nahi uthata. Humare yahan agar aapka loan process hote waqt koi technical glitch aa bhi gaya, toh aapko pareshan nahi hona hai. Aap seedha humare area ke Sector Incharge ko batayiye, woh piche system par baat karke aapka temporary block turant clear karwayega. Fast capital ke sath fast aur reliable ground service sirf humare paas hai."
         },
         "Banks": {
             "points": [
@@ -254,40 +275,50 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se james aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
         }
     }
 }
 
 TECHNICAL_ERRORS = {
-    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type या E-NACH Consent में Problem है।", "actions": ["Bank Details दोबारा Check करें।", "सही Account Type (Savings) और IFSC चुनें।"]},
-    "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card और Aadhaar Card में नाम अलग है।", "actions": ["सही नाम अपडेट कराएं।", "PAN में नाम सुधारकर फिर से KYC करें।"]},
-    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process बीच में रुक गया / पूरा नहीं हो पाया।", "actions": ["कुछ समय (TAT) इंतजार करें।", "TAT पूरा होने के बाद भी Issue रहे तो War Room में Raise करें।"]},
-    "face_match_failed": {"title": "Face Match Failed", "reason": "Selfie और Aadhaar/PAN Photo Match नहीं हुई।", "actions": ["Bright Light में Clear Selfie लें।", "चश्मा/कैप हटाकर Try करें।"]}
+    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type या E-NACH Consent में Problem hai.", "actions": ["Bank Details dobara Check karen.", "Sahi Account Type (Savings) aur IFSC chunen."]},
+    "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur Aadhaar Card mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC karen."]},
+    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya / poora nahi ho paya.", "actions": ["Kuch samay (TAT) intezar karen.", "TAT poora hone ke baad bhi Issue rahe toh War Room mein Raise" ]},
+    "face_match_failed": {"title": "Face Match Failed", "reason": "Selfie aur Aadhaar/PAN Photo Match nahi hui.", "actions": ["Bright Light mein Clear Selfie len.", "Chashma/Cap hatakar Try" ]}
 }
 
 COUNTER_OBJECTIONS = {
-    "eligibility": {"title": "PhonePe QR है, पर Loan के लिए Eligible कैसे बनूँ?", "reason": "मर्चेंट द्वारा नियमित व्यवहार बढ़ाना आवश्यक है।", "actions": ["रोजाना PhonePe QR पर ज्यादा से ज्यादा UPI Payments लें।", "आपकी लगातार Transaction History ही आपको Loan के लिए Eligible बनाती है।"]},
-    "higher_offer": {"title": "मुझे Higher Loan Offer कैसे मिलेगा?", "reason": "लोन की राशि मुख्य रूप से लेनदेन और सिबिल पर आधारित है।", "actions": ["Loan Amount मुख्य रूप से आपके PhonePe QR Transactions और CIBIL Score पर निर्भर करता. है।", "समय पर EDI Repayment करने से आपका CIBIL सुधरता है।"]},
-    "edi_vs_emi": {"title": "मैं EMI की बजाय EDI क्यों लूँ?", "reason": "व्यवसाय के कैशफ्लो पर बिना दबाव डाले आसान दैनिक अदायगी।", "actions": ["EMI में हर महीने बड़ी Fixed Amount देनी पड़ती है।", "EDI में आपकी Daily Sales से छोटी-छोटी Amount कटती है, जिससे Repayment आसान हो जाता है।"]}
+    "eligibility": {"title": "Eligible Kaise Bane", "reason": "Merchant dwara niyamit vyavahar badhana aavashyak hai.", "actions": ["Rojana PhonePe QR par jyada se jyada UPI Payments len.", "Aapki lagatar Transaction History hi aapko Loan ke liye Eligible banati hai."]},
+    "higher_offer": {"title": "Higher Loan Offer Kaise Milega", "reason": "Loan ki rashi mukhya roop se lenden aur cibil par aadharit hai.", "actions": ["Loan Amount mukhya roop se aapke PhonePe QR Transactions aur CIBIL Score par nirbhar karta hai.", "Samay par EDI Repayment karne se aapka CIBIL sudharta hai."]},
+    "edi_vs_emi": {"title": "EDI Kyun Len", "reason": "Vyavasay ke cashflow par bina dabav dale aasan dainik adayegi.", "actions": ["EMI mein har mahine badi Fixed Amount deni padti hai.", "EDI mein aapki Daily Sales se chhoti-chhoti Amount katti hai, jisse Repayment aasan ho jata hai."]}
 }
 
 # 4. APP BOUNDARY SURFACE HEADERS
 st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-main-title">Lending Army Active Workspace</div>', unsafe_allow_html=True)
 
-# 5. RESTORED NATIVE WORKSPACE BUTTONS (Match exact parameters of image_8.png)
-cols = st.columns(2)
-
-with cols[0]:
+# 5. RESTORED NATIVE WORKSPACE BUTTON GRID (Strictly following layout design metrics)
+row1_cols = st.columns(2)
+with row1_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
-    if st.button("📊 **ECB**\n\nExternal commercial settlement configurations.", key="mod_ecb"):
+    if st.button("ECB\n\nExternal commercial settlement configurations.", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
 
-with cols[1]:
+with row1_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
-    if st.button("💼 **LENDING**\n\nMerchant evaluation profiles & pitch scripts.", key="mod_lending"):
+    if st.button("LENDING\n\nMerchant evaluation profiles and pitch scripts.", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
+
+row2_cols = st.columns(2)
+with row2_cols[0]:
+    st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
+    if st.button("GATE MEETING RITUALS\n\nMorning optimization and attendance routines.", key="mod_gate"):
+        reset_pitch_flow("Gate Meeting Rituals")
+
+with row2_cols[1]:
+    st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
+    if st.button("MERCHANT VISIT RITUALS\n\nGround deployment checklist and merchant journey.", key="mod_visit"):
+        reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
 
@@ -295,58 +326,94 @@ st.markdown("<hr/>", unsafe_allow_html=True)
 if st.session_state.selected_module:
     current_mod = st.session_state.selected_module
     
-    # Dropdown to select a competitive vector target
-    comp_choice = st.selectbox(
-        "SELECT TARGET COMPETITION / OUTLET SPECIFIC PROFILE:",
-        options=["Select Competition...", "Paytm", "BharatPe", "Google Pay", "Banks"]
-    )
-    
-    if comp_choice != "Select Competition...":
-        node = DATA_FLOW_MATRIX[current_mod][comp_choice]
+    # FLOW A: CORE LENDING AND SPEAKER UTILITIES
+    if current_mod in ["Smart Speaker", "Merchant Lending"]:
+        comp_choice = st.selectbox(
+            "SELECT TARGET COMPETITION / OUTLET SPECIFIC PROFILE:",
+            options=["Select Competition...", "Paytm", "BharatPe", "Google Pay", "Banks"]
+        )
         
-        # Step A: Generate standard talk tracks block card layout safely without HTML leakage
-        st.markdown(f"""
-            <div class="solution-popup-card flow-border">
-                <div class="status-pill flow-color">🔥 COMPETITIVE OUTLET PLAYBOOK: {comp_choice.upper()}</div>
-                <div class="popup-title">{current_mod} Strategy vs {comp_choice}</div>
-                <div class="meta-label">Actual Points to Discuss / मुख्य बातें</div>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        # Streamlit-native bullet box rendering avoids printing broken HTML tags inside cards
-        with st.container():
-            st.markdown(
-                f"""<div class="action-steps-box" style="background: #F0FDF4; border-color: #DCFCE7; border-radius:14px; padding:16px; margin-top:-10px;">
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        {"".join([f"<li style='color: #1B5E20; font-size:14px; margin-bottom:8px;'>✅ {pt}</li>" for pt in node["points"]])}
-                    </ul>
-                </div>""", 
-                unsafe_allow_html=True
-            )
+        if comp_choice != "Select Competition...":
+            node = DATA_FLOW_MATRIX[current_mod][comp_choice]
             
-        # Step B: Render interactive presentation logic to reveal custom audio pitch block
-        st.write("")
-        st.write("")
-        st.markdown('<div class="pitch-trigger-box">', unsafe_allow_html=True)
-        if st.button(f"✨ Customize Active Pitch Script vs {comp_choice}", key="generate_pitch_btn"):
-            st.session_state.pitch_customized = True
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        if st.session_state.pitch_customized:
             st.markdown(f"""
-                <div class="solution-popup-card flow-border" style="margin-top:16px;">
-                    <div class="meta-label" style="margin-top:0px;">Hinglish Sales Pitch / मर्चेंट काउंटर पर क्या बोलें</div>
-                    <div class="diagnostic-reason-text" style="background: #FAFAFA; border: 1px solid #E4E4E7; line-height:1.5; font-size:14.5px; color:#1C1C1E; font-weight:400;">
-                        🗣️ "{node['pitch']}"
-                    </div>
+                <div class="solution-popup-card flow-border">
+                    <div class="status-pill flow-color">COMPETITIVE OUTLET PLAYBOOK: {comp_choice.upper()}</div>
+                    <div class="popup-title">{current_mod} Strategy vs {comp_choice}</div>
+                    <div class="meta-label">Actual Points to Discuss / मुख्य बातें</div>
                 </div>
             """, unsafe_allow_html=True)
             
+            with st.container():
+                st.markdown(
+                    f"""<div class="action-steps-box" style="background: #F0FDF4; border-color: #DCFCE7; border-radius:14px; padding:16px; margin-top:-10px;">
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            {"".join([f"<li style='color: #1B5E20; font-size:14px; margin-bottom:8px;'>✅ {pt}</li>" for pt in node["points"]])}
+                        </ul>
+                    </div>""", 
+                    unsafe_allow_html=True
+                )
+                
             st.write("")
-            st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">Interactive Pitch Training Audio:</div>', unsafe_allow_html=True)
-            st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
+            st.markdown('<div class="pitch-trigger-box">', unsafe_allow_html=True)
+            if st.button(f"Customize Active Pitch Script vs {comp_choice}", key="generate_pitch_btn"):
+                st.session_state.pitch_customized = True
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            if st.session_state.pitch_customized:
+                st.markdown(f"""
+                    <div class="solution-popup-card flow-border" style="margin-top:16px;">
+                        <div class="meta-label" style="margin-top:0px;">Hinglish Sales Pitch / मर्चेंट काउंटर पर क्या बोलें</div>
+                        <div class="diagnostic-reason-text" style="background: #FAFAFA; border: 1px solid #E4E4E7; line-height:1.5; font-size:14.5px; color:#1C1C1E; font-weight:400;">
+                            "{node['pitch']}"
+                        </div>
+                    </div>
+                """, unsafe_allow_html=True)
+                
+                st.write("")
+                st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">Interactive Pitch Training Audio:</div>', unsafe_allow_html=True)
+                st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
 
-# 7. TROUBLESHOOTING PORTALS (Disappears when a module sub-flow becomes active)
+    # FLOW B: GATE MEETING RITUALS (10 KA DUM - image_11.png DATA INTERACTION)
+    elif current_mod == "Gate Meeting Rituals":
+        st.markdown("""
+            <div class="solution-popup-card ritual-border">
+                <div class="status-pill ritual-color">GATE MEETING GUIDELINES</div>
+                <div class="popup-title">10 KA DUM</div>
+                <table class="ritual-table">
+                    <tr><th>Gate Meeting</th><th>Description</th></tr>
+                    <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Generation/Scanning<br>2-Selfie with Code (Mention AOP, Count of Active, Location)<br>3-Virtual GM Form</td></tr>
+                    <tr><td><span class="step-highlight">2. Team Grooming</span></td><td>Basic Hygiene - Dress, Bags, Helmet, Mobile Cover, Mobile Screen Guard, Torn Shoes or Slippers.</td></tr>
+                    <tr><td><span class="step-highlight">3. SKH</span></td><td>In-depth Discussion with help of Agent Activity & Tracker</td></tr>
+                    <tr><td><span class="step-highlight">4. DSR</span></td><td>1-Take Appointment during Morning calling activity<br>2-Visit Mx and Mark tasks with final remarks</td></tr>
+                    <tr><td><span class="step-highlight">5. Salary Discussion</span></td><td>Daily Salary Discussion with format to be done and Signed by Manager i.e. TSM, ASM, CSM.</td></tr>
+                    <tr><td><span class="step-highlight">6. TOD</span></td><td>1-Task of the Day Discussion<br>2-Open Smart Squad<br>3-Perform Ace Activities<br>4-TP Commitment for the Day on Sales Academy</td></tr>
+                    <tr><td><span class="step-highlight">7. Manager Inputs</span></td><td>How to Drive task of the Day, share inputs and create innovative drives.</td></tr>
+                    <tr><td><span class="step-highlight">8. Collateral Dist.</span></td><td>QR, A4, SS, RVP collection, distribution and submission.</td></tr>
+                    <tr><td><span class="step-highlight">9. Telecalling Activity</span></td><td>15 Appointments to be Booked before leaving.</td></tr>
+                    <tr><td><span class="step-highlight">10. Support Required</span></td><td>One on One support requirement discussion with Manager.</td></tr>
+                </table>
+            </div>
+        """, unsafe_allow_html=True)
+
+    # FLOW C: MERCHANT VISIT RITUALS (5 KA PUNCH - image_12.png DATA INTERACTION)
+    elif current_mod == "Merchant Visit Rituals":
+        st.markdown("""
+            <div class="solution-popup-card ritual-border">
+                <div class="status-pill ritual-color">STEP-BY-STEP GUIDE FOR SUCCESS</div>
+                <div class="popup-title">5 KA PUNCH</div>
+                <table class="ritual-table">
+                    <tr><th>Step</th><th>Task Objective</th><th>Action Roadmap</th></tr>
+                    <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test Transaction</b></td><td>Deploy minimum 3 QR codes and perform a small test transaction to confirm tracking ecosystem health.</td></tr>
+                    <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition QR</b></td><td>Locate and tag the specific competition QR active on counter inside analytics environment.</td></tr>
+                    <tr><td><span class="step-highlight">3</span></td><td><b>Show Transaction in App</b></td><td>Verify test transaction inside the PhonePe Business App. Click all visible structural banners and request Photo QR if available.</td></tr>
+                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity instruments (PAN, Aadhaar) on workspace dashboard.</td></tr>
+                    <tr><td><span class="step-highlight">5</span></td><td><b>Smartspeaker Activation</b></td><td>Plug in and charge smartspeaker. Share complete support line coordinates and localized contact details with the merchant.</td></tr>
+                </table>
+            </div>
+        """, unsafe_allow_html=True)
+
+# 7. TROUBLESHOOTING PORTALS (Vanishes cleanly when any active card flow is initiated)
 if not st.session_state.selected_module:
     st.markdown('<div class="app-brand-tag">Instant Assistance Portals</div>', unsafe_allow_html=True)
     
@@ -366,13 +433,13 @@ if not st.session_state.selected_module:
             format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"]
         )
         
-    # Render Troubleshooting Cards
+    # Render Active Dropdown Choice Output Configurations
     if selected_err != "None":
         node = TECHNICAL_ERRORS[selected_err]
         actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
         st.markdown(f"""
             <div class="solution-popup-card err-border">
-                <div class="status-pill err-color">🚫 LENDING ERROR DIAGNOSTIC</div>
+                <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
                 <div class="popup-title">{node['title']}</div>
                 <div class="meta-label">Reason / क्यों होता है</div>
                 <div class="diagnostic-reason-text">{node['reason']}</div>
@@ -386,7 +453,7 @@ if not st.session_state.selected_module:
         actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
         st.markdown(f"""
             <div class="solution-popup-card obj-border">
-                <div class="status-pill obj-color">💬 OBJECTION RESOLUTION ENGINE</div>
+                <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
                 <div class="popup-title">{node['title']}</div>
                 <div class="meta-label">Reason / क्यों होता है</div>
                 <div class="diagnostic-reason-text">{node['reason']}</div>
