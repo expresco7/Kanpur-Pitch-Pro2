@@ -268,7 +268,7 @@ st.markdown("""
         color: #000000 !important;
     }
     
-    /* FIX: Standardize selectbox label blocks to align perfectly horizontally */
+    /* Global Selectbox Styling */
     div.stSelectbox > label {
         color: #8E8E93 !important;
         font-size: 11px !important;
@@ -276,9 +276,7 @@ st.markdown("""
         letter-spacing: 0.05em !important;
         font-weight: 700 !important;
         margin-bottom: 8px;
-        min-height: 32px !important; /* Forces uniform spatial height for labels */
-        display: flex !important;
-        align-items: flex-end !important; /* Snaps label baselines together */
+        white-space: nowrap !important; /* Prevents text wrapping entirely */
     }
     div[data-testid="stSelectbox"] > div {
         background-color: #1C1C1E !important;
@@ -690,8 +688,8 @@ if not st.session_state.selected_module:
     st.markdown('<div class="illuminated-triage-panel">', unsafe_allow_html=True)
     st.markdown('<div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>', unsafe_allow_html=True)
     
-    # Grid layout aligning technical diagnostics and customer responses completely in-line
-    triage_cols = st.columns(2)
+    # FIX: Shifted proportions [1.2, 1.0] to give the left column more breathing room to be single-lined
+    triage_cols = st.columns([1.2, 1.0])
     
     with triage_cols[0]:
         selected_err = st.selectbox(
