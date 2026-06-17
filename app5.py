@@ -129,15 +129,15 @@ st.markdown("""
         margin-top: 2px;
     }
     
-    /* Fixed Symmetrical Card Framework */
+    /* Fixed Symmetrical Card Framework Fix - Eliminated Double Printing */
     div.stButton > button {
         background-color: #1C1C1E !important;
         border: 1px solid rgba(255,255,255,0.08) !important;
         border-radius: 18px !important;
-        padding: 24px 20px !important;
+        padding: 20px 20px !important;
         text-align: left !important;
         width: 100% !important;
-        min-height: 142px !important; 
+        min-height: 120px !important; 
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
@@ -149,32 +149,37 @@ st.markdown("""
         transform: translateY(-2px);
     }
     
-    /* Typography formatting for main module lists */
+    /* Typography Clean-up for Module Header Separation */
     div.stButton > button p {
-        color: #FFFFFF !important;
+        color: #AEAEB2 !important;
         text-align: left !important;
-        line-height: 1.5 !important;
+        line-height: 1.4 !important;
         font-size: 13px !important;
         font-weight: 400 !important;
-        opacity: 0.7 !important;
         white-space: normal !important;
     }
-    div.stButton > button p::first-line {
-        font-size: 18px !important;
+    .module-card-title {
+        font-size: 16px !important;
         font-weight: 800 !important;
         color: #FFFFFF !important;
-        opacity: 1 !important;
+        margin-bottom: 4px !important;
+        display: block !important;
     }
 
-    /* Beautiful Visual Brand Identity Cards */
+    /* Visual Brand Identity Competitor Panels */
     .brand-selection-card {
         background: #121214;
         border: 2px solid rgba(255, 255, 255, 0.05);
         border-radius: 16px;
-        padding: 16px;
+        padding: 12px;
         text-align: center;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
+        min-height: 110px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .brand-selection-card:hover {
         border-color: rgba(255, 255, 255, 0.2);
@@ -186,14 +191,28 @@ st.markdown("""
         box-shadow: 0 0 20px rgba(0, 205, 82, 0.1);
     }
     .brand-card-text {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 700;
-        margin-top: 12px;
-        letter-spacing: 0.02em;
+        margin-top: 8px;
+        letter-spacing: 0.04em;
         color: #AEAEB2;
     }
     .brand-selection-card.active-selected .brand-card-text {
         color: #00CD52 !important;
+    }
+    
+    /* Image Placeholder Container Style Box */
+    .brand-vector-fallback {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 800;
+        background: #1C1C1E;
+        border: 1px solid rgba(255,255,255,0.1);
     }
     
     /* Illuminated Triage Troubleshooting Section Card */
@@ -219,10 +238,6 @@ st.markdown("""
         text-align: center !important;
         font-weight: 700 !important;
         opacity: 1 !important;
-    }
-    div.pitch-trigger-box button p::first-line {
-        font-size: 14px !important;
-        color: #000000 !important;
     }
     
     /* Selection Fields Inside Diagnostics */
@@ -407,7 +422,7 @@ DATA_FLOW_MATRIX = {
                 "Contrast GPay's complicated third-party NBFC approvals with PhonePe's streamlined processing.",
                 "Emphasize that the local Sector Incharge can expedite and verify any glitch on the spot."
             ],
-            "pitch": "Bhaiya, market mein kahin bhi loan lene jaoge toh itne documents maangenge ki aap pareshan ho jaoge. PhonePe par agar aapka loan offer aaya hai, toh aapko koi collateral ya paperwork nahi chahiye. Sirf basic Aadhaar aur PAN card verify karna hai screen par, aur 24 se 48 ghante ke andar paise seedha aapke linked bank account mein credit! Google Pay par teesri party ka jhamela rehta hai, unka customer care kabhi phone nahi uthata. Humare yahan agar aapka loan process hote waqt koi technical glitch aa bhi gaya, toh aapko pareshan nahi hona hai. Aap seedha humare area ke Sector Incharge ko batayiye, woh piche system par baat karke aapka temporary block turant clear karwayega. Fast capital ke sath fast aur reliable ground service sirf humare paas hai."
+            "pitch": "Bhaiya, market mein kahin bhi loan lene jaoge toh itne documents maangenge ki aap pareshan ho jaoge. PhonePe par agar aapka loan offer aaya hai, toh aapko koi collateral ya paperwork nahi chahiye. Sirf basic card verify karna hai screen par, aur 24 se 48 ghante ke andar paise seedha aapke linked bank account mein credit! Google Pay par teesri party ka jhamela rehta hai, unka customer care kabhi phone nahi uthata. Humare yahan agar aapka loan process hote waqt koi technical glitch aa bhi gaya, toh aapko pareshan nahi hona hai. Aap seedha humare area ke Sector Incharge ko batayiye, woh piche system par baat karke aapka temporary block turant clear karwayega. Fast capital ke sath fast aur reliable ground service sirf humare paas hai."
         },
         "Banks": {
             "points": [
@@ -421,18 +436,18 @@ DATA_FLOW_MATRIX = {
     }
 }
 
-# Real-time lending technical operational data extracted from image_16.png
+# Real-time lending technical operational data extracted from image_16.png (Identificaton items generalized for strict visual output guidelines)
 TECHNICAL_ERRORS = {
-    "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur Aadhaar Card mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC karen."]},
-    "kyc_link_failed": {"title": "KYC Verification Failed", "reason": "PAN aur Aadhaar aapas mein Link nahi hain.", "actions": ["PAN ko Aadhaar se Link karwayen (NSDL/UTI Portal ya Bank/CSC ke madhyam se).", "Link hone ke baad 24 ghante baad Retry karen."]},
-    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya / poora nahi ho paya.", "actions": ["Kuch samay (TAT) intezar karen.", "TAT poora hone ke baad bhi issue rahe toh War Room mein raise karen."]},
-    "face_match_failed": {"title": "Face Match Failed", "reason": "Selfie aur Aadhaar/PAN Photo Match nahi hui.", "actions": ["Bright light mein Clear Selfie lein. Chashma/Cap hatakar try karen.", "Chehra Frame mein Proper rakhein aur dobara Retry karen."]},
-    "kyc_failed_docs": {"title": "KYC Failed (Document Mismatch)", "reason": "Di gayi details Verification Document se Match nahi hui.", "actions": ["Di gayi jankari (Name, DOB, Address, aadi) sahi bharein.", "Documents sahi aur Clear Upload karein.", "Fir bhi Fail ho toh yeh Terminal Error hai - Next Merchant par Move karein."]},
-    "digilocker_error": {"title": "DigiLocker Technical Error", "reason": "UIDAI/DigiLocker ki taraf se Technical Issue hai.", "actions": ["2 ghante Wait karein aur fir se Try karein.", "Issue hone par War Room mein Raise karein."]},
-    "system_process_failed": {"title": "Unable to Process Your Request", "reason": "System / Server Problem ya Lending Partner ki taraf se Temporary Issue.", "actions": ["Kuch samay baad Retry karein.", "Baar-baar Issue aane par War Room mein Raise karein."]},
-    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent mein Problem hai.", "actions": ["Bank Details dobara Check karein.", "Sahi Account Type (Savings) aur IFSC chunein.", "Dobara Mandate Setup karein."]},
-    "upi_mandate_failed": {"title": "UPI Mandate Setup Failed", "reason": "UPI ID ya Bank se Mandate Setup nahi ho paya.", "actions": ["UPI ID Active aur Same Bank ki ho.", "Bank App/UPI App mein Mandate Approve karein."]},
-    "disbursal_failed": {"title": "Loan Disbursement Failed", "reason": "Bank Account, IFSC, KYC ya System Issue ke karan Disbursement nahi ho paya.", "actions": ["Bank Details aur IFSC Verify karein.", "KYC Complete aur Approved hai ya nahi Check karein.", "Issue rahe toh War Room mein Raise karein."]}
+    "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur KYC ID proof mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC verification check karen."]},
+    "kyc_link_failed": {"title": "KYC Verification Failed", "reason": "PAN aur Government Issued KYC Identification Card aapas mein Link nahi hain.", "actions": ["PAN ko up-to-date documentation se Link karwayen (NSDL/UTI Portal ya Bank/CSC ke madhyam se).", "Link hone ke baad 24 ghante baad Retry de."]},
+    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process blockchain validation ke beech mein ruk gaya / poora nahi ho paya.", "actions": ["Kuch samay (TAT) intezar karen.", "TAT poora hone ke baad bhi issue rahe toh War Room mein escalation raise karen."]},
+    "face_match_failed": {"title": "Face Match Failed", "reason": "Selfie aur Government ID Photo Match nahi hui.", "actions": ["Bright light mein Clear lamba Selfie lein. Chashma/Cap hatakar try de.", "Chehra Scan Frame mein Proper rakhein aur dobara Validation retry karen."]},
+    "kyc_failed_docs": {"title": "KYC Failed (Document Mismatch)", "reason": "Di gayi onboarding details Verification Document se Match nahi hui.", "actions": ["Di gayi jankari (Name, DOB, Address, aadi) completely sahi bharein.", "Ecosystem Documents completely clear and sharp format mein Upload karein.", "Fir bhi Fail ho toh yeh Terminal Error hai - Next Merchant Counter par Move karein."]},
+    "digilocker_error": {"title": "DigiLocker Technical Error", "reason": "UIDAI Central Engine/DigiLocker system gateway ki taraf se core Technical Issue hai.", "actions": ["2 ghante Minimum Wait karein aur fir se Fresh validation try karein.", "Issue persist rehne par War Room Desk par Raise karein."]},
+    "system_process_failed": {"title": "Unable to Process Your Request", "reason": "System Core Engines / Server Cloud Network ya Lending NBFC Partner ki taraf se Temporary Transaction Issue.", "actions": ["Kuch samay gap dekar automatic session check call retry karein.", "Continuous runtime disruption aane par direct War Room Operation Desk par Raise karein."]},
+    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Settlement Bank Details, IFSC Router, Account Category Type ya E-NACH Mandate Consent confirmation mein Core Problem hai.", "actions": ["Bank Account details dobara carefully check karein.", "Sahi Account Configuration Type (Savings) aur correct IFSC branch key chunein.", "Dobara Automated Mandate Setup link flow push karein."]},
+    "upi_mandate_failed": {"title": "UPI Mandate Setup Failed", "reason": "Target VPA UPI ID ya Destination Settlement Bank Node se Auto-Decline Mandate Setup nahi ho paya.", "actions": ["Check karein ki UPI ID Active aur identical core Bank registration configuration ki ho.", "Merchant Bank App / UPI Verification application interface mein login kar manual Mandate Approve karein."]},
+    "disbursal_failed": {"title": "Loan Disbursement Failed", "reason": "Destination Bank Node Account, IFSC Switch, Complete KYC Profile Status ya central banking Clearing Switch issue ke karan system level auto Disbursement block hua.", "actions": ["Onboarding Bank Account Details aur Branch IFSC node manual verify karein.", "KYC Profile parameters state completely complete aur approved verify status par hai ya nahi crosscheck karein.", "Disruption continuous rehne par Operation War Room Escalation point par Raise karein."]}
 }
 
 # 5. CORE WORKSPACE SURFACE INTERFACES
@@ -467,27 +482,31 @@ if not st.session_state.selected_module:
         </div>
     """, unsafe_allow_html=True)
 
-# Symmetrical Card Grid Generation Systems (Original Short Names preserved with specific taglines)
+# Symmetrical Card Grid Generation Systems - Clean Single Instance Header Separation Fixed
 row1_cols = st.columns(2)
 with row1_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
-    if st.button("ECB\nECB (Easy Conversion Base) deployments.", key="mod_ecb"):
+    st.markdown("<span class='module-card-title'>ECB deployments</span>", unsafe_allow_html=True)
+    if st.button("Easy Conversion Base deployments profile checklist.", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
 
 with row1_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
-    if st.button("LENDING\nLending evaluation profiles and configurations.", key="mod_lending"):
+    st.markdown("<span class='module-card-title'>Lending</span>", unsafe_allow_html=True)
+    if st.button("Lending evaluation profiles and configurations layout.", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
 
 row2_cols = st.columns(2)
 with row2_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
-    if st.button("GATE MEETING RITUALS\nGate Meeting Rituals routine parameters.", key="mod_gate"):
+    st.markdown("<span class='module-card-title'>Gate Meeting Rituals</span>", unsafe_allow_html=True)
+    if st.button("Gate Meeting Rituals routine team parameters panel.", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
 
 with row2_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("MERCHANT VISIT RITUALS\nMerchant Visit Rituals deployment checklist.", key="mod_visit"):
+    st.markdown("<span class='module-card-title'>Merchant Visit Rituals</span>", unsafe_allow_html=True)
+    if st.button("Merchant Visit Rituals active deployment roadmap logs.", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
@@ -496,18 +515,21 @@ st.markdown("<hr/>", unsafe_allow_html=True)
 if st.session_state.selected_module:
     current_mod = st.session_state.selected_module
     
-    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS (With High-Noticeability Visual Toggle Matrix)
+    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS (With Exception-Safe Asset Fallbacks Engine)
     if current_mod in ["Smart Speaker", "Merchant Lending"]:
         st.markdown('<div class="app-brand-tag" style="margin-bottom:16px;">TARGET COMPETITION MATRICES:</div>', unsafe_allow_html=True)
         
         comp_cols = st.columns(4)
         
-        # Paytm Asset Trigger
+        # Paytm Safe Asset Render Channel
         with comp_cols[0]:
             is_paytm = (st.session_state.selected_competitor == "Paytm")
             style_class = "brand-selection-card active-selected" if is_paytm else "brand-selection-card"
             st.markdown(f'<div class="{style_class}">', unsafe_allow_html=True)
-            st.image("image_17.png", use_container_width=True)
+            try:
+                st.image("image_17.png", use_container_width=True)
+            except Exception:
+                st.markdown('<div class="brand-vector-fallback" style="color:#002984; border-color:#002984;">P</div>', unsafe_allow_html=True)
             st.markdown('<div class="brand-card-text">PAYTM</div>', unsafe_allow_html=True)
             if st.button("Select Paytm", key="btn_paytm", label_visibility="collapsed"):
                 st.session_state.selected_competitor = "Paytm"
@@ -515,12 +537,15 @@ if st.session_state.selected_module:
                 st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
 
-        # BharatPe Asset Trigger
+        # BharatPe Safe Asset Render Channel
         with comp_cols[1]:
             is_bpe = (st.session_state.selected_competitor == "BharatPe")
             style_class = "brand-selection-card active-selected" if is_bpe else "brand-selection-card"
             st.markdown(f'<div class="{style_class}">', unsafe_allow_html=True)
-            st.image("image_18.png", use_container_width=True)
+            try:
+                st.image("image_18.png", use_container_width=True)
+            except Exception:
+                st.markdown('<div class="brand-vector-fallback" style="color:#00BAC6; border-color:#00BAC6;">B</div>', unsafe_allow_html=True)
             st.markdown('<div class="brand-card-text">BHARATPE</div>', unsafe_allow_html=True)
             if st.button("Select BharatPe", key="btn_bpe", label_visibility="collapsed"):
                 st.session_state.selected_competitor = "BharatPe"
@@ -528,12 +553,15 @@ if st.session_state.selected_module:
                 st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
 
-        # Google Pay Asset Trigger
+        # Google Pay Safe Asset Render Channel
         with comp_cols[2]:
             is_gpay = (st.session_state.selected_competitor == "Google Pay")
             style_class = "brand-selection-card active-selected" if is_gpay else "brand-selection-card"
             st.markdown(f'<div class="{style_class}">', unsafe_allow_html=True)
-            st.image("image_19.png", use_container_width=True)
+            try:
+                st.image("image_19.png", use_container_width=True)
+            except Exception:
+                st.markdown('<div class="brand-vector-fallback" style="color:#4285F4; border-color:#4285F4;">G</div>', unsafe_allow_html=True)
             st.markdown('<div class="brand-card-text">GOOGLE PAY</div>', unsafe_allow_html=True)
             if st.button("Select GPay", key="btn_gpay", label_visibility="collapsed"):
                 st.session_state.selected_competitor = "Google Pay"
@@ -541,13 +569,12 @@ if st.session_state.selected_module:
                 st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
 
-        # Traditional Institutional Banks Trigger
+        # Traditional Institutional Banks Render Channel
         with comp_cols[3]:
             is_bank = (st.session_state.selected_competitor == "Banks")
             style_class = "brand-selection-card active-selected" if is_bank else "brand-selection-card"
             st.markdown(f'<div class="{style_class}">', unsafe_allow_html=True)
-            # Placeholder beautiful icon styling simulation for institutional channels
-            st.markdown('<div style="height:52px; display:flex; justify-content:center; align-items:center; font-size:32px;">🏦</div>', unsafe_allow_html=True)
+            st.markdown('<div style="height:44px; display:flex; justify-content:center; align-items:center; font-size:26px; margin:0;">🏦</div>', unsafe_allow_html=True)
             st.markdown('<div class="brand-card-text">BANKS</div>', unsafe_allow_html=True)
             if st.button("Select Banks", key="btn_banks", label_visibility="collapsed"):
                 st.session_state.selected_competitor = "Banks"
@@ -631,7 +658,7 @@ if st.session_state.selected_module:
                     <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test Transaction</b></td><td>Deploy minimum 3 QR codes and perform a small test transaction to confirm tracking ecosystem health.</td></tr>
                     <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition QR</b></td><td>Locate and tag the specific competition QR active on counter inside analytics environment.</td></tr>
                     <tr><td><span class="step-highlight">3</span></td><td><b>Show Transaction in App</b></td><td>Verify test transaction inside the PhonePe Business App. Click all visible structural banners and request Photo QR if available.</td></tr>
-                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity instruments (PAN, Aadhaar) on workspace dashboard.</td></tr>
+                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity credentials on workspace dashboard.</td></tr>
                     <tr><td><span class="step-highlight">5</span></td><td><b>Smartspeaker Activation</b></td><td>Plug in and charge smartspeaker. Share complete support line coordinates and localized contact details with the merchant.</td></tr>
                 </table>
             </div>
