@@ -12,7 +12,7 @@ st.set_page_config(
 if "selected_module" not in st.session_state:
     st.session_state.selected_module = None
 if "selected_competitor" not in st.session_state:
-    st.session_state.selected_competitor = None
+    st.session_state.selected_competitor = "Select Competitor..."
 if "pitch_customized" not in st.session_state:
     st.session_state.pitch_customized = False
 if "splash_done" not in st.session_state:
@@ -21,7 +21,7 @@ if "splash_done" not in st.session_state:
 # Reset view metrics when toggling between operational nodes
 def reset_pitch_flow(target_module):
     st.session_state.selected_module = target_module
-    st.session_state.selected_competitor = None
+    st.session_state.selected_competitor = "Select Competitor..."
     st.session_state.pitch_customized = False
 
 # 2. CRED DESIGN SYSTEM & HIGH-CONTRAST INTERACTION ENGINE
@@ -164,43 +164,6 @@ st.markdown("""
         font-weight: 800 !important;
         color: #FFFFFF !important;
         opacity: 1 !important;
-    }
-
-    /* Dynamic High-Noticeability Competitor Button Selectors */
-    div.comp-node button {
-        min-height: auto !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
-        background-color: #121214 !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-    }
-    div.comp-node button p {
-        text-align: center !important;
-        font-weight: 600 !important;
-        opacity: 0.9 !important;
-    }
-    div.comp-node button p::first-line {
-        font-size: 14px !important;
-        font-weight: 600 !important;
-    }
-    /* Active Selected State Accent Overrides */
-    div.comp-node-active button {
-        background-color: #00CD52 !important;
-        border: 1px solid #00CD52 !important;
-        min-height: auto !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
-    }
-    div.comp-node-active button p {
-        color: #000000 !important;
-        text-align: center !important;
-        font-weight: 800 !important;
-        opacity: 1 !important;
-    }
-    div.comp-node-active button p::first-line {
-        font-size: 14px !important;
-        font-weight: 800 !important;
-        color: #000000 !important;
     }
     
     /* Illuminated Triage Troubleshooting Section Card */
@@ -425,22 +388,32 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se github aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
         }
     }
 }
 
 TECHNICAL_ERRORS = {
-    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent में Problem hai.", "actions": ["Bank Details dobara Check karen.", "Sahi Account Type (Savings) aur IFSC chunen."]},
     "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur Aadhaar Card mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC karen."]},
-    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya.", "actions": ["Samay (TAT) ke poora hone ka intezar karen.", "War room operations me ticket raise kare."]},
-    "face_match_failed": {"title": "Face Match Verification Fault", "reason": "Selfie capture criteria fails to cross check with background document parameters.", "actions": ["Take clean selfie under ambient bright setup.", "Avoid wearing verification blocking accessories like lenses or caps."]}
+    "kyc_failed_link": {"title": "KYC Verification Failed", "reason": "PAN aur Aadhaar aapas mein Link nahi hai.", "actions": ["PAN ko Aadhaar se Link karwaen (NSDL/UTI Portal ya Bank/CSC ke madhyam se).", "Link hone ke baad 24 ghante baad Retry karen."]},
+    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya / poora nahi ho paya.", "actions": ["Kuch samay (TAT) intezar karen.", "TAT poora hone ke baad bhi issue rahe toh War Room mein Raise karen."]},
+    "face_match_failed": {"title": "Face Match Failed", "reason": "Selfie aur Aadhaar/PAN Photo Match nahi hui.", "actions": ["Bright Light mein Clear Selfie le.", "Chashma/Cap hatakar try kare.", "Chehra Frame mein Proper rakhe aur dobara Retry kare."]},
+    "kyc_failed_docs": {"title": "KYC Failed", "reason": "Di gayi Details Verification Document se Match nahi hui.", "actions": ["Di gayi jankari (Name, DOB, Address, aadi) sahi bhare.", "Documents sahi aur Clear Upload kare.", "Fir bhi Fail ho toh yeh Terminal Error hai - Next Merchant par Move kare."]},
+    "digilocker_error": {"title": "DigiLocker Error", "reason": "UIDAI/DigiLocker ki taraf se Technical Issue hai.", "actions": ["2 ghante Wait kare aur fir se Try kare.", "Issue hone par War Room mein Raise kare."]},
+    "unable_process_request": {"title": "Unable to Process Your Request", "reason": "System / Server Problem ya Lending Partner ki taraf se Temporary Issue hai.", "actions": ["Kuch samay baad Retry kare.", "Baar-baar Issue aane par War Room mein Raise kare."]},
+    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent mein Problem hai.", "actions": ["Bank Details dobara Check kare.", "Sahi Account Type (Savings) aur IFSC chune.", "Dobara Mandate Setup kare."]},
+    "upi_mandate_failed": {"title": "UPI Mandate Setup Failed", "reason": "UPI ID ya Bank se Mandate Setup nahi ho paya.", "actions": ["UPI ID Active aur Same Bank ki ho.", "Bank App/UPI App mein Mandate Approve kare."]},
+    "disbursement_failed": {"title": "Loan Disbursement Failed", "reason": "Bank Account, IFSC, KYC ya System issue ke karan Disbursement nahi ho paya.", "actions": ["Bank Details aur IFSC Verify kare.", "KYC Complete aur Approved hai ya nahi Check kare.", "Issue rahe toh War Room mein Raise kare."]}
 }
 
 COUNTER_OBJECTIONS = {
-    "eligibility": {"title": "Eligible Kaise Bane", "reason": "Merchant dwara niyamit vyavahar badhana aavashyak hai.", "actions": ["Rojana PhonePe QR par jyada se jyada UPI Payments len.", "Aapki lagatar Transaction History hi aapko Loan ke liye Eligible banati hai."]},
-    "higher_offer": {"title": "Higher Loan Offer Kaise Milega", "reason": "Loan ki rashi mukhya roop se lenden aur cibil par aadharit hai.", "actions": ["Loan Amount mukhya roop se aapke PhonePe QR Transactions aur CIBIL Score par nirbhar karta hai.", "Samay par EDI Repayment karne se aapka CIBIL sudharta hai."]},
-    "edi_vs_emi": {"title": "EDI Kyun Len", "reason": "Vyavasay ke cashflow par bina dabav dale aasan dainik adayegi.", "actions": ["EMI mein har mahine badi Fixed Amount deni padti hai.", "EDI mein aapki Daily Sales se chhoti-chhoti Amount katti hai, jisse Repayment aasan ho jata hai."]}
+    "eligibility": {"title": "Mere paas PhonePe QR hai, par Loan ke liye Eligible kaise banu?", "reason": "Merchant dwara niyamit aur sahi vyavahar badhana aavashyak hai.", "actions": ["Rojana PhonePe QR par jyada se jyada UPI Payments le.", "Aapki lagatar Transaction History hi aapko Loan ke liye Eligible banati hai.", "Jitna jyada aur Regular istemal, utni jaldi Loan Offer!"]},
+    "higher_offer": {"title": "Mujhe Higher Loan Offer kaise milega?", "reason": "Loan ki rashi mukhya roop se lenden aur cibil par aadharit hai.", "actions": ["Loan Amount mukhya roop se aapke PhonePe QR Transactions aur CIBIL Score par nirbhar karta hai.", "Samay par EDI Repayment karne se aapka CIBIL sudharta hai aur agla Higher Loan Slab swatah khul jata hai.", "Acche Business Performance se Loan Offer badhta hai."]},
+    "edi_miss": {"title": "Agar mein EDI Miss kar du toh kya hoga?", "reason": "E-NACH bounce hone par credit score aur future metrics par bura asar padta hai.", "actions": ["Hum E-NACH ke madhyam se Due aur Overdue Amount ko aapke Bank Account se Auto-Debit kar sakte hain.", "Baar-baar Default karne se aapka CIBIL Score kharab hota hai.", "Isse bhavishya mein Loan milna mushkil ho sakta hai."]},
+    "loan_reject": {"title": "Loan Banner dikha, fir bhi mera Loan Reject kyun ho gaya?", "reason": "Banner eligible criteria dikhata hai par final approval partner assessment par hota hai.", "actions": ["Loan Offer Eligibility aapki Activity ke aadhar par hoti hai.", "Lekin Final Approval Lending Partner dwara kiya jata hai.", "Kuch Internal Parameters mein kami hone par Loan Reject ho sakta hai.", "Aap QR Usage jaari rakhe aur CIBIL sudhare, fir dobara koshish kare."]},
+    "competitor_more_offer": {"title": "Doosre Merchant ko mujhse jyada Loan Amount kyun offer hua?", "reason": "Lending risk assessment engines multiple variable parameters par matrix evaluation karte hain.", "actions": ["Lending Company aapke Business ko kareeb 20 alag-alag Parameters par Evaluate karti hai.", "Jaise: Transaction Volume, Consistency, Business Vintage, Ticket Size, Refund Ratio, CIBIL Score, KYC Quality aadi.", "Har Merchant ke yeh Parameters alag hote hain, isliye Offer bhi alag hota hai."]},
+    "loan_benefit": {"title": "Loan lene ka mere liye kya fayda hai?", "reason": "Business scaling capital metrics validation.", "actions": ["Loan se aap Inventory bada sakte hain, Business Expand kar sakte hain.", "Jyada Stock = Jyada Sales aur jyada Profit kama sakte hain.", "Samay par Repayment karne se CIBIL Score improve hota hai.", "Bhavishya mein aapko Higher Loan Amount kam Interest Rate par milega."]},
+    "edi_vs_emi": {"title": "Main EMI ki bajay EDI kyun lu?", "reason": "Vyavasay ke cashflow par bina dabav dale aasan dainik adayegi framework.", "actions": ["EMI mein har mahine badi Fixed Amount deni padti hai.", "EDI mein aapki Daily Sales se chhoti-chhoti Amount katti hai, jisse Repayment aasan ho jata hai.", "Business Cash Flow mein koi dabav nahi padta."]}
 }
 
 # 5. CORE WORKSPACE SURFACE INTERFACES
@@ -504,28 +477,22 @@ st.markdown("<hr/>", unsafe_allow_html=True)
 if st.session_state.selected_module:
     current_mod = st.session_state.selected_module
     
-    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS (With High-Noticeability Toggles)
+    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS (Upgraded with clean Dropdown Design System)
     if current_mod in ["Smart Speaker", "Merchant Lending"]:
-        st.markdown('<div class="app-brand-tag" style="margin-bottom:12px;">TARGET COMPETITION MATRICES:</div>', unsafe_allow_html=True)
+        st.markdown('<div class="app-brand-tag" style="margin-bottom:6px;">Target Competition Matrices</div>', unsafe_allow_html=True)
         
-        # Grid arrangement for competitors instead of a hidden drop box
-        comp_options = ["Paytm", "BharatPe", "Google Pay", "Banks"]
-        comp_cols = st.columns(4)
+        comp_options = ["Select Competitor...", "Paytm", "BharatPe", "Google Pay", "Banks"]
         
-        for index, name in enumerate(comp_options):
-            with comp_cols[index]:
-                # Assign distinct styling class if currently clicked/active
-                is_active = (st.session_state.selected_competitor == name)
-                class_markup = "comp-node-active" if is_active else "comp-node"
-                
-                st.markdown(f'<div class="{class_markup}">', unsafe_allow_html=True)
-                if st.button(name, key=f"comp_select_{name}"):
-                    st.session_state.selected_competitor = name
-                    st.session_state.pitch_customized = False
-                st.markdown('</div>', unsafe_allow_html=True)
+        # Clean Premium High Contrast SelectBox replacement
+        selected_dropdown = st.selectbox(
+            "Choose a target competitor to open tactical playbook",
+            options=comp_options,
+            index=comp_options.index(st.session_state.selected_competitor) if st.session_state.selected_competitor in comp_options else 0,
+            key="competitor_dropdown_matrix"
+        )
         
-        # Render strategy assets once high-noticeability button selection resolves
-        if st.session_state.selected_competitor:
+        if selected_dropdown != "Select Competitor...":
+            st.session_state.selected_competitor = selected_dropdown
             comp_choice = st.session_state.selected_competitor
             node = DATA_FLOW_MATRIX[current_mod][comp_choice]
             
@@ -606,7 +573,7 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-# 7. ILLUMINATED ASSISTANCE PORTALS (Wrapped in the requested prominent glowing chassis)
+# 7. ILLUMINATED ASSISTANCE PORTALS (Wrapped in prominent glowing chassis)
 if not st.session_state.selected_module:
     st.markdown('<div class="illuminated-triage-panel">', unsafe_allow_html=True)
     st.markdown('<div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>', unsafe_allow_html=True)
