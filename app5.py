@@ -463,12 +463,14 @@ with row1_cols[1]:
 row2_cols = st.columns(2)
 with row2_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
-    if st.button("GATE MEETING RITUALS\nMorning optimization and attendance routines.", key="mod_gate"):
+    if st.button("GATE MEETING RITUALS\n
+    Morning optimization and attendance routines.", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
 
 with row2_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("MERCHANT VISIT RITUALS\nGround deployment checklist and merchant journey.", key="mod_visit"):
+    if st.button("MERCHANT VISIT RITUALS\n    
+    Ground deployment checklist and merchant journey.", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
