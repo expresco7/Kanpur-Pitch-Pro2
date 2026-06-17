@@ -297,6 +297,30 @@ st.markdown("""
     .step-highlight { font-weight: 700; color: #000000; }
     
     hr { border-color: rgba(255,255,255,0.08) !important; margin: 24px 0 !important; }
+    
+    /* Horizontal Scrolling Carousel Engine Tweaks */
+    .stHorizontalBlock {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        padding-bottom: 12px;
+        gap: 16px;
+    }
+    .stHorizontalBlock::-webkit-scrollbar {
+        height: 6px;
+    }
+    .stHorizontalBlock::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+    }
+    .stHorizontalBlock::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+    }
+    .stHorizontalBlock > div {
+        min-width: 200px !important;
+        flex: 0 0 auto !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -357,7 +381,7 @@ DATA_FLOW_MATRIX = {
         "Paytm": {
             "points": [
                 "Expose true Annual Percentage Rate (APR) of 36%–37% hidden under processing blocks and processing premiums.",
-                "Pitch clear, low monthly entry level interest matrix rates of 1.25%–1.5%.",
+                "Pitch clear, low monthly interest matrix rates of 1.25%–1.5%.",
                 "Highlight the physical security of having an active ground layout asset checking processing parameters.",
                 "Avoid cold automated digital loops via dedicated human verification channels."
             ],
@@ -388,7 +412,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jan aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
         }
     }
 }
@@ -411,7 +435,7 @@ COUNTER_OBJECTIONS = {
     "higher_offer": {"title": "Mujhe Higher Loan Offer kaise milega?", "reason": "Loan ki rashi mukhya roop se lenden aur cibil par aadharit hai.", "actions": ["Loan Amount mukhya roop se aapke PhonePe QR Transactions aur CIBIL Score par nirbhar karta hai.", "Samay par EDI Repayment karne se aapka CIBIL sudharta hai aur agla Higher Loan Slab swatah khul jata hai.", "Acche Business Performance se Loan Offer badhta hai."]},
     "edi_miss": {"title": "Agar mein EDI Miss kar du toh kya hoga?", "reason": "E-NACH bounce hone par credit score aur future metrics par bura asar padta hai.", "actions": ["Hum E-NACH ke madhyam se Due aur Overdue Amount ko aapke Bank Account se Auto-Debit kar sakte hain.", "Baar-baar Default karne se aapka CIBIL Score kharab hota hai.", "Isse bhavishya mein Loan milna mushkil ho sakta hai."]},
     "loan_reject": {"title": "Loan Banner dikha, fir bhi mera Loan Reject kyun ho gaya?", "reason": "Banner eligible criteria dikhata hai par final approval partner assessment par hota hai.", "actions": ["Loan Offer Eligibility aapki Activity ke aadhar par hoti hai.", "Lekin Final Approval Lending Partner dwara kiya jata hai.", "Kuch Internal Parameters mein kami hone par Loan Reject ho sakta hai.", "Aap QR Usage jaari rakhe aur CIBIL sudhare, fir dobara koshish kare."]},
-    "competitor_more_offer": {"title": "Doosre Merchant ko mujhse jyada Loan Amount kyun offer hua?", "reason": "Lending risk assessment engines multiple variable parameters par matrix evaluation karte hain.", "actions": ["Lending Company aapke Business ko kareeb 20 alag-alag Parameters par Evaluate karti hai.", "Jaise: Transaction Volume, Consistency, Business Vintage, Ticket Size, Refund Ratio, CIBIL Score, KYC Quality aadi.", "Har Merchant ke yeh Parameters alag hote hain, isliye Offer bhi alag hota hai."]},
+    "competitor_more_offer": {"title": "Doosre Merchant ko mujhse jyada Loan Amount kyun offer hua?", "reason": "Lending risk assessment engines multiple variable parameters par matrix evaluation karte hain.", "actions": ["Lending Company aapke Business ko kareeb 20 alag-alag Parameters par Evaluate karti hai.", "Jaise: Transaction Volume, Consistency, Business Vintage, Ticket Size, Refund Ratio, CIBIL Score, KYC Quality aadi.", "Har Merchant ke yeh Parameters alag hote hain, isliye Offer bhi alag hote hain."]},
     "loan_benefit": {"title": "Loan lene ka mere liye kya fayda hai?", "reason": "Business scaling capital metrics validation.", "actions": ["Loan se aap Inventory bada sakte hain, Business Expand kar sakte hain.", "Jyada Stock = Jyada Sales aur jyada Profit kama sakte hain.", "Samay par Repayment karne se CIBIL Score improve hota hai.", "Bhavishya mein aapko Higher Loan Amount kam Interest Rate par milega."]},
     "edi_vs_emi": {"title": "Main EMI ki bajay EDI kyun lu?", "reason": "Vyavasay ke cashflow par bina dabav dale aasan dainik adayegi framework.", "actions": ["EMI mein har mahine badi Fixed Amount deni padti hai.", "EDI mein aapki Daily Sales se chhoti-chhoti Amount katti hai, jisse Repayment aasan ho jata hai.", "Business Cash Flow mein koi dabav nahi padta."]}
 }
@@ -448,27 +472,27 @@ if not st.session_state.selected_module:
         </div>
     """, unsafe_allow_html=True)
 
-# Symmetrical Card Grid Generation Systems (Clean line breaks, original short names)
-row1_cols = st.columns(2)
-with row1_cols[0]:
+# SETUP HORIZONTAL CAROUSEL LAYOUT GRID
+carousel_cols = st.columns(4)
+
+with carousel_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
     if st.button("ECB\n", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
 
-with row1_cols[1]:
+with carousel_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
     if st.button("LENDING\n", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
 
-row2_cols = st.columns(2)
-with row2_cols[0]:
+with carousel_cols[2]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
     if st.button("GATE MEETING RITUALS\n", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
 
-with row2_cols[1]:
+with carousel_cols[3]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("MERCHANT VISIT RITUALS\n", key="mod_visit"):
+    if st.button("MERCHANT VISIT RITUALS\n ", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
@@ -477,13 +501,12 @@ st.markdown("<hr/>", unsafe_allow_html=True)
 if st.session_state.selected_module:
     current_mod = st.session_state.selected_module
     
-    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS (Upgraded with clean Dropdown Design System)
+    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS
     if current_mod in ["Smart Speaker", "Merchant Lending"]:
         st.markdown('<div class="app-brand-tag" style="margin-bottom:6px;">Target Competition Matrices</div>', unsafe_allow_html=True)
         
         comp_options = ["Select Competitor...", "Paytm", "BharatPe", "Google Pay", "Banks"]
         
-        # Clean Premium High Contrast SelectBox replacement
         selected_dropdown = st.selectbox(
             "Choose a target competitor to open tactical playbook",
             options=comp_options,
@@ -573,7 +596,7 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-# 7. ILLUMINATED ASSISTANCE PORTALS (Wrapped in prominent glowing chassis)
+# 7. ILLUMINATED ASSISTANCE PORTALS
 if not st.session_state.selected_module:
     st.markdown('<div class="illuminated-triage-panel">', unsafe_allow_html=True)
     st.markdown('<div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>', unsafe_allow_html=True)
