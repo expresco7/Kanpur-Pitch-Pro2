@@ -70,7 +70,7 @@ st.markdown("""
     
     .active-workspace-surface {
         animation: workspaceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
-        margin-bottom: 80px; /* Space out room for the sticky back-button layer */
+        margin-bottom: 80px;
     }
 
     /* Typography & Header Blocks */
@@ -149,20 +149,18 @@ st.markdown("""
         background: rgba(255, 255, 255, 0.15);
         border-radius: 10px;
     }
-    /* Lock each column into explicit structural symmetry boundaries */
     .stHorizontalBlock > div {
         min-width: 220px !important;
         max-width: 220px !important;
         flex: 0 0 auto !important;
     }
     
-    /* Custom Card Shell Component wrapping layout modules */
     .carousel-card-shell {
         background-color: #1C1C1E;
         border: 1px solid rgba(255,255,255,0.08);
         border-radius: 20px;
         padding: 20px;
-        height: 180px; /* Forces exact spatial alignment across all card rows */
+        height: 180px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -185,7 +183,6 @@ st.markdown("""
         overflow: hidden;
     }
     
-    /* Uniform overrides for secondary target call buttons inside cards */
     .carousel-card-shell div.stButton > button {
         background-color: rgba(255,255,255,0.05) !important;
         border: 1px solid rgba(255,255,255,0.1) !important;
@@ -222,7 +219,6 @@ st.markdown("""
         margin-top: 10px;
     }
     
-    /* Pitch CTA Accent Button elements */
     div.pitch-trigger-box button {
         background-color: #00CD52 !important;
         border: none !important;
@@ -272,7 +268,7 @@ st.markdown("""
         color: #000000 !important;
     }
     
-    /* Selection Fields Inside Diagnostics */
+    /* FIX: Standardize selectbox label blocks to align perfectly horizontally */
     div.stSelectbox > label {
         color: #8E8E93 !important;
         font-size: 11px !important;
@@ -280,6 +276,9 @@ st.markdown("""
         letter-spacing: 0.05em !important;
         font-weight: 700 !important;
         margin-bottom: 8px;
+        min-height: 32px !important; /* Forces uniform spatial height for labels */
+        display: flex !important;
+        align-items: flex-end !important; /* Snaps label baselines together */
     }
     div[data-testid="stSelectbox"] > div {
         background-color: #1C1C1E !important;
@@ -447,7 +446,7 @@ DATA_FLOW_MATRIX = {
                 "Position the local Sector Incharge as an advocate who monitors your QR health to unlock bigger limits.",
                 "Emphasize that reliable, human ground-support is unmatched by corporate apps."
             ],
-            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jab aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai."
+            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jan aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai."
         },
         "Google Pay": {
             "points": [
@@ -499,7 +498,7 @@ st.markdown('<div class="active-workspace-surface">', unsafe_allow_html=True)
 st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-main-title">Pitch Pro</div>', unsafe_allow_html=True)
 
-# THE LANDING TELEMETRY PANEL: Disappears automatically when a workspace module is selected.
+# THE LANDING TELEMETRY PANEL
 if not st.session_state.selected_module:
     st.markdown("""
         <div class="telemetry-card">
@@ -677,7 +676,7 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-    # FLOATING CORNER BACK BUTTON (Appears at bottom corner of every page EXCEPT landing page)
+    # FLOATING CORNER BACK BUTTON
     st.markdown('<div class="floating-back-container">', unsafe_allow_html=True)
     if st.button("← Back to Dashboard", key="floating_back_nav_action"):
         st.session_state.selected_module = None
