@@ -1,24 +1,27 @@
 import streamlit as st
+import time
 
 # 1. STRUCTURAL PAGE LAYOUT SETUP
 st.set_page_config(
-    page_title="Lending Army Terminal",
+    page_title="Pitch Pro Terminal",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# Active user state session variables for dynamic step-by-step navigation
+# Active state session management variables
 if "selected_module" not in st.session_state:
     st.session_state.selected_module = None
 if "pitch_customized" not in st.session_state:
     st.session_state.pitch_customized = False
+if "splash_done" not in st.session_state:
+    st.session_state.splash_done = False
 
-# Reset script view whenever a new module is toggled
+# Reset view metrics when toggling between operational nodes
 def reset_pitch_flow(target_module):
     st.session_state.selected_module = target_module
     st.session_state.pitch_customized = False
 
-# 2. APP DESIGN SYSTEM & TERMINAL NATIVE CSS
+# 2. CRED DESIGN SYSTEM & SYMMETRICAL ANIMATION ENGINE
 st.markdown("""
     <style>
     /* Base Engine UI Configuration */
@@ -28,10 +31,45 @@ st.markdown("""
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     
-    /* Clean Top Header Space */
+    /* Clean Top Header Space Clearances */
     header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; }
     
-    /* Typography Styles */
+    /* Premium CRED Intro Transition Graphics Engine */
+    @keyframes credTracking {
+        0% { letter-spacing: -0.2em; opacity: 0; filter: blur(12px); }
+        40% { opacity: 1; filter: blur(0px); }
+        70% { letter-spacing: 0.15em; opacity: 1; }
+        100% { opacity: 0; letter-spacing: 0.2em; filter: blur(4px); }
+    }
+    @keyframes workspaceFadeUp {
+        0% { transform: translateY(30px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+    
+    .cred-splash-container {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: #050507;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .cred-splash-logo {
+        font-size: 42px;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        animation: credTracking 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        text-shadow: 0 0 30px rgba(255,255,255,0.2);
+    }
+    
+    .active-workspace-surface {
+        animation: workspaceFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
+    }
+
+    /* Typography & Header Blocks */
     .app-brand-tag {
         font-size: 11px;
         font-weight: 700;
@@ -48,7 +86,7 @@ st.markdown("""
         margin-bottom: 24px;
     }
     
-    /* Native Button Styling Overrides to replicate image_13.png layout */
+    /* Symmetrical Native Module Block Layout Engine (Fixes image_14.png disparity) */
     div.stButton > button {
         background-color: #1C1C1E !important;
         border: 1px solid rgba(255,255,255,0.08) !important;
@@ -56,26 +94,34 @@ st.markdown("""
         padding: 24px 20px !important;
         text-align: left !important;
         width: 100% !important;
-        transition: all 0.25s ease-in-out !important;
+        min-height: 142px !important; /* Forces total box level row symmetry */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     div.stButton > button:hover {
         border-color: rgba(255,255,255,0.25) !important;
         background-color: #242426 !important;
         transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
+    /* Enlarged module bold typography layout values */
     div.stButton > button p {
         color: #FFFFFF !important;
         text-align: left !important;
-        font-size: 14px !important;
+        line-height: 1.4 !important;
     }
     
-    /* Secondary CTA Custom Pitch Button overrides */
+    /* Pitch CTA Accent Button elements */
     div.pitch-trigger-box button {
         background-color: #00CD52 !important;
         border: none !important;
         font-weight: 700 !important;
         color: #000000 !important;
         text-align: center !important;
+        min-height: auto !important;
+        padding: 14px 20px !important;
     }
     div.pitch-trigger-box button p {
         color: #000000 !important;
@@ -83,7 +129,7 @@ st.markdown("""
         font-weight: 700 !important;
     }
     
-    /* Dropdown Component Restyling */
+    /* Selection Fields */
     div.stSelectbox > label {
         color: #8E8E93 !important;
         font-size: 11px !important;
@@ -96,24 +142,18 @@ st.markdown("""
         background-color: #1C1C1E !important;
         border: 1px solid rgba(255,255,255,0.08) !important;
         border-radius: 14px !important;
-        color: #FFFFFF !important;
     }
     div[data-testid="stSelectbox"] div[data-baseweb="select"] {
         color: white !important;
     }
     
-    /* Interactive Dashboard Response Cards */
-    @keyframes springPop {
-        0% { transform: scale(0.96) translateY(15px); opacity: 0; }
-        100% { transform: scale(1) translateY(0); opacity: 1; }
-    }
+    /* Output Analytics Cards */
     .solution-popup-card {
         background: #FFFFFF;
         border-radius: 28px;
         padding: 26px;
         margin-top: 12px;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        animation: springPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
     }
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
     .solution-popup-card.obj-border { border-left: 6px solid #5856D6; }
@@ -165,7 +205,6 @@ st.markdown("""
         padding: 16px;
     }
     
-    /* Custom Styling for Table Layouts inside Cards */
     .ritual-table {
         width: 100%;
         border-collapse: collapse;
@@ -188,19 +227,27 @@ st.markdown("""
         border-bottom: 1px solid #E4E4E7;
         vertical-align: top;
     }
-    .ritual-table tr:last-child td {
-        border-bottom: none;
-    }
-    .step-highlight {
-        font-weight: 700;
-        color: #000000;
-    }
+    .ritual-table tr:last-child td { border-bottom: none; }
+    .step-highlight { font-weight: 700; color: #000000; }
     
     hr { border-color: rgba(255,255,255,0.08) !important; margin: 24px 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. KNOWLEDGE MATRICES DATA REPOSITORY
+# 3. RUNTIME APP ENTRY TRANSITION (CRED SPLASH FLOW)
+if not st.session_state.splash_done:
+    splash_placeholder = st.empty()
+    with splash_placeholder.container():
+        st.markdown("""
+            <div class="cred-splash-container">
+                <div class="cred-splash-logo">PITCH PRO</div>
+            </div>
+        """, unsafe_allow_html=True)
+    time.sleep(2.1)
+    splash_placeholder.empty()
+    st.session_state.splash_done = True
+
+# 4. ACTIVE DATA STRUCTURAL ENTITIES
 DATA_FLOW_MATRIX = {
     "Smart Speaker": {
         "Paytm": {
@@ -232,10 +279,10 @@ DATA_FLOW_MATRIX = {
         },
         "Banks": {
             "points": [
-                "Expose that bank QRs dump every single transaction directly into the bank account, making it tedious to track and verify daily business in the ledger.",
-                "Highlight PhonePe’s unified end-of-day (EOD) single settlement that makes daily tracking effortless.",
-                "Contrast slow, institutional bank compliance with PhonePe's 1-2 hour physical device replacement guarantee.",
-                "Eliminate bank manager visits with direct Sector Incharge direct-line access."
+                "Expose that bank QRs dump every single transaction directly into the bank account, making it tedious to track and verify daily dhandha entries.",
+                "Highlight unified end-of-day (EOD) single settlement that keeps passbooks perfectly clean.",
+                "Contrast institutional banking delays with lightning fast 1-2 hour physical device swap deployment.",
+                "Eliminate structural bank branch operational visits with direct-line field engineering tools."
             ],
             "pitch": "Bhaiya, bank wale QR mein sabse bada jhamela yeh hai ki unke yahan har ek chota-mota transaction seedha aapke bank account mein jaakar girta hai. Ab din bhar mein 100 transaction huye toh aapki passbook aur bank ledger mein 100 entries bhar jayengi, jisse har ek transaction ko verify karna aur track rakhna bohot tedious aur mushkil ho jata hai. PhonePe par aisa kachra nahi hota! Hum din bhar ka poora collection ek sath, single settlement mein aapke bank mein bhejte hain, jisse har din ka dhandha track karna bilkul aasan ho jata hai. Aur agar aapko kisi ek transaction ki in-depth detail chahiye, toh aap PhonePe Business app mein dekh sakte hain. Sabse badi baat—bank ka speaker kharab hua toh aap apni chalti dukaan chhod kar manager ke samne application lekar khade hoge kya? Bank ka support system bohot dheema hai. Humare yahan har area ke liye alag Sector Incharge assigned hai. Machine mein 1% dikkat aayi, direct call karo, ladka 1 se 2 ghante ke andar dukaan par aakar physically speaker badal kar dega. Hum dhandha rukne nahi dete!"
         }
@@ -243,10 +290,10 @@ DATA_FLOW_MATRIX = {
     "Merchant Lending": {
         "Paytm": {
             "points": [
-                "Expose Paytm’s true Annual Percentage Rate (APR) of 36%–37% hidden under processing fees and GST.",
-                "Pitch PhonePe’s clear, low monthly entry-level interest rates of 1.25%–1.5%.",
-                "Highlight the security of having an active on-ground Sector Incharge to assist with any payment queries during the loan tenure.",
-                "Avoid cold automated fintech systems with localized human relationship managers."
+                "Expose true Annual Percentage Rate (APR) of 36%–37% hidden under processing blocks and processing premiums.",
+                "Pitch clear, low monthly entry level interest matrix rates of 1.25%–1.5%.",
+                "Highlight the physical security of having an active ground layout asset checking processing parameters.",
+                "Avoid cold automated digital loops via dedicated human verification channels."
             ],
             "pitch": "Bhaiya, agar aapne Paytm se loan lene ka socha hai ya liya hai, toh unka ek baar interest certificate nikal kar dekhiye. Woh upar se bolte hain 2% mahina, par hidden charges, processing fees aur GST milakar saal ka 36% se 37% tak baithta hai. Aap loot rahe ho wahan! Ek baar PhonePe ka loan banner check kariye, hum aapko pehli dafa mein hi 1.25% se 1.5% ke clear interest rate par loan de rahe hain. Koi hidden jhamela nahi hai. Aur sabse badhiya baat, Paytm par loan lene ke baad agar collection ya deduction ka koi confusion ho, toh aap chatbot se sarr marte reh jaoge. PhonePe par aapka bhai, humara local Sector Incharge hamesha aapke sath khada hai. Kuch bhi baat ho, direct usko phone lagao, woh aakar table par baith kar aapka hisab clear karega. Jab local support ka bharosa ho, toh dhandha fikar-mukt chalta hai."
         },
@@ -275,7 +322,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
         }
     }
 }
@@ -283,8 +330,8 @@ DATA_FLOW_MATRIX = {
 TECHNICAL_ERRORS = {
     "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type या E-NACH Consent में Problem hai.", "actions": ["Bank Details dobara Check karen.", "Sahi Account Type (Savings) aur IFSC chunen."]},
     "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur Aadhaar Card mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC karen."]},
-    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya / poora nahi ho paya.", "actions": ["Kuch samay (TAT) intezar karen.", "TAT poora hone ke baad bhi Issue rahe toh War Room mein Raise" ]},
-    "face_match_failed": {"title": "Face Match Failed", "reason": "Selfie aur Aadhaar/PAN Photo Match nahi hui.", "actions": ["Bright Light mein Clear Selfie len.", "Chashma/Cap hatakar Try" ]}
+    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process KYC Process beech mein ruk gaya.", "actions": ["Samay (TAT) ke poora hone ka intezar karen.", "War room operations me ticket raise kare."]},
+    "face_match_failed": {"title": "Face Match Verification Fault", "reason": "Selfie capture criteria fails to cross check with background document parameters.", "actions": ["Take clean selfie under ambient bright setup.", "Avoid wearing verification blocking accessories like lenses or caps."]}
 }
 
 COUNTER_OBJECTIONS = {
@@ -293,40 +340,42 @@ COUNTER_OBJECTIONS = {
     "edi_vs_emi": {"title": "EDI Kyun Len", "reason": "Vyavasay ke cashflow par bina dabav dale aasan dainik adayegi.", "actions": ["EMI mein har mahine badi Fixed Amount deni padti hai.", "EDI mein aapki Daily Sales se chhoti-chhoti Amount katti hai, jisse Repayment aasan ho jata hai."]}
 }
 
-# 4. APP BOUNDARY SURFACE HEADERS
-st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
-st.markdown('<div class="app-main-title">Lending Army Active Workspace</div>', unsafe_allow_html=True)
+# 5. CORE WORKSPACE SURFACE INTERFACES
+st.markdown('<div class="active-workspace-surface">', unsafe_allow_html=True)
 
-# 5. RESTORED NATIVE WORKSPACE BUTTON GRID (Strictly following layout design metrics)
+st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
+st.markdown('<div class="app-main-title">Pitch Pro</div>', unsafe_allow_html=True)
+
+# Symmetric Grid Generation Systems (Enforces symmetrical card alignments across boundaries)
 row1_cols = st.columns(2)
 with row1_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
-    if st.button("ECB\n\nExternal commercial settlement configurations.", key="mod_ecb"):
+    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>ECB</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>External commercial settlement configurations.</span>", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
 
 with row1_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
-    if st.button("LENDING\n\nMerchant evaluation profiles and pitch scripts.", key="mod_lending"):
+    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>LENDING</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Merchant evaluation profiles and pitch scripts.</span>", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
 
 row2_cols = st.columns(2)
 with row2_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
-    if st.button("GATE MEETING RITUALS\n\nMorning optimization and attendance routines.", key="mod_gate"):
+    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>GATE MEETING RITUALS</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Morning optimization and attendance routines.</span>", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
 
 with row2_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("MERCHANT VISIT RITUALS\n\nGround deployment checklist and merchant journey.", key="mod_visit"):
+    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>MERCHANT VISIT RITUALS</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Ground deployment checklist and merchant journey.</span>", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
 
-# 6. DYNAMIC SUB-FLOW PROFILE PROCESSING
+# 6. DYNAMIC DRILL-DOWN SUB WORKSPACES
 if st.session_state.selected_module:
     current_mod = st.session_state.selected_module
     
-    # FLOW A: CORE LENDING AND SPEAKER UTILITIES
+    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS
     if current_mod in ["Smart Speaker", "Merchant Lending"]:
         comp_choice = st.selectbox(
             "SELECT TARGET COMPETITION / OUTLET SPECIFIC PROFILE:",
@@ -374,7 +423,7 @@ if st.session_state.selected_module:
                 st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">Interactive Pitch Training Audio:</div>', unsafe_allow_html=True)
                 st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
 
-    # FLOW B: GATE MEETING RITUALS (10 KA DUM - image_11.png DATA INTERACTION)
+    # SYSTEM INTERACTION 2: GATE MEETINGS (10 KA DUM - image_11.png Matrix tracking)
     elif current_mod == "Gate Meeting Rituals":
         st.markdown("""
             <div class="solution-popup-card ritual-border">
@@ -396,7 +445,7 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-    # FLOW C: MERCHANT VISIT RITUALS (5 KA PUNCH - image_12.png DATA INTERACTION)
+    # SYSTEM INTERACTION 3: VISITATION RITUALS (5 KA PUNCH - image_12.png Step roadmap)
     elif current_mod == "Merchant Visit Rituals":
         st.markdown("""
             <div class="solution-popup-card ritual-border">
@@ -413,7 +462,7 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-# 7. TROUBLESHOOTING PORTALS (Vanishes cleanly when any active card flow is initiated)
+# 7. ASSISTANCE DRILL-DOWN CHANNELS (Vanishes completely upon inner flow navigation)
 if not st.session_state.selected_module:
     st.markdown('<div class="app-brand-tag">Instant Assistance Portals</div>', unsafe_allow_html=True)
     
@@ -433,7 +482,6 @@ if not st.session_state.selected_module:
             format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"]
         )
         
-    # Render Active Dropdown Choice Output Configurations
     if selected_err != "None":
         node = TECHNICAL_ERRORS[selected_err]
         actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
@@ -461,3 +509,5 @@ if not st.session_state.selected_module:
                 <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
             </div>
         """, unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
