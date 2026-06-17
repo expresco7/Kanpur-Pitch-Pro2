@@ -129,43 +129,89 @@ st.markdown("""
         margin-top: 2px;
     }
     
-    /* Fixed Symmetrical Card Framework */
-    div.stButton > button {
-        background-color: #1C1C1E !important;
-        border: 1px solid rgba(255,255,255,0.08) !important;
-        border-radius: 18px !important;
-        padding: 24px 20px !important;
-        text-align: left !important;
-        width: 100% !important;
-        min-height: 142px !important; 
+    /* --- SYMMETRICAL PROPORTIONATE CAROUSEL ARCHITECTURE --- */
+    .stHorizontalBlock {
         display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        padding: 4px 4px 16px 4px;
+        gap: 16px;
     }
-    div.stButton > button:hover {
-        border-color: rgba(255,255,255,0.25) !important;
-        background-color: #242426 !important;
+    .stHorizontalBlock::-webkit-scrollbar {
+        height: 6px;
+    }
+    .stHorizontalBlock::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 10px;
+    }
+    .stHorizontalBlock::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+    }
+    /* Lock each column into explicit structural symmetry boundaries */
+    .stHorizontalBlock > div {
+        min-width: 220px !important;
+        max-width: 220px !important;
+        flex: 0 0 auto !important;
+    }
+    
+    /* Custom Card Shell Component wrapping layout modules */
+    .carousel-card-shell {
+        background-color: #1C1C1E;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        padding: 20px;
+        height: 180px; /* Forces exact spatial alignment across all card rows */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .carousel-card-shell:hover {
+        border-color: rgba(255,255,255,0.25);
+        background-color: #242426;
         transform: translateY(-2px);
     }
-    
-    /* Typography formatting for main module lists */
-    div.stButton > button p {
-        color: #FFFFFF !important;
-        text-align: left !important;
-        line-height: 1.5 !important;
-        font-size: 13px !important;
-        font-weight: 400 !important;
-        opacity: 0.7 !important;
-        white-space: normal !important;
-    }
-    div.stButton > button p::first-line {
-        font-size: 18px !important;
-        font-weight: 800 !important;
-        color: #FFFFFF !important;
-        opacity: 1 !important;
+    .carousel-card-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: #FFFFFF;
+        line-height: 1.3;
+        margin-top: 4px;
+        /* Uniformly contain long text fields to avoid breaking grid structures */
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     
+    /* Uniform overrides for secondary target call buttons inside cards */
+    .carousel-card-shell div.stButton > button {
+        background-color: rgba(255,255,255,0.05) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        border-radius: 10px !important;
+        padding: 6px 12px !important;
+        min-height: 32px !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+    .carousel-card-shell div.stButton > button:hover {
+        background-color: #00CD52 !important;
+        border-color: #00CD52 !important;
+    }
+    .carousel-card-shell div.stButton > button p {
+        color: #FFFFFF !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+    .carousel-card-shell div.stButton > button:hover p {
+        color: #000000 !important;
+    }
+
     /* Illuminated Triage Troubleshooting Section Card */
     .illuminated-triage-panel {
         background: linear-gradient(180deg, #121215 0%, #0A0A0C 100%);
@@ -297,30 +343,6 @@ st.markdown("""
     .step-highlight { font-weight: 700; color: #000000; }
     
     hr { border-color: rgba(255,255,255,0.08) !important; margin: 24px 0 !important; }
-    
-    /* Horizontal Scrolling Carousel Engine Tweaks */
-    .stHorizontalBlock {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        padding-bottom: 12px;
-        gap: 16px;
-    }
-    .stHorizontalBlock::-webkit-scrollbar {
-        height: 6px;
-    }
-    .stHorizontalBlock::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.02);
-        border-radius: 10px;
-    }
-    .stHorizontalBlock::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 10px;
-    }
-    .stHorizontalBlock > div {
-        min-width: 200px !important;
-        flex: 0 0 auto !important;
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -472,28 +494,56 @@ if not st.session_state.selected_module:
         </div>
     """, unsafe_allow_html=True)
 
-# SETUP HORIZONTAL CAROUSEL LAYOUT GRID
+# SETUP PROPORTIONATE HORIZONTAL CAROUSEL GRID
 carousel_cols = st.columns(4)
 
 with carousel_cols[0]:
-    st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
-    if st.button("ECB\n", key="mod_ecb"):
+    st.markdown("""
+        <div class="carousel-card-shell">
+            <div>
+                <div class="app-brand-tag" style="font-size:9px; margin-bottom:0px;">Module 01</div>
+                <div class="carousel-card-title">ECB</div>
+            </div>
+    """, unsafe_allow_html=True)
+    if st.button("Open", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with carousel_cols[1]:
-    st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
-    if st.button("LENDING\n", key="mod_lending"):
+    st.markdown("""
+        <div class="carousel-card-shell">
+            <div>
+                <div class="app-brand-tag" style="font-size:9px; margin-bottom:0px;">Module 02</div>
+                <div class="carousel-card-title">LENDING</div>
+            </div>
+    """, unsafe_allow_html=True)
+    if st.button("Open", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with carousel_cols[2]:
-    st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
-    if st.button("GATE MEETING RITUALS\n", key="mod_gate"):
+    st.markdown("""
+        <div class="carousel-card-shell">
+            <div>
+                <div class="app-brand-tag" style="font-size:9px; margin-bottom:0px;">Module 03</div>
+                <div class="carousel-card-title">GATE MEETING RITUALS</div>
+            </div>
+    """, unsafe_allow_html=True)
+    if st.button("Open", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with carousel_cols[3]:
-    st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("MERCHANT VISIT RITUALS\n ", key="mod_visit"):
+    st.markdown("""
+        <div class="carousel-card-shell">
+            <div>
+                <div class="app-brand-tag" style="font-size:9px; margin-bottom:0px;">Module 04</div>
+                <div class="carousel-card-title">MERCHANT VISIT RITUALS</div>
+            </div>
+    """, unsafe_allow_html=True)
+    if st.button("Open", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("<hr/>", unsafe_allow_html=True)
 
