@@ -11,8 +11,6 @@ st.set_page_config(
 # Active state session management variables
 if "selected_module" not in st.session_state:
     st.session_state.selected_module = None
-if "selected_competitor" not in st.session_state:
-    st.session_state.selected_competitor = None
 if "pitch_customized" not in st.session_state:
     st.session_state.pitch_customized = False
 if "splash_done" not in st.session_state:
@@ -21,10 +19,9 @@ if "splash_done" not in st.session_state:
 # Reset view metrics when toggling between operational nodes
 def reset_pitch_flow(target_module):
     st.session_state.selected_module = target_module
-    st.session_state.selected_competitor = None
     st.session_state.pitch_customized = False
 
-# 2. CRED DESIGN SYSTEM & HIGH-CONTRAST INTERACTION ENGINE
+# 2. CRED DESIGN SYSTEM & SYMMETRICAL ANIMATION ENGINE
 st.markdown("""
     <style>
     /* Base Engine UI Configuration */
@@ -45,7 +42,7 @@ st.markdown("""
         100% { opacity: 0; letter-spacing: 0.2em; filter: blur(4px); }
     }
     @keyframes workspaceFadeUp {
-        0% { transform: translateY(20px); opacity: 0; }
+        0% { transform: translateY(30px); opacity: 0; }
         100% { transform: translateY(0); opacity: 1; }
     }
     
@@ -69,7 +66,7 @@ st.markdown("""
     }
     
     .active-workspace-surface {
-        animation: workspaceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
+        animation: workspaceFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
     }
 
     /* Typography & Header Blocks */
@@ -88,48 +85,8 @@ st.markdown("""
         color: #FFFFFF;
         margin-bottom: 24px;
     }
-
-    /* Market Share Analytics Telemetry Panel */
-    .telemetry-card {
-        background: linear-gradient(135deg, #121216 0%, #1C1C1E 100%);
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 20px;
-        padding: 20px;
-        margin-bottom: 28px;
-    }
-    .telemetry-grid {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .telemetry-item {
-        text-align: center;
-        flex: 1;
-        border-right: 1px solid rgba(255,255,255,0.08);
-    }
-    .telemetry-item:last-child {
-        border-right: none;
-    }
-    .telemetry-val {
-        font-size: 20px;
-        font-weight: 800;
-        color: #FFFFFF;
-        letter-spacing: -0.02em;
-    }
-    .telemetry-val.leader-color {
-        color: #00CD52 !important;
-        text-shadow: 0 0 10px rgba(0,205,82,0.2);
-    }
-    .telemetry-lbl {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #8E8E93;
-        margin-top: 2px;
-    }
     
-    /* Fixed Symmetrical Card Framework */
+    /* Symmetrical Native Module Block Layout Engine (Fixes image_14.png disparity) */
     div.stButton > button {
         background-color: #1C1C1E !important;
         border: 1px solid rgba(255,255,255,0.08) !important;
@@ -137,7 +94,7 @@ st.markdown("""
         padding: 24px 20px !important;
         text-align: left !important;
         width: 100% !important;
-        min-height: 142px !important; 
+        min-height: 142px !important; /* Forces total box level row symmetry */
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
@@ -147,76 +104,21 @@ st.markdown("""
         border-color: rgba(255,255,255,0.25) !important;
         background-color: #242426 !important;
         transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
-    
-    /* Typography formatting for main module lists */
+    /* Enlarged module bold typography layout values */
     div.stButton > button p {
         color: #FFFFFF !important;
         text-align: left !important;
-        line-height: 1.5 !important;
-        font-size: 13px !important;
-        font-weight: 400 !important;
-        opacity: 0.7 !important;
-        white-space: normal !important;
-    }
-    div.stButton > button p::first-line {
-        font-size: 18px !important;
-        font-weight: 800 !important;
-        color: #FFFFFF !important;
-        opacity: 1 !important;
-    }
-
-    /* Dynamic High-Noticeability Competitor Button Selectors */
-    div.comp-node button {
-        min-height: auto !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
-        background-color: #121214 !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-    }
-    div.comp-node button p {
-        text-align: center !important;
-        font-weight: 600 !important;
-        opacity: 0.9 !important;
-    }
-    div.comp-node button p::first-line {
-        font-size: 14px !important;
-        font-weight: 600 !important;
-    }
-    /* Active Selected State Accent Overrides */
-    div.comp-node-active button {
-        background-color: #00CD52 !important;
-        border: 1px solid #00CD52 !important;
-        min-height: auto !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
-    }
-    div.comp-node-active button p {
-        color: #000000 !important;
-        text-align: center !important;
-        font-weight: 800 !important;
-        opacity: 1 !important;
-    }
-    div.comp-node-active button p::first-line {
-        font-size: 14px !important;
-        font-weight: 800 !important;
-        color: #000000 !important;
-    }
-    
-    /* Illuminated Triage Troubleshooting Section Card */
-    .illuminated-triage-panel {
-        background: linear-gradient(180deg, #121215 0%, #0A0A0C 100%);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.03);
-        border-radius: 24px;
-        padding: 24px;
-        margin-top: 10px;
+        line-height: 1.4 !important;
     }
     
     /* Pitch CTA Accent Button elements */
     div.pitch-trigger-box button {
         background-color: #00CD52 !important;
         border: none !important;
+        font-weight: 700 !important;
+        color: #000000 !important;
         text-align: center !important;
         min-height: auto !important;
         padding: 14px 20px !important;
@@ -225,14 +127,9 @@ st.markdown("""
         color: #000000 !important;
         text-align: center !important;
         font-weight: 700 !important;
-        opacity: 1 !important;
-    }
-    div.pitch-trigger-box button p::first-line {
-        font-size: 14px !important;
-        color: #000000 !important;
     }
     
-    /* Selection Fields Inside Diagnostics */
+    /* Selection Fields */
     div.stSelectbox > label {
         color: #8E8E93 !important;
         font-size: 11px !important;
@@ -250,12 +147,12 @@ st.markdown("""
         color: white !important;
     }
     
-    /* Output Data Interface Modals */
+    /* Output Analytics Cards */
     .solution-popup-card {
         background: #FFFFFF;
-        border-radius: 24px;
+        border-radius: 28px;
         padding: 26px;
-        margin-top: 16px;
+        margin-top: 12px;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
     }
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
@@ -425,15 +322,15 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se github aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi karega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!"
         }
     }
 }
 
 TECHNICAL_ERRORS = {
-    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent में Problem hai.", "actions": ["Bank Details dobara Check karen.", "Sahi Account Type (Savings) aur IFSC chunen."]},
+    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type या E-NACH Consent में Problem hai.", "actions": ["Bank Details dobara Check karen.", "Sahi Account Type (Savings) aur IFSC chunen."]},
     "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur Aadhaar Card mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC karen."]},
-    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya.", "actions": ["Samay (TAT) ke poora hone ka intezar karen.", "War room operations me ticket raise kare."]},
+    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process KYC Process beech mein ruk gaya.", "actions": ["Samay (TAT) ke poora hone ka intezar karen.", "War room operations me ticket raise kare."]},
     "face_match_failed": {"title": "Face Match Verification Fault", "reason": "Selfie capture criteria fails to cross check with background document parameters.", "actions": ["Take clean selfie under ambient bright setup.", "Avoid wearing verification blocking accessories like lenses or caps."]}
 }
 
@@ -449,53 +346,27 @@ st.markdown('<div class="active-workspace-surface">', unsafe_allow_html=True)
 st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-main-title">Pitch Pro</div>', unsafe_allow_html=True)
 
-# THE LANDING TELEMETRY PANEL: Disappears automatically when a workspace module is selected.
-if not st.session_state.selected_module:
-    st.markdown("""
-        <div class="telemetry-card">
-            <div class="app-brand-tag" style="font-size:10px; margin-bottom:12px; color:rgba(255,255,255,0.4);">Territory Market Share Snapshot</div>
-            <div class="telemetry-grid">
-                <div class="telemetry-item">
-                    <div class="telemetry-val leader-color">38.6%</div>
-                    <div class="telemetry-lbl">🟢 PhonePe</div>
-                </div>
-                <div class="telemetry-item">
-                    <div class="telemetry-val">37.6%</div>
-                    <div class="telemetry-lbl">Paytm</div>
-                </div>
-                <div class="telemetry-item">
-                    <div class="telemetry-val">9.6%</div>
-                    <div class="telemetry-lbl">BharatPe</div>
-                </div>
-                <div class="telemetry-item">
-                    <div class="telemetry-val">5.8%</div>
-                    <div class="telemetry-lbl">Google Pay</div>
-                </div>
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
-
-# Symmetrical Card Grid Generation Systems (Clean line breaks, original short names)
+# Symmetric Grid Generation Systems (Enforces symmetrical card alignments across boundaries)
 row1_cols = st.columns(2)
 with row1_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
-    if st.button("ECB\nExternal commercial settlement configurations.", key="mod_ecb"):
+    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>ECB</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>External commercial settlement configurations.</span>", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
 
 with row1_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
-    if st.button("LENDING\nMerchant evaluation profiles and pitch scripts.", key="mod_lending"):
+    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>LENDING</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Merchant evaluation profiles and pitch scripts.</span>", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
 
 row2_cols = st.columns(2)
 with row2_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
-    if st.button("GATE MEETING RITUALS\nMorning optimization and attendance routines.", key="mod_gate"):
+    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>GATE MEETING RITUALS</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Morning optimization and attendance routines.</span>", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
 
 with row2_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("MERCHANT VISIT RITUALS\nGround deployment checklist and merchant journey.", key="mod_visit"):
+    if st.button("<span style='font-size:18px; font-weight:800; display:block; margin-bottom:4px;'>MERCHANT VISIT RITUALS</span><span style='font-size:13px; font-weight:400; opacity:0.7; display:block; white-space:normal;'>Ground deployment checklist and merchant journey.</span>", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
@@ -504,29 +375,14 @@ st.markdown("<hr/>", unsafe_allow_html=True)
 if st.session_state.selected_module:
     current_mod = st.session_state.selected_module
     
-    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS (With High-Noticeability Toggles)
+    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS
     if current_mod in ["Smart Speaker", "Merchant Lending"]:
-        st.markdown('<div class="app-brand-tag" style="margin-bottom:12px;">TARGET COMPETITION MATRICES:</div>', unsafe_allow_html=True)
+        comp_choice = st.selectbox(
+            "SELECT TARGET COMPETITION / OUTLET SPECIFIC PROFILE:",
+            options=["Select Competition...", "Paytm", "BharatPe", "Google Pay", "Banks"]
+        )
         
-        # Grid arrangement for competitors instead of a hidden drop box
-        comp_options = ["Paytm", "BharatPe", "Google Pay", "Banks"]
-        comp_cols = st.columns(4)
-        
-        for index, name in enumerate(comp_options):
-            with comp_cols[index]:
-                # Assign distinct styling class if currently clicked/active
-                is_active = (st.session_state.selected_competitor == name)
-                class_markup = "comp-node-active" if is_active else "comp-node"
-                
-                st.markdown(f'<div class="{class_markup}">', unsafe_allow_html=True)
-                if st.button(name, key=f"comp_select_{name}"):
-                    st.session_state.selected_competitor = name
-                    st.session_state.pitch_customized = False
-                st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Render strategy assets once high-noticeability button selection resolves
-        if st.session_state.selected_competitor:
-            comp_choice = st.session_state.selected_competitor
+        if comp_choice != "Select Competition...":
             node = DATA_FLOW_MATRIX[current_mod][comp_choice]
             
             st.markdown(f"""
@@ -567,7 +423,7 @@ if st.session_state.selected_module:
                 st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">Interactive Pitch Training Audio:</div>', unsafe_allow_html=True)
                 st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
 
-    # SYSTEM INTERACTION 2: GATE MEETINGS
+    # SYSTEM INTERACTION 2: GATE MEETINGS (10 KA DUM - image_11.png Matrix tracking)
     elif current_mod == "Gate Meeting Rituals":
         st.markdown("""
             <div class="solution-popup-card ritual-border">
@@ -589,7 +445,7 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-    # SYSTEM INTERACTION 3: VISITATION RITUALS
+    # SYSTEM INTERACTION 3: VISITATION RITUALS (5 KA PUNCH - image_12.png Step roadmap)
     elif current_mod == "Merchant Visit Rituals":
         st.markdown("""
             <div class="solution-popup-card ritual-border">
@@ -606,10 +462,9 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-# 7. ILLUMINATED ASSISTANCE PORTALS (Wrapped in the requested prominent glowing chassis)
+# 7. ASSISTANCE DRILL-DOWN CHANNELS (Vanishes completely upon inner flow navigation)
 if not st.session_state.selected_module:
-    st.markdown('<div class="illuminated-triage-panel">', unsafe_allow_html=True)
-    st.markdown('<div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>', unsafe_allow_html=True)
+    st.markdown('<div class="app-brand-tag">Instant Assistance Portals</div>', unsafe_allow_html=True)
     
     col_err, col_obj = st.columns(2)
     
@@ -654,6 +509,5 @@ if not st.session_state.selected_module:
                 <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
             </div>
         """, unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
