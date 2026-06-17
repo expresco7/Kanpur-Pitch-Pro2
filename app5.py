@@ -166,41 +166,34 @@ st.markdown("""
         opacity: 1 !important;
     }
 
-    /* Dynamic High-Noticeability Competitor Button Selectors */
-    div.comp-node button {
-        min-height: auto !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
-        background-color: #121214 !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
+    /* Beautiful Visual Brand Identity Cards */
+    .brand-selection-card {
+        background: #121214;
+        border: 2px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 16px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
     }
-    div.comp-node button p {
-        text-align: center !important;
-        font-weight: 600 !important;
-        opacity: 0.9 !important;
+    .brand-selection-card:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        background: #1C1C1E;
     }
-    div.comp-node button p::first-line {
-        font-size: 14px !important;
-        font-weight: 600 !important;
+    .brand-selection-card.active-selected {
+        border-color: #00CD52 !important;
+        background: rgba(0, 205, 82, 0.06) !important;
+        box-shadow: 0 0 20px rgba(0, 205, 82, 0.1);
     }
-    /* Active Selected State Accent Overrides */
-    div.comp-node-active button {
-        background-color: #00CD52 !important;
-        border: 1px solid #00CD52 !important;
-        min-height: auto !important;
-        padding: 14px 16px !important;
-        border-radius: 12px !important;
+    .brand-card-text {
+        font-size: 14px;
+        font-weight: 700;
+        margin-top: 12px;
+        letter-spacing: 0.02em;
+        color: #AEAEB2;
     }
-    div.comp-node-active button p {
-        color: #000000 !important;
-        text-align: center !important;
-        font-weight: 800 !important;
-        opacity: 1 !important;
-    }
-    div.comp-node-active button p::first-line {
-        font-size: 14px !important;
-        font-weight: 800 !important;
-        color: #000000 !important;
+    .brand-selection-card.active-selected .brand-card-text {
+        color: #00CD52 !important;
     }
     
     /* Illuminated Triage Troubleshooting Section Card */
@@ -259,7 +252,6 @@ st.markdown("""
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
     }
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
-    .solution-popup-card.obj-border { border-left: 6px solid #5856D6; }
     .solution-popup-card.flow-border { border-left: 6px solid #00CD52; }
     .solution-popup-card.ritual-border { border-left: 6px solid #FF9500; }
     
@@ -273,7 +265,6 @@ st.markdown("""
         margin-bottom: 14px;
     }
     .status-pill.err-color { background: #FFEBEE; color: #D32F2F; }
-    .status-pill.obj-color { background: #E8EAF6; color: #3F51B5; }
     .status-pill.flow-color { background: #E8F9EE; color: #007A31; }
     .status-pill.ritual-color { background: #FFF3E0; color: #E65100; }
     
@@ -394,11 +385,11 @@ DATA_FLOW_MATRIX = {
         "Paytm": {
             "points": [
                 "Expose true Annual Percentage Rate (APR) of 36%–37% hidden under processing blocks and processing premiums.",
-                "Pitch clear, low monthly entry level interest matrix rates of 1.25%–1.5%.",
+                "Pitch clear, low monthly interest matrix rates of 1.25%–1.5%.",
                 "Highlight the physical security of having an active ground layout asset checking processing parameters.",
                 "Avoid cold automated digital loops via dedicated human verification channels."
             ],
-            "pitch": "Bhaiya, agar aapne Paytm se loan lene ka socha hai ya liya hai, toh unka ek baar interest certificate nikal kar dekhiye. Woh upar se bolte hain 2% mahina, par hidden charges, processing fees aur GST milakar saal ka 36% se 37% tak baithta hai. Aap loot rahe ho wahan! Ek baar PhonePe ka loan banner check kariye, hum aapko pehli dafa mein hi 1.25% se 1.5% ke clear interest rate par loan de rahe hain. Koi hidden jhamela nahi hai. Aur sabse badhiya baat, Paytm par loan lene ke baad agar collection ya deduction ka koi confusion ho, toh aap chatbot se sarr marte reh jaoge. PhonePe par aapka bhai, humara local Sector Incharge hamesha aapke sath khada hai. Kuch bhi baat ho, direct usko phone lagao, woh aakar table par baith kar aapka hisab clear karega. Jab local support ka bharosa ho, toh dhandha fikar-mukt chalta hai."
+            "pitch": "Bhaiya, agar aapne Paytm se loan lene ka socha hai ya liya hai, toh unka ek baar interest certificate nikal kar dekhiye. Wohn upar se bolte hain 2% mahina, par hidden charges, processing fees aur GST milakar saal ka 36% se 37% tak baithta hai. Aap loot rahe ho wahan! Ek baar PhonePe ka loan banner check kariye, hum aapko pehli dafa mein hi 1.25% se 1.5% ke clear interest rate par loan de rahe hain. Koi hidden jhamela nahi hai. Aur sabse badhiya baat, Paytm par loan lene ke baad agar collection ya deduction ka koi confusion ho, toh aap chatbot se sarr marte reh jaoge. PhonePe par aapka bhai, humara local Sector Incharge hamesha aapke sath khada hai. Kuch bhi baat ho, direct usko phone lagao, woh aakar table par baith kar aapka hisab clear karega. Jab local support ka bharosa ho, toh dhandha fikar-mukt chalta hai."
         },
         "BharatPe": {
             "points": [
@@ -407,7 +398,7 @@ DATA_FLOW_MATRIX = {
                 "Position the local Sector Incharge as an advocate who monitors your QR health to unlock bigger limits.",
                 "Emphasize that reliable, human ground-support is unmatched by corporate apps."
             ],
-            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jab aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai."
+            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jag aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai."
         },
         "Google Pay": {
             "points": [
@@ -430,17 +421,18 @@ DATA_FLOW_MATRIX = {
     }
 }
 
+# Real-time lending technical operational data extracted from image_16.png
 TECHNICAL_ERRORS = {
-    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent में Problem hai.", "actions": ["Bank Details dobara Check karen.", "Sahi Account Type (Savings) aur IFSC chunen."]},
     "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur Aadhaar Card mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC karen."]},
-    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya.", "actions": ["Samay (TAT) ke poora hone ka intezar karen.", "War room operations me ticket raise kare."]},
-    "face_match_failed": {"title": "Face Match Verification Fault", "reason": "Selfie capture criteria fails to cross check with background document parameters.", "actions": ["Take clean selfie under ambient bright setup.", "Avoid wearing verification blocking accessories like lenses or caps."]}
-}
-
-COUNTER_OBJECTIONS = {
-    "eligibility": {"title": "Eligible Kaise Bane", "reason": "Merchant dwara niyamit vyavahar badhana aavashyak hai.", "actions": ["Rojana PhonePe QR par jyada se jyada UPI Payments len.", "Aapki lagatar Transaction History hi aapko Loan ke liye Eligible banati hai."]},
-    "higher_offer": {"title": "Higher Loan Offer Kaise Milega", "reason": "Loan ki rashi mukhya roop se lenden aur cibil par aadharit hai.", "actions": ["Loan Amount mukhya roop se aapke PhonePe QR Transactions aur CIBIL Score par nirbhar karta hai.", "Samay par EDI Repayment karne se aapka CIBIL sudharta hai."]},
-    "edi_vs_emi": {"title": "EDI Kyun Len", "reason": "Vyavasay ke cashflow par bina dabav dale aasan dainik adayegi.", "actions": ["EMI mein har mahine badi Fixed Amount deni padti hai.", "EDI mein aapki Daily Sales se chhoti-chhoti Amount katti hai, jisse Repayment aasan ho jata hai."]}
+    "kyc_link_failed": {"title": "KYC Verification Failed", "reason": "PAN aur Aadhaar aapas mein Link nahi hain.", "actions": ["PAN ko Aadhaar se Link karwayen (NSDL/UTI Portal ya Bank/CSC ke madhyam se).", "Link hone ke baad 24 ghante baad Retry karen."]},
+    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya / poora nahi ho paya.", "actions": ["Kuch samay (TAT) intezar karen.", "TAT poora hone ke baad bhi issue rahe toh War Room mein raise karen."]},
+    "face_match_failed": {"title": "Face Match Failed", "reason": "Selfie aur Aadhaar/PAN Photo Match nahi hui.", "actions": ["Bright light mein Clear Selfie lein. Chashma/Cap hatakar try karen.", "Chehra Frame mein Proper rakhein aur dobara Retry karen."]},
+    "kyc_failed_docs": {"title": "KYC Failed (Document Mismatch)", "reason": "Di gayi details Verification Document se Match nahi hui.", "actions": ["Di gayi jankari (Name, DOB, Address, aadi) sahi bharein.", "Documents sahi aur Clear Upload karein.", "Fir bhi Fail ho toh yeh Terminal Error hai - Next Merchant par Move karein."]},
+    "digilocker_error": {"title": "DigiLocker Technical Error", "reason": "UIDAI/DigiLocker ki taraf se Technical Issue hai.", "actions": ["2 ghante Wait karein aur fir se Try karein.", "Issue hone par War Room mein Raise karein."]},
+    "system_process_failed": {"title": "Unable to Process Your Request", "reason": "System / Server Problem ya Lending Partner ki taraf se Temporary Issue.", "actions": ["Kuch samay baad Retry karein.", "Baar-baar Issue aane par War Room mein Raise karein."]},
+    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent mein Problem hai.", "actions": ["Bank Details dobara Check karein.", "Sahi Account Type (Savings) aur IFSC chunein.", "Dobara Mandate Setup karein."]},
+    "upi_mandate_failed": {"title": "UPI Mandate Setup Failed", "reason": "UPI ID ya Bank se Mandate Setup nahi ho paya.", "actions": ["UPI ID Active aur Same Bank ki ho.", "Bank App/UPI App mein Mandate Approve karein."]},
+    "disbursal_failed": {"title": "Loan Disbursement Failed", "reason": "Bank Account, IFSC, KYC ya System Issue ke karan Disbursement nahi ho paya.", "actions": ["Bank Details aur IFSC Verify karein.", "KYC Complete aur Approved hai ya nahi Check karein.", "Issue rahe toh War Room mein Raise karein."]}
 }
 
 # 5. CORE WORKSPACE SURFACE INTERFACES
@@ -475,27 +467,27 @@ if not st.session_state.selected_module:
         </div>
     """, unsafe_allow_html=True)
 
-# Symmetrical Card Grid Generation Systems (Clean line breaks, original short names)
+# Symmetrical Card Grid Generation Systems (Original Short Names preserved with specific taglines)
 row1_cols = st.columns(2)
 with row1_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 01</div>", unsafe_allow_html=True)
-    if st.button("ECB\nExternal commercial settlement configurations.", key="mod_ecb"):
+    if st.button("ECB\nECB (Easy Conversion Base) deployments.", key="mod_ecb"):
         reset_pitch_flow("Smart Speaker")
 
 with row1_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 02</div>", unsafe_allow_html=True)
-    if st.button("LENDING\nMerchant evaluation profiles and pitch scripts.", key="mod_lending"):
+    if st.button("LENDING\nLending evaluation profiles and configurations.", key="mod_lending"):
         reset_pitch_flow("Merchant Lending")
 
 row2_cols = st.columns(2)
 with row2_cols[0]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 03</div>", unsafe_allow_html=True)
-    if st.button("GATE MEETING RITUALS\nMorning optimization and attendance routines.", key="mod_gate"):
+    if st.button("GATE MEETING RITUALS\nGate Meeting Rituals routine parameters.", key="mod_gate"):
         reset_pitch_flow("Gate Meeting Rituals")
 
 with row2_cols[1]:
     st.markdown("<div class='app-brand-tag' style='font-size:10px;'>Module 04</div>", unsafe_allow_html=True)
-    if st.button("MERCHANT VISIT RITUALS\nGround deployment checklist and merchant journey.", key="mod_visit"):
+    if st.button("MERCHANT VISIT RITUALS\nMerchant Visit Rituals deployment checklist.", key="mod_visit"):
         reset_pitch_flow("Merchant Visit Rituals")
 
 st.markdown("<hr/>", unsafe_allow_html=True)
@@ -504,27 +496,66 @@ st.markdown("<hr/>", unsafe_allow_html=True)
 if st.session_state.selected_module:
     current_mod = st.session_state.selected_module
     
-    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS (With High-Noticeability Toggles)
+    # SYSTEM INTERACTION 1: STRATEGIC PLAYBOOKS (With High-Noticeability Visual Toggle Matrix)
     if current_mod in ["Smart Speaker", "Merchant Lending"]:
-        st.markdown('<div class="app-brand-tag" style="margin-bottom:12px;">TARGET COMPETITION MATRICES:</div>', unsafe_allow_html=True)
+        st.markdown('<div class="app-brand-tag" style="margin-bottom:16px;">TARGET COMPETITION MATRICES:</div>', unsafe_allow_html=True)
         
-        # Grid arrangement for competitors instead of a hidden drop box
-        comp_options = ["Paytm", "BharatPe", "Google Pay", "Banks"]
         comp_cols = st.columns(4)
         
-        for index, name in enumerate(comp_options):
-            with comp_cols[index]:
-                # Assign distinct styling class if currently clicked/active
-                is_active = (st.session_state.selected_competitor == name)
-                class_markup = "comp-node-active" if is_active else "comp-node"
-                
-                st.markdown(f'<div class="{class_markup}">', unsafe_allow_html=True)
-                if st.button(name, key=f"comp_select_{name}"):
-                    st.session_state.selected_competitor = name
-                    st.session_state.pitch_customized = False
-                st.markdown('</div>', unsafe_allow_html=True)
+        # Paytm Asset Trigger
+        with comp_cols[0]:
+            is_paytm = (st.session_state.selected_competitor == "Paytm")
+            style_class = "brand-selection-card active-selected" if is_paytm else "brand-selection-card"
+            st.markdown(f'<div class="{style_class}">', unsafe_allow_html=True)
+            st.image("image_17.png", use_container_width=True)
+            st.markdown('<div class="brand-card-text">PAYTM</div>', unsafe_allow_html=True)
+            if st.button("Select Paytm", key="btn_paytm", label_visibility="collapsed"):
+                st.session_state.selected_competitor = "Paytm"
+                st.session_state.pitch_customized = False
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        # BharatPe Asset Trigger
+        with comp_cols[1]:
+            is_bpe = (st.session_state.selected_competitor == "BharatPe")
+            style_class = "brand-selection-card active-selected" if is_bpe else "brand-selection-card"
+            st.markdown(f'<div class="{style_class}">', unsafe_allow_html=True)
+            st.image("image_18.png", use_container_width=True)
+            st.markdown('<div class="brand-card-text">BHARATPE</div>', unsafe_allow_html=True)
+            if st.button("Select BharatPe", key="btn_bpe", label_visibility="collapsed"):
+                st.session_state.selected_competitor = "BharatPe"
+                st.session_state.pitch_customized = False
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        # Google Pay Asset Trigger
+        with comp_cols[2]:
+            is_gpay = (st.session_state.selected_competitor == "Google Pay")
+            style_class = "brand-selection-card active-selected" if is_gpay else "brand-selection-card"
+            st.markdown(f'<div class="{style_class}">', unsafe_allow_html=True)
+            st.image("image_19.png", use_container_width=True)
+            st.markdown('<div class="brand-card-text">GOOGLE PAY</div>', unsafe_allow_html=True)
+            if st.button("Select GPay", key="btn_gpay", label_visibility="collapsed"):
+                st.session_state.selected_competitor = "Google Pay"
+                st.session_state.pitch_customized = False
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        # Traditional Institutional Banks Trigger
+        with comp_cols[3]:
+            is_bank = (st.session_state.selected_competitor == "Banks")
+            style_class = "brand-selection-card active-selected" if is_bank else "brand-selection-card"
+            st.markdown(f'<div class="{style_class}">', unsafe_allow_html=True)
+            # Placeholder beautiful icon styling simulation for institutional channels
+            st.markdown('<div style="height:52px; display:flex; justify-content:center; align-items:center; font-size:32px;">🏦</div>', unsafe_allow_html=True)
+            st.markdown('<div class="brand-card-text">BANKS</div>', unsafe_allow_html=True)
+            if st.button("Select Banks", key="btn_banks", label_visibility="collapsed"):
+                st.session_state.selected_competitor = "Banks"
+                st.session_state.pitch_customized = False
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
         
-        # Render strategy assets once high-noticeability button selection resolves
+        # Render strategy assets once brand identity toggle resolves
         if st.session_state.selected_competitor:
             comp_choice = st.session_state.selected_competitor
             node = DATA_FLOW_MATRIX[current_mod][comp_choice]
@@ -606,26 +637,16 @@ if st.session_state.selected_module:
             </div>
         """, unsafe_allow_html=True)
 
-# 7. ILLUMINATED ASSISTANCE PORTALS (Wrapped in the requested prominent glowing chassis)
+# 7. ILLUMINATED ASSISTANCE PORTALS (Redacted Counter Objections; Troubleshooting Only)
 if not st.session_state.selected_module:
     st.markdown('<div class="illuminated-triage-panel">', unsafe_allow_html=True)
     st.markdown('<div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>', unsafe_allow_html=True)
     
-    col_err, col_obj = st.columns(2)
-    
-    with col_err:
-        selected_err = st.selectbox(
-            "Troubleshoot Technical Errors",
-            options=["None"] + list(TECHNICAL_ERRORS.keys()),
-            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"]
-        )
-        
-    with col_obj:
-        selected_obj = st.selectbox(
-            "Resolve Counter Objections",
-            options=["None"] + list(COUNTER_OBJECTIONS.keys()),
-            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"]
-        )
+    selected_err = st.selectbox(
+        "Troubleshoot Technical Lending Errors",
+        options=["None"] + list(TECHNICAL_ERRORS.keys()),
+        format_func=lambda x: "Select Active Merchant Processing Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"]
+    )
         
     if selected_err != "None":
         node = TECHNICAL_ERRORS[selected_err]
@@ -634,26 +655,13 @@ if not st.session_state.selected_module:
             <div class="solution-popup-card err-border">
                 <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
                 <div class="popup-title">{node['title']}</div>
-                <div class="meta-label">Reason / क्यों होता है</div>
+                <div class="meta-label">Reason / क्यों होता है (From Image Reference)</div>
                 <div class="diagnostic-reason-text">{node['reason']}</div>
                 <div class="meta-label">Immediate Solution / क्या करें</div>
                 <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
             </div>
         """, unsafe_allow_html=True)
         
-    elif selected_obj != "None":
-        node = COUNTER_OBJECTIONS[selected_obj]
-        actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-        st.markdown(f"""
-            <div class="solution-popup-card obj-border">
-                <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
-                <div class="popup-title">{node['title']}</div>
-                <div class="meta-label">Reason / क्यों होता है</div>
-                <div class="diagnostic-reason-text">{node['reason']}</div>
-                <div class="meta-label">Immediate Action / क्या करें</div>
-                <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
-            </div>
-        """, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
