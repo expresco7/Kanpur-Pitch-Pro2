@@ -19,6 +19,21 @@ if "pitch_customized" not in st.session_state:
 if "splash_done" not in st.session_state:
     st.session_state.splash_done = False
 
+# Initialize dropdown session keys for dynamic clearing mechanics
+if "tech_errors_aligned_dropdown" not in st.session_state:
+    st.session_state["tech_errors_aligned_dropdown"] = "None"
+if "counter_objections_aligned_dropdown" not in st.session_state:
+    st.session_state["counter_objections_aligned_dropdown"] = "None"
+
+# Dropdown Mutual Exclusivity Core Callbacks
+def clear_objection_dropdown():
+    if st.session_state["tech_errors_aligned_dropdown"] != "None":
+        st.session_state["counter_objections_aligned_dropdown"] = "None"
+
+def clear_error_dropdown():
+    if st.session_state["counter_objections_aligned_dropdown"] != "None":
+        st.session_state["tech_errors_aligned_dropdown"] = "None"
+
 # Reset view metrics when toggling between operational nodes
 def reset_pitch_flow(target_module):
     st.session_state.selected_module = target_module
@@ -46,7 +61,7 @@ st.markdown("""
         100% { opacity: 0; letter-spacing: 0.2em; filter: blur(4px); }
     }
     @keyframes workspaceFadeUp {
-        0% { transform: translateY(20px); opacity: 0; }
+        0% { transform: translateY(15px); opacity: 0; }
         100% { transform: translateY(0); opacity: 1; }
     }
     
@@ -61,7 +76,7 @@ st.markdown("""
         align-items: center;
     }
     .cred-splash-logo {
-        font-size: 42px;
+        font-size: 36px;
         font-weight: 900;
         text-transform: uppercase;
         color: #FFFFFF;
@@ -70,8 +85,9 @@ st.markdown("""
     }
     
     .active-workspace-surface {
-        animation: workspaceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
-        margin-bottom: 40px;
+        animation: workspaceFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
+        margin-bottom: 24px;
+        padding: 0 4px;
     }
 
     /* Typography & Header Blocks */
@@ -84,36 +100,39 @@ st.markdown("""
         margin-bottom: 4px;
     }
     .app-main-title {
-        font-size: 26px;
+        font-size: 24px;
         font-weight: 800;
         letter-spacing: -0.02em;
         color: #FFFFFF;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
     }
 
     /* Market Share Analytics Telemetry Panel */
     .telemetry-card {
         background: linear-gradient(135deg, #121216 0%, #1C1C1E 100%);
         border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 20px;
-        padding: 20px;
-        margin-bottom: 28px;
+        border-radius: 16px;
+        padding: 16px;
+        margin-bottom: 24px;
     }
     .telemetry-grid {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
     }
     .telemetry-item {
         text-align: center;
         flex: 1;
+        min-width: 75px;
         border-right: 1px solid rgba(255,255,255,0.08);
     }
     .telemetry-item:last-child {
         border-right: none;
     }
     .telemetry-val {
-        font-size: 20px;
+        font-size: 17px;
         font-weight: 800;
         color: #FFFFFF;
         letter-spacing: -0.02em;
@@ -123,7 +142,7 @@ st.markdown("""
         text-shadow: 0 0 10px rgba(0,205,82,0.2);
     }
     .telemetry-lbl {
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -131,24 +150,32 @@ st.markdown("""
         margin-top: 2px;
     }
     
-    /* Symmetrical Carousel Architecture */
+    /* Mobile-Enhanced Symmetrical Carousel Architecture */
     .stHorizontalBlock {
         display: flex !important;
+        flex-direction: row !important;
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
-        padding: 4px 4px 16px 4px;
-        gap: 16px;
+        padding: 4px 2px 14px 2px;
+        gap: 12px;
+        -webkit-overflow-scrolling: touch;
     }
-    .stHorizontalBlock::-webkit-scrollbar { height: 6px; }
+    .stHorizontalBlock::-webkit-scrollbar { height: 4px; }
     .stHorizontalBlock::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
     .stHorizontalBlock::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+    
+    /* Force columns to hold structural minimum width on mobile screens instead of collapsing */
+    div[data-testid="column"] {
+        min-width: 150px !important;
+        flex: 0 0 auto !important;
+    }
     
     .carousel-card-shell {
         background-color: #1C1C1E;
         border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 20px;
-        padding: 20px;
-        height: 180px;
+        border-radius: 16px;
+        padding: 14px;
+        height: 160px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -157,10 +184,9 @@ st.markdown("""
     .carousel-card-shell:hover {
         border-color: rgba(255,255,255,0.25);
         background-color: #242426;
-        transform: translateY(-2px);
     }
     .carousel-card-title {
-        font-size: 16px;
+        font-size: 13px;
         font-weight: 800;
         color: #FFFFFF;
         line-height: 1.3;
@@ -170,53 +196,56 @@ st.markdown("""
     .carousel-card-shell div.stButton > button {
         background-color: rgba(255,255,255,0.05) !important;
         border: 1px solid rgba(255,255,255,0.1) !important;
-        border-radius: 10px !important;
-        padding: 6px 12px !important;
-        min-height: 32px !important;
+        border-radius: 8px !important;
+        padding: 4px 10px !important;
+        min-height: 28px !important;
         width: 100% !important;
     }
     .carousel-card-shell div.stButton > button:hover { background-color: #00CD52 !important; border-color: #00CD52 !important; }
     .carousel-card-shell div.stButton > button p {
-        color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important;
+        color: #FFFFFF !important; font-size: 10px !important; font-weight: 700 !important;
         text-transform: uppercase !important; letter-spacing: 0.05em !important; margin: 0 auto !important;
     }
     .carousel-card-shell div.stButton > button:hover p { color: #000000 !important; }
 
-    /* --- PREMIUM HIGH-HIGHLIGHT CRUCIAL TRIAGE CONTAINER INTERFACE --- */
+    /* --- MOBILE STABILIZED CRUCIAL TRIAGE CONTAINER INTERFACE --- */
     .illuminated-triage-panel {
         background: linear-gradient(145deg, #0D0D11 0%, #14141A 100%) !important;
         border: 1px solid rgba(255, 149, 0, 0.35) !important;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 149, 0, 0.05) !important;
-        border-radius: 28px !important;
-        padding: 30px !important;
-        margin-top: 60px !important;
-        margin-bottom: 35px !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 149, 0, 0.03) !important;
+        border-radius: 20px !important;
+        padding: 20px 16px !important;
+        margin-top: 40px !important;
+        margin-bottom: 25px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
     }
     
-    /* Dedicated Style Scale Rule for Command Terminal Headers */
+    /* Centered Command Terminal Headers Style Rule */
     .terminal-main-header {
-        font-size: 15px !important;
+        font-size: 13px !important;
         font-weight: 900 !important;
-        letter-spacing: 0.12em !important;
+        letter-spacing: 0.1em !important;
         text-transform: uppercase !important;
-        color: #FF9500 !important; /* Vivid active amber profile color */
+        color: #FF9500 !important;
         text-shadow: 0 0 15px rgba(255, 149, 0, 0.2);
-        margin-bottom: 4px !important;
-        display: block !important;
+        margin: 0 auto !important;
+        display: inline-block !important;
+        text-align: center !important;
     }
     
-    div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 14px 20px !important; width: 100%; }
-    div.pitch-trigger-box button p { color: #000000 !important; font-weight: 700 !important; font-size: 14px !important; }
+    div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 12px 16px !important; width: 100%; border-radius: 12px; }
+    div.pitch-trigger-box button p { color: #000000 !important; font-weight: 700 !important; font-size: 13px !important; }
 
     /* Fixed Floating Corner Back Button Interface Styles */
-    div.floating-back-container { position: fixed; bottom: 24px; left: 24px; z-index: 9999; }
+    div.floating-back-container { position: fixed; bottom: 16px; left: 16px; z-index: 9999; }
     div.floating-back-container button {
         background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.15) !important;
-        border-radius: 30px !important; padding: 8px 18px !important; box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+        border-radius: 30px !important; padding: 6px 14px !important; box-shadow: 0 6px 20px rgba(0,0,0,0.5) !important;
     }
-    div.floating-back-container button:hover { background-color: #FFFFFF !important; border-color: #FFFFFF !important; }
-    div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; }
-    div.floating-back-container button:hover p { color: #000000 !important; }
+    div.floating-back-container button p { color: #FFFFFF !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase !important; }
     
     /* Input headings with descriptive spacing */
     .custom-input-heading {
@@ -225,39 +254,40 @@ st.markdown("""
         text-transform: uppercase !important;
         letter-spacing: 0.08em !important;
         font-weight: 700 !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 8px !important;
         display: block !important;
         text-align: left !important;
     }
     
-    div[data-testid="stSelectbox"] > div { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 14px !important; }
-    div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; }
+    div[data-testid="stSelectbox"] > div { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 12px !important; }
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; font-size: 14px !important; }
     
     /* Output Data Interface Modals */
-    .solution-popup-card { background: #FFFFFF; border-radius: 24px; padding: 26px; margin-top: 16px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+    .solution-popup-card { background: #FFFFFF; border-radius: 20px; padding: 20px; margin-top: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); }
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
     .solution-popup-card.obj-border { border-left: 6px solid #5856D6; }
     .solution-popup-card.flow-border { border-left: 6px solid #00CD52; }
     .solution-popup-card.ritual-border { border-left: 6px solid #FF9500; }
     
-    .status-pill { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.05em; padding: 5px 12px; border-radius: 50px; margin-bottom: 14px; }
+    .status-pill { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 50px; margin-bottom: 12px; }
     .status-pill.err-color { background: #FFEBEE; color: #D32F2F; }
     .status-pill.obj-color { background: #E8EAF6; color: #3F51B5; }
     .status-pill.flow-color { background: #E8F9EE; color: #007A31; }
     .status-pill.ritual-color { background: #FFF3E0; color: #E65100; }
     
-    .popup-title { color: #1C1C1E; font-size: 22px; font-weight: 800; margin: 0 0 16px 0; }
-    .meta-label { font-size: 11px; color: #71717A; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; margin-top: 14px; }
-    .diagnostic-reason-text { background: #F4F4F5; color: #1C1C1E; padding: 14px 16px; border-radius: 14px; font-size: 15px; font-weight: 500; margin-bottom: 10px; }
-    .action-steps-box { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 14px; padding: 16px; }
+    .popup-title { color: #1C1C1E; font-size: 18px; font-weight: 800; margin: 0 0 12px 0; line-height: 1.3; }
+    .meta-label { font-size: 10px; color: #71717A; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; margin-top: 12px; }
+    .diagnostic-reason-text { background: #F4F4F5; color: #1C1C1E; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 500; margin-bottom: 10px; }
+    .action-steps-box { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 12px; padding: 12px; }
+    .action-steps-box ul { padding-left: 4px; margin: 0; list-style-type: none; }
     
     .ritual-table { width: 100%; border-collapse: collapse; margin-top: 10px; color: #1C1C1E; }
-    .ritual-table th { background: #F4F4F5; text-align: left; padding: 10px; font-size: 12px; text-transform: uppercase; font-weight: 700; color: #71717A; border-bottom: 2px solid #E4E4E7; }
-    .ritual-table td { padding: 12px 10px; font-size: 14px; border-bottom: 1px solid #E4E4E7; vertical-align: top; }
+    .ritual-table th { background: #F4F4F5; text-align: left; padding: 8px; font-size: 11px; text-transform: uppercase; font-weight: 700; color: #71717A; border-bottom: 2px solid #E4E4E7; }
+    .ritual-table td { padding: 10px 8px; font-size: 13px; border-bottom: 1px solid #E4E4E7; vertical-align: top; }
     .ritual-table tr:last-child td { border-bottom: none; }
     .step-highlight { font-weight: 700; color: #000000; }
     
-    hr { border-color: rgba(255,255,255,0.08) !important; margin: 24px 0 !important; }
+    hr { border-color: rgba(255,255,255,0.08) !important; margin: 20px 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -274,7 +304,7 @@ if not st.session_state.splash_done:
     splash_placeholder.empty()
     st.session_state.splash_done = True
 
-# 4. DATA MATRIX - COMPREHENSIVE REPOSITORY SYNCHRONIZED ARCHITECTURE (.mp3 EXTENSIONS)
+# 4. DATA MATRIX - COMPREHENSIVE REPOSITORY SYNCHRONIZED ARCHITECTURE
 DATA_FLOW_MATRIX = {
     "Smart Speaker": {
         "Paytm": {
@@ -356,7 +386,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
             "audio": "loan_bank.mp3"
         }
     }
@@ -411,13 +441,13 @@ if not st.session_state.selected_module:
                 </div>
                 <div class="telemetry-item">
                     <div class="telemetry-val">5.8%</div>
-                    <div class="telemetry-lbl">Google Pay</div>
+                    <div class="telemetry-lbl">GPay</div>
                 </div>
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-# Symmetrical Horizontal Carousel Grid
+# Symmetrical Horizontal Carousel Grid (Transforms beautifully to scrolling cards on mobile)
 carousel_cols = st.columns(4)
 modules = ["Smart Speaker", "Merchant Lending", "Gate Meeting Rituals", "Merchant Visit Rituals"]
 keys = ["mod_ecb", "mod_lending", "mod_gate", "mod_visit"]
@@ -497,7 +527,6 @@ if st.session_state.selected_module:
                 st.write("")
                 st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">🎙️ Training Audio Player:</div>', unsafe_allow_html=True)
                 
-                # Dynamic Execution Absolute Path Map (.mp3 asset routing directly from repository root)
                 base_dir = os.path.dirname(os.path.abspath(__file__))
                 absolute_audio_path = os.path.join(base_dir, node["audio"])
                 
@@ -505,7 +534,7 @@ if st.session_state.selected_module:
                     with open(absolute_audio_path, "rb") as audio_file:
                         st.audio(audio_file.read(), format="audio/mp3")
                 except FileNotFoundError:
-                    st.error(f"⚠️ Audio asset missing: '{node['audio']}' could not be matched at root destination.")
+                    st.error(f"⚠️ Audio asset missing: '{node['audio']}'")
 
     # System Interaction 3: Gate Meetings
     elif current_mod == "Gate Meeting Rituals":
@@ -515,16 +544,16 @@ if st.session_state.selected_module:
                 <div class="popup-title">10 KA DUM</div>
                 <table class="ritual-table">
                     <tr><th>Gate Meeting</th><th>Description</th></tr>
-                    <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Generation/Scanning<br>2-Selfie with Code (Mention AOP, Count of Active, Location)<br>3-Virtual GM Form</td></tr>
-                    <tr><td><span class="step-highlight">2. Team Grooming</span></td><td>Basic Hygiene - Dress, Bags, Helmet, Mobile Cover, Mobile Screen Guard, Torn Shoes or Slippers.</td></tr>
-                    <tr><td><span class="step-highlight">3. SKH</span></td><td>In-depth Discussion with help of Agent Activity & Tracker</td></tr>
-                    <tr><td><span class="step-highlight">4. DSR</span></td><td>1-Take Appointment during Morning calling activity<br>2-Visit Mx and Mark tasks with final remarks</td></tr>
-                    <tr><td><span class="step-highlight">5. Salary Discussion</span></td><td>Daily Salary Discussion with format to be done and Signed by Manager i.e. TSM, ASM, CSM.</td></tr>
-                    <tr><td><span class="step-highlight">6. TOD</span></td><td>1-Task of the Day Discussion<br>2-Open Smart Squad<br>3-Perform Ace Activities<br>4-TP Commitment for the Day on Sales Academy</td></tr>
-                    <tr><td><span class="step-highlight">7. Manager Inputs</span></td><td>How to Drive task of the Day, share inputs and create innovative drives.</td></tr>
-                    <tr><td><span class="step-highlight">8. Collateral Dist.</span></td><td>QR, A4, SS, RVP collection, distribution and submission.</td></tr>
-                    <tr><td><span class="step-highlight">9. Telecalling Activity</span></td><td>15 Appointments to be Booked before leaving.</td></tr>
-                    <tr><td><span class="step-highlight">11. Support Required</span></td><td>One on One support requirement discussion with Manager.</td></tr>
+                    <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Gen/Scanning<br>2-Selfie with Code<br>3-Virtual GM Form</td></tr>
+                    <tr><td><span class="step-highlight">2. Grooming</span></td><td>Dress, Bags, Helmet, Mobile Screen Guard, Shoes.</td></tr>
+                    <tr><td><span class="step-highlight">3. SKH</span></td><td>Discussion via Agent Tracker</td></tr>
+                    <tr><td><span class="step-highlight">4. DSR</span></td><td>Visit Mx and Mark tasks with final remarks</td></tr>
+                    <tr><td><span class="step-highlight">5. Salary</span></td><td>Daily Salary Discussion signed by Manager.</td></tr>
+                    <tr><td><span class="step-highlight">6. TOD</span></td><td>Task of the Day & Ace Activities</td></tr>
+                    <tr><td><span class="step-highlight">7. Inputs</span></td><td>Manager Innovative drives.</td></tr>
+                    <tr><td><span class="step-highlight">8. Collateral</span></td><td>QR, A4, SS, RVP distribution.</td></tr>
+                    <tr><td><span class="step-highlight">9. Telecalling</span></td><td>15 Appointments Booked.</td></tr>
+                    <tr><td><span class="step-highlight">11. Support</span></td><td>One on One support request.</td></tr>
                 </table>
             </div>
         """, unsafe_allow_html=True)
@@ -537,18 +566,18 @@ if st.session_state.selected_module:
                 <div class="popup-title">5 KA PUNCH</div>
                 <table class="ritual-table">
                     <tr><th>Step</th><th>Task Objective</th><th>Action Roadmap</th></tr>
-                    <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test Transaction</b></td><td>Deploy minimum 3 QR codes and perform a small test transaction to confirm tracking ecosystem health.</td></tr>
-                    <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition QR</b></td><td>Locate and tag the specific competition QR active on counter inside analytics environment.</td></tr>
-                    <tr><td><span class="step-highlight">3</span></td><td><b>Show Transaction in App</b></td><td>Verify test transaction inside the PhonePe Business App. Click all visible structural banners and request Photo QR if available.</td></tr>
-                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity instruments (PAN, Aadhaar) on workspace dashboard.</td></tr>
-                    <tr><td><span class="step-highlight">5</span></td><td><b>Smartspeaker Activation</b></td><td>Plug in and charge smartspeaker. Share complete support line coordinates and localized contact details with the merchant.</td></tr>
+                    <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test</b></td><td>Deploy min 3 QRs and perform small test transaction.</td></tr>
+                    <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition</b></td><td>Locate and tag specific competition QR active on counter.</td></tr>
+                    <tr><td><span class="step-highlight">3</span></td><td><b>Show Trans in App</b></td><td>Verify transaction inside PhonePe Business App.</td></tr>
+                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete KYC</b></td><td>Securely verify account identity instruments (PAN, Aadhaar).</td></tr>
+                    <tr><td><span class="step-highlight">5</span></td><td><b>Speaker Activation</b></td><td>Plug in smartspeaker. Share complete support coordinates.</td></tr>
                 </table>
             </div>
         """, unsafe_allow_html=True)
 
     # Floating Back Button Action
     st.markdown('<div class="floating-back-container">', unsafe_allow_html=True)
-    if st.button("← Back to Dashboard", key="floating_back_nav_action"):
+    if st.button("← Back", key="floating_back_nav_action"):
         st.session_state.selected_module = None
         st.session_state.selected_competitor = "Select Competitor..."
         st.session_state.pitch_customized = False
@@ -557,7 +586,7 @@ if st.session_state.selected_module:
 
 # 7. HIGHLY HIGHLIGHTED STANDALONE VERTICAL TRIAGE TERMINAL ENGINE
 if not st.session_state.selected_module:
-    # Upgraded standalone shell with amplified header tracking style properties
+    # Centered illuminated header layout shell
     st.markdown("""
         <div class="illuminated-triage-panel">
             <span class="terminal-main-header">⚡ INSTANT TROUBLESHOOTING TERMINAL</span>
@@ -572,10 +601,11 @@ if not st.session_state.selected_module:
             options=["None"] + list(TECHNICAL_ERRORS.keys()),
             format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
             key="tech_errors_aligned_dropdown",
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            on_change=clear_objection_dropdown
         )
     
-    st.markdown('<div style="margin-bottom: 30px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="margin-bottom: 20px;"></div>', unsafe_allow_html=True)
     
     # Item Container Block 02: Counter Objections Selector Dropdown
     with st.container():
@@ -585,13 +615,14 @@ if not st.session_state.selected_module:
             options=["None"] + list(COUNTER_OBJECTIONS.keys()),
             format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
             key="counter_objections_aligned_dropdown",
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            on_change=clear_error_dropdown
         )
     
     # Action result metrics outputs cards processing
     if selected_err != "None":
         node = TECHNICAL_ERRORS[selected_err]
-        actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
+        actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px; font-size:13.5px;'>📍 {act}</li>" for act in node["actions"]])
         st.markdown(f"""
             <div class="solution-popup-card err-border">
                 <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
@@ -605,7 +636,7 @@ if not st.session_state.selected_module:
         
     elif selected_obj != "None":
         node = COUNTER_OBJECTIONS[selected_obj]
-        actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
+        actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px; font-size:13.5px;'>📍 {act}</li>" for act in node["actions"]])
         st.markdown(f"""
             <div class="solution-popup-card obj-border">
                 <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
