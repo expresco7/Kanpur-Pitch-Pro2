@@ -71,7 +71,7 @@ st.markdown("""
     
     .active-workspace-surface {
         animation: workspaceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
-        margin-bottom: 80px;
+        margin-bottom: 40px;
     }
 
     /* Typography & Header Blocks */
@@ -142,7 +142,6 @@ st.markdown("""
     .stHorizontalBlock::-webkit-scrollbar { height: 6px; }
     .stHorizontalBlock::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
     .stHorizontalBlock::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
-    .stHorizontalBlock > div { min-width: 220px !important; max-width: 220px !important; flex: 0 0 auto !important; }
     
     .carousel-card-shell {
         background-color: #1C1C1E;
@@ -166,10 +165,6 @@ st.markdown("""
         color: #FFFFFF;
         line-height: 1.3;
         margin-top: 4px;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
     }
     
     .carousel-card-shell div.stButton > button {
@@ -179,49 +174,48 @@ st.markdown("""
         padding: 6px 12px !important;
         min-height: 32px !important;
         width: 100% !important;
-        text-align: center !important;
     }
     .carousel-card-shell div.stButton > button:hover { background-color: #00CD52 !important; border-color: #00CD52 !important; }
     .carousel-card-shell div.stButton > button p {
         color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important;
-        text-transform: uppercase !important; letter-spacing: 0.05em !important; text-align: center !important; margin: 0 auto !important;
+        text-transform: uppercase !important; letter-spacing: 0.05em !important; margin: 0 auto !important;
     }
     .carousel-card-shell div.stButton > button:hover p { color: #000000 !important; }
 
-    /* Illuminated Triage Troubleshooting Section Card */
+    /* Premium Bold Highlighted Triage Section Chassis */
     .illuminated-triage-panel {
-        background: linear-gradient(180deg, #121215 0%, #0A0A0C 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.02);
-        border-radius: 24px;
-        padding: 24px;
-        margin-top: 10px;
-        margin-bottom: 20px;
+        background: linear-gradient(135deg, #121216 0%, #17171C 100%);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.01);
+        border-radius: 28px;
+        padding: 26px;
+        margin-top: 40px; /* Stronger standalone whitespace distance separator */
+        margin-bottom: 30px;
     }
     
-    div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; text-align: center !important; min-height: auto !important; padding: 14px 20px !important; }
-    div.pitch-trigger-box button p { color: #000000 !important; text-align: center !important; font-weight: 700 !important; opacity: 1 !important; }
-    div.pitch-trigger-box button p::first-line { font-size: 14px !important; color: #000000 !important; }
+    div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 14px 20px !important; width: 100%; }
+    div.pitch-trigger-box button p { color: #000000 !important; font-weight: 700 !important; font-size: 14px !important; }
 
     /* Fixed Floating Corner Back Button Interface Styles */
     div.floating-back-container { position: fixed; bottom: 24px; left: 24px; z-index: 9999; }
     div.floating-back-container button {
         background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.15) !important;
-        border-radius: 30px !important; padding: 8px 18px !important; box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important; min-height: auto !important; width: auto !important;
+        border-radius: 30px !important; padding: 8px 18px !important; box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
     }
     div.floating-back-container button:hover { background-color: #FFFFFF !important; border-color: #FFFFFF !important; }
-    div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; }
+    div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; }
     div.floating-back-container button:hover p { color: #000000 !important; }
     
-    /* Global Selectbox Label Custom Styling with Clear Margins */
+    /* Input headings with descriptive spacing */
     .custom-input-heading {
         color: #8E8E93 !important;
         font-size: 11px !important;
         text-transform: uppercase !important;
-        letter-spacing: 0.07em !important;
+        letter-spacing: 0.08em !important;
         font-weight: 700 !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 8px !important;
         display: block !important;
+        text-align: left !important;
     }
     
     div[data-testid="stSelectbox"] > div { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 14px !important; }
@@ -264,11 +258,11 @@ if not st.session_state.splash_done:
                 <div class="cred-splash-logo">PITCH PRO</div>
             </div>
         """, unsafe_allow_html=True)
-    time.sleep(2.1)
+    time.sleep(1.5)
     splash_placeholder.empty()
     st.session_state.splash_done = True
 
-# 4. DATA MATRIX - ROOTED FILE ALIGNMENTS (NO 'audio/' PREFIX)
+# 4. DATA MATRIX - COMPREHENSIVE REPOSITORY SYNCHRONIZED ARCHITECTURE (.mp3 EXTENSIONS)
 DATA_FLOW_MATRIX = {
     "Smart Speaker": {
         "Paytm": {
@@ -279,7 +273,7 @@ DATA_FLOW_MATRIX = {
                 "Zero online customer care dependency; direct call to the local executive for instant resolution."
             ],
             "pitch": "Bhaiya, ek minute dijiye, main aapko aapke Paytm Business app mein ek cheez dikhata hoon. Aap bol rahe ho na ki sirf ₹1 kat ta hai? Yeh dekho, app ke 'Soundbox History' aur 'Filters' mein jaakar—yeh har mahine ka hidden rental kat raha hai aapka. PhonePe par humare purane merchants ke liye abhi ek special offer chal raha hai jismein setup fee par bhari discount hai (sirf ₹99/₹149 LTV ke hisab se). Aur sabse badi baat—Paytm mein agar speaker kharab ho jaye, toh unke customer care par robot se chat karte-karte thak jaoge, koi sunne wala nahi hota. PhonePe par humara system bilkul alag hai. Humne aapke Kanpur ke isi market area mein ek dedicated Sector Incharge bitha rakha hai. Koi online ticket-vicket raising ka jhamela nahi hai. Ek call ghumao, humara ladka turant aapki dukaan par hazir hoga. Agar daily target hit kar lete ho, toh rental bhi zero aur service bhi top class!",
-            "audio": "speaker_paytm.mp3"
+            "audio": "loan_paytm.mp3"
         },
         "BharatPe": {
             "points": [
@@ -289,7 +283,7 @@ DATA_FLOW_MATRIX = {
                 "Emphasize fast, direct human support over automated, slow online complaint portals."
             ],
             "pitch": "Bhaiya, aap khud dekho, aapke dukaan par jitne bhi log aate hain, unmein se 70% se 80% log PhonePe use karte hain. Jab consumer hi PhonePe ka hai, toh aap BharatPe ke QR par ghumakar settlement kyun delay kar rahe ho? Seedha PhonePe ka Smart Speaker lagao. Customers ke liye bhi frictionless payment hoga aur isi transaction volume ke basis par aapka loan offer bhi raat-o-raat active ho jayega. Rahi baat service ki—toh BharatPe ka na toh koi on-ground aadmi milta hai aur na hi unka support system local hai. Humara Sector Incharge har waqt isi market mein rehta hai. Kal ko network ka ya payment ka koi bhi issue aaye, aapko kisi app par jaakar shikayat nahi darj karni. Aapke paas humare local team ka number hoga, direct phone milao aur on-the-spot tension saaf!",
-            "audio": "speaker_bharatpe.mp3"
+            "audio": "loan_bharatpe.mp3"
         },
         "Google Pay": {
             "points": [
@@ -299,7 +293,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight PhonePe's hyper-local team backup ensuring 100% counter uptime."
             ],
             "pitch": "Bhaiya, Google Pay ka speaker sirf ek audio box hai, usse aapke business ko koi fayda nahi mil raha. PhonePe ka Smart Speaker lagane ka matlab hai ki aapka business humare system mein top priority par aa jata hai. Iske lagte hi aapka business loan jald approve ho jata hai, aur aane wale time mein jo shop insurance aur retail health benefits hum de rahe hain, uski facilities bhi sabse pehle aapko milengi. Aur sabse matted baat bataun? Google Pay ka koi local office ya on-ground team nahi hai Kanpur mein. Kuch dikkat aayi toh mail likhte reh jaoge. PhonePe ka hamara local Sector Incharge hamesha aapke area mein round par rehta hai. Humara maqsad hai ki aapka counter kabhi band na ho. Bina kisi online ticketing ke, hand-to-hand aur reliable service sirf PhonePe par milti hai.",
-            "audio": "speaker_gpay.mp3"
+            "audio": "loan_gpay.mp3"
         },
         "Banks": {
             "points": [
@@ -309,7 +303,7 @@ DATA_FLOW_MATRIX = {
                 "Eliminate structural bank branch operational visits with direct-line field engineering tools."
             ],
             "pitch": "Bhaiya, bank wale QR mein sabse bada jhamela yeh hai ki unke yahan har ek chota-mota transaction seedha aapke bank account mein jaakar girta hai. Ab din bhar mein 100 transaction huye toh aapki passbook aur bank ledger mein 100 entries bhar jayengi, jisse har ek transaction ko verify karna aur track rakhna bohot tedious aur mushkil ho jata hai. PhonePe par aisa kachra nahi hota! Hum din bhar ka poora collection ek sath, single settlement mein aapke bank mein bhejte hain, jisse har din ka dhandha track karna bilkul aasan ho jata hai. Aur agar aapko kisi ein transaction ki in-depth detail chahiye, toh aap PhonePe Business app mein dekh sakte hain. Sabse badi baat—bank ka speaker kharab hua toh aap apni chalti dukaan chhod kar manager ke samne application lekar khade hoge kya? Bank ka support system bohot dheema hai. Humare yahan har area ke liye alag Sector Incharge assigned hai. Machine mein 1% dikkat aayi, direct call karo, ladka 1 se 2 ghante ke andar dukaan par aakar physically speaker badal kar dega. Hum dhandha rukne nahi dete!",
-            "audio": "speaker_bank.mp3"
+            "audio": "loan_bank.mp3"
         }
     },
     "Merchant Lending": {
@@ -320,7 +314,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight the physical security of having an active ground layout asset checking processing parameters.",
                 "Avoid cold automated digital loops via dedicated human verification channels."
             ],
-            "pitch": "Bhaiya, agar aapne Paytm se loan lene ka socha hai ya liya hai, toh unka ek baar interest certificate nikal kar dekhiye. Woh upar se bolte hain 2% mahina, par hidden charges, processing fees aur GST milakar saal ka 36% se 37% tak baithta hai. Aap loot rahe ho wahan! Ek baar PhonePe ka loan banner check kariye, hum aapko pehli dafa mein hi 1.25% se 1.5% ke clear interest rate par loan de rahe hain. Koi hidden jhamela nahi hai. Aur sabse badhiya baat, Paytm par loan lene ke baad agar collection ya deduction ka koi confusion ho, toh aap chatbot se sarr marte reh jaoge. PhonePe par aapka bhai, humara local Sector Incharge hamesha aapke sath khada hai. Kuch bhi baat ho, direct usko phone lagao, woh aakar table par baith kar aapka hisab clear karega. Jab local support ka bharosa ho, toh dhandha fikar-mukt chalta hai.",
+            "pitch": "Bhaiya, agar aapne Paytm se loan lene ka socha hai ya liya hai, toh unka ek baar interest certificate nikal kar dekhiye. Woh upar se bolte hain 2% mahina, par hidden charges, processing fees aur GST milakar saal ka 36% se 37% tak baithta hai. Aap loot rahe ho wahan! Ek baar PhonePe ka loan banner check kariye, hum aapko pehli dafa mein hi 1.25% se 1.5% ke clear interest rate par loan de rahe hain. Koi hidden jhamela nahi hai. Aur sabse badhiya baat, Paytm par loan lene ke baad agar collection ya deduction ka koi confusion ho, toh aap chatbot se sarr marte reh jaoge. PhonePe par aapka bhai, humara local Sector Incharge hamesha aapke sath khada hai. Kuch bhi baat ho, direct usko phone lagao, woh aakar table par baith kar aapka hisab clear karega. Jag local support ka bharosa ho, toh dhandha fikar-mukt chalta hai.",
             "audio": "loan_paytm.mp3"
         },
         "BharatPe": {
@@ -330,7 +324,7 @@ DATA_FLOW_MATRIX = {
                 "Position the local Sector Incharge as an advocate who monitors your QR health to unlock bigger limits.",
                 "Emphasize that reliable, human ground-support is unmatched by corporate apps."
             ],
-            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, javascript aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai.",
+            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jab aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai.",
             "audio": "loan_bharatpe.mp3"
         },
         "Google Pay": {
@@ -350,7 +344,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se james aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
             "audio": "loan_bank.mp3"
         }
     }
@@ -429,6 +423,7 @@ for i, col in enumerate(carousel_cols):
             reset_pitch_flow(modules[i])
         st.markdown('</div>', unsafe_allow_html=True)
 
+st.markdown('</div>', unsafe_allow_html=True) # End active-workspace-surface
 st.markdown("<hr/>", unsafe_allow_html=True)
 
 # 6. DYNAMIC DRILL-DOWN SUB WORKSPACES
@@ -490,7 +485,7 @@ if st.session_state.selected_module:
                 st.write("")
                 st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">🎙️ Training Audio Player:</div>', unsafe_allow_html=True)
                 
-                # Dynamic On-Demand Absolute Path Alignment Engine
+                # Dynamic Execution Absolute Path Map (.mp3 asset routing directly from repository root)
                 base_dir = os.path.dirname(os.path.abspath(__file__))
                 absolute_audio_path = os.path.join(base_dir, node["audio"])
                 
@@ -498,7 +493,7 @@ if st.session_state.selected_module:
                     with open(absolute_audio_path, "rb") as audio_file:
                         st.audio(audio_file.read(), format="audio/mp3")
                 except FileNotFoundError:
-                    st.error(f"⚠️ Audio asset missing: Could not find '{node['audio']}' at root directory. Please upload this file to your GitHub repository.")
+                    st.error(f"⚠️ Audio asset missing: '{node['audio']}' could not be matched at root destination.")
 
     # System Interaction 3: Gate Meetings
     elif current_mod == "Gate Meeting Rituals":
@@ -548,62 +543,64 @@ if st.session_state.selected_module:
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 7. SAFELY ESCAPED TROUBLESHOOTING INTERFACES (ALWAYS VISIBLE OR FIXED AT BASE)
-st.markdown("""
-    <div class="illuminated-triage-panel">
-        <div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:4px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
-    </div>
-""", unsafe_allow_html=True)
-
-# Clean architectural separation using non-interfering Streamlit elements
-triage_cols = st.columns(2)
-
-with triage_cols[0]:
-    st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
-    selected_err = st.selectbox(
-        "Technical Error Picker Selector Dropdown Key",
-        options=["None"] + list(TECHNICAL_ERRORS.keys()),
-        format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
-        key="tech_errors_aligned_dropdown",
-        label_visibility="collapsed"
-    )
-    
-with triage_cols[1]:
-    st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
-    selected_obj = st.selectbox(
-        "Counter Objection Picker Selector Dropdown Key",
-        options=["None"] + list(COUNTER_OBJECTIONS.keys()),
-        format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
-        key="counter_objections_aligned_dropdown",
-        label_visibility="collapsed"
-    )
-    
-if selected_err != "None":
-    node = TECHNICAL_ERRORS[selected_err]
-    actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-    st.markdown(f"""
-        <div class="solution-popup-card err-border">
-            <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
-            <div class="popup-title">{node['title']}</div>
-            <div class="meta-label">Reason / क्यों होता hai</div>
-            <div class="diagnostic-reason-text">{node['reason']}</div>
-            <div class="meta-label">Immediate Solution / क्या करें</div>
-            <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
-        </div>
-    """, unsafe_allow_html=True)
-    
-elif selected_obj != "None":
-    node = COUNTER_OBJECTIONS[selected_obj]
-    actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-    st.markdown(f"""
-        <div class="solution-popup-card obj-border">
-            <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
-            <div class="popup-title">{node['title']}</div>
-            <div class="meta-label">Reason / क्यों होता hai</div>
-            <div class="diagnostic-reason-text">{node['reason']}</div>
-            <div class="meta-label">Immediate Action / क्या करें</div>
-            <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
+# 7. HIGHLY VISIBLE & STANDALONE VERTICAL TROUBLESHOOTING TERMINAL
+if not st.session_state.selected_module:
+    # Encapsulated highlighted container panel card structure
+    st.markdown("""
+        <div class="illuminated-triage-panel">
+            <div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:0px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
         </div>
     """, unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_allow_html=True)
+    # Item Container Block 01: Technical Errors Selector Dropdown
+    with st.container():
+        st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
+        selected_err = st.selectbox(
+            "Technical Error Form Selector Tool",
+            options=["None"] + list(TECHNICAL_ERRORS.keys()),
+            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
+            key="tech_errors_aligned_dropdown",
+            label_visibility="collapsed"
+        )
+    
+    st.markdown('<div style="margin-bottom: 24px;"></div>', unsafe_allow_html=True) # Structural whitespace divider gap
+    
+    # Item Container Block 02: Counter Objections Selector Dropdown
+    with st.container():
+        st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
+        selected_obj = st.selectbox(
+            "Counter Objection Form Selector Tool",
+            options=["None"] + list(COUNTER_OBJECTIONS.keys()),
+            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
+            key="counter_objections_aligned_dropdown",
+            label_visibility="collapsed"
+        )
+    
+    # Action result metrics outputs cards processing
+    if selected_err != "None":
+        node = TECHNICAL_ERRORS[selected_err]
+        actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
+        st.markdown(f"""
+            <div class="solution-popup-card err-border">
+                <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
+                <div class="popup-title">{node['title']}</div>
+                <div class="meta-label">Reason / क्यों होता hai</div>
+                <div class="diagnostic-reason-text">{node['reason']}</div>
+                <div class="meta-label">Immediate Solution / क्या करें</div>
+                <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+    elif selected_obj != "None":
+        node = COUNTER_OBJECTIONS[selected_obj]
+        actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
+        st.markdown(f"""
+            <div class="solution-popup-card obj-border">
+                <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
+                <div class="popup-title">{node['title']}</div>
+                <div class="meta-label">Reason / क्यों होता hai</div>
+                <div class="diagnostic-reason-text">{node['reason']}</div>
+                <div class="meta-label">Immediate Action / क्या करें</div>
+                <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
+            </div>
+        """, unsafe_allow_html=True)
