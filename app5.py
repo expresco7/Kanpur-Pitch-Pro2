@@ -213,7 +213,7 @@ st.markdown("""
     div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; }
     div.floating-back-container button:hover p { color: #000000 !important; }
     
-    /* Global Selectbox Label Custom Styling with Clear Margins */
+    /* Global Selectbox Label Custom Styling with Centered Alignment */
     .custom-input-heading {
         color: #8E8E93 !important;
         font-size: 11px !important;
@@ -222,6 +222,7 @@ st.markdown("""
         font-weight: 700 !important;
         margin-bottom: 10px !important;
         display: block !important;
+        text-align: center !important; /* Forces heading elements into centered symmetry */
     }
     
     div[data-testid="stSelectbox"] > div { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 14px !important; }
@@ -548,62 +549,4 @@ if st.session_state.selected_module:
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 7. SAFELY ESCAPED TROUBLESHOOTING INTERFACES (ALWAYS VISIBLE OR FIXED AT BASE)
-st.markdown("""
-    <div class="illuminated-triage-panel">
-        <div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:4px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
-    </div>
-""", unsafe_allow_html=True)
-
-# Clean architectural separation using non-interfering Streamlit elements
-triage_cols = st.columns(2)
-
-with triage_cols[0]:
-    st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
-    selected_err = st.selectbox(
-        "Technical Error Picker Selector Dropdown Key",
-        options=["None"] + list(TECHNICAL_ERRORS.keys()),
-        format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
-        key="tech_errors_aligned_dropdown",
-        label_visibility="collapsed"
-    )
-    
-with triage_cols[1]:
-    st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
-    selected_obj = st.selectbox(
-        "Counter Objection Picker Selector Dropdown Key",
-        options=["None"] + list(COUNTER_OBJECTIONS.keys()),
-        format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
-        key="counter_objections_aligned_dropdown",
-        label_visibility="collapsed"
-    )
-    
-if selected_err != "None":
-    node = TECHNICAL_ERRORS[selected_err]
-    actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-    st.markdown(f"""
-        <div class="solution-popup-card err-border">
-            <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
-            <div class="popup-title">{node['title']}</div>
-            <div class="meta-label">Reason / क्यों होता hai</div>
-            <div class="diagnostic-reason-text">{node['reason']}</div>
-            <div class="meta-label">Immediate Solution / क्या करें</div>
-            <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
-        </div>
-    """, unsafe_allow_html=True)
-    
-elif selected_obj != "None":
-    node = COUNTER_OBJECTIONS[selected_obj]
-    actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-    st.markdown(f"""
-        <div class="solution-popup-card obj-border">
-            <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
-            <div class="popup-title">{node['title']}</div>
-            <div class="meta-label">Reason / क्यों होता hai</div>
-            <div class="diagnostic-reason-text">{node['reason']}</div>
-            <div class="meta-label">Immediate Action / क्या करें</div>
-            <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
-        </div>
-    """, unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
+# 7. SAFELY ESCAPED TROUBLESHOOTING INTERFACES (ALWAYS VISIBLE OR FIXED AT BASE
