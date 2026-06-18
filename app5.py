@@ -150,63 +150,38 @@ st.markdown("""
         margin-top: 2px;
     }
     
-    /* Mobile-Enhanced Symmetrical Carousel Architecture */
-    .stHorizontalBlock {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        padding: 4px 2px 14px 2px;
-        gap: 12px;
-        -webkit-overflow-scrolling: touch;
-    }
-    .stHorizontalBlock::-webkit-scrollbar { height: 4px; }
-    .stHorizontalBlock::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
-    .stHorizontalBlock::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
-    
-    /* Force columns to hold structural minimum width on mobile screens instead of collapsing */
-    div[data-testid="column"] {
-        min-width: 150px !important;
-        flex: 0 0 auto !important;
+    /* Native Overrides for Mobile Container Consistency */
+    div[data-testid="stVComponentBlock"] div[data-testid="element-container"] {
+        margin-bottom: 0px !important;
     }
     
-    .carousel-card-shell {
-        background-color: #1C1C1E;
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 16px;
-        padding: 14px;
-        height: 160px;
+    /* Custom Styling injected directly into internal container components */
+    .mobile-card-header {
+        font-size: 13px !important;
+        font-weight: 800 !important;
+        color: #FFFFFF !important;
+        line-height: 1.3 !important;
+        margin-bottom: 12px !important;
+        min-height: 34px;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .carousel-card-shell:hover {
-        border-color: rgba(255,255,255,0.25);
-        background-color: #242426;
-    }
-    .carousel-card-title {
-        font-size: 13px;
-        font-weight: 800;
-        color: #FFFFFF;
-        line-height: 1.3;
-        margin-top: 4px;
+        align-items: center;
     }
     
-    .carousel-card-shell div.stButton > button {
+    /* Unified Button Interface Configuration */
+    div.stButton > button {
         background-color: rgba(255,255,255,0.05) !important;
         border: 1px solid rgba(255,255,255,0.1) !important;
         border-radius: 8px !important;
         padding: 4px 10px !important;
-        min-height: 28px !important;
+        min-height: 32px !important;
         width: 100% !important;
     }
-    .carousel-card-shell div.stButton > button:hover { background-color: #00CD52 !important; border-color: #00CD52 !important; }
-    .carousel-card-shell div.stButton > button p {
+    div.stButton > button:hover { background-color: #00CD52 !important; border-color: #00CD52 !important; }
+    div.stButton > button p {
         color: #FFFFFF !important; font-size: 10px !important; font-weight: 700 !important;
         text-transform: uppercase !important; letter-spacing: 0.05em !important; margin: 0 auto !important;
     }
-    .carousel-card-shell div.stButton > button:hover p { color: #000000 !important; }
+    div.stButton > button:hover p { color: #000000 !important; }
 
     /* --- MOBILE STABILIZED CRUCIAL TRIAGE CONTAINER INTERFACE --- */
     .illuminated-triage-panel {
@@ -386,7 +361,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jag aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
             "audio": "loan_bank.mp3"
         }
     }
@@ -447,23 +422,23 @@ if not st.session_state.selected_module:
         </div>
     """, unsafe_allow_html=True)
 
-# Symmetrical Horizontal Carousel Grid (Transforms beautifully to scrolling cards on mobile)
-carousel_cols = st.columns(4)
-modules = ["Smart Speaker", "Merchant Lending", "Gate Meeting Rituals", "Merchant Visit Rituals"]
-keys = ["mod_ecb", "mod_lending", "mod_gate", "mod_visit"]
-
-for i, col in enumerate(carousel_cols):
-    with col:
-        st.markdown(f"""
-            <div class="carousel-card-shell">
-                <div>
-                    <div class="app-brand-tag" style="font-size:9px; margin-bottom:0px;">Module 0{i+1}</div>
-                    <div class="carousel-card-title">{modules[i].upper()}</div>
-                </div>
-        """, unsafe_allow_html=True)
-        if st.button("Open", key=keys[i]):
-            reset_pitch_flow(modules[i])
-        st.markdown('</div>', unsafe_allow_html=True)
+# 2x2 COMPACT GRID SETUP - OPTIMIZED FOR MOBILE TERMINALS
+if not st.session_state.selected_module:
+    modules = ["Smart Speaker", "Merchant Lending", "Gate Meeting Rituals", "Merchant Visit Rituals"]
+    keys = ["mod_ecb", "mod_lending", "mod_gate", "mod_visit"]
+    
+    # Generate 2 native rows with 2 columns each
+    row1_cols = st.columns(2)
+    row2_cols = st.columns(2)
+    all_cols = row1_cols + row2_cols
+    
+    for i, col in enumerate(all_cols):
+        with col:
+            with st.container(border=True):
+                st.markdown(f'<div class="app-brand-tag" style="font-size:9px;">Module 0{i+1}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="mobile-card-header">{modules[i].upper()}</div>', unsafe_allow_html=True)
+                if st.button("Open", key=keys[i]):
+                    reset_pitch_flow(modules[i])
 
 st.markdown('</div>', unsafe_allow_html=True) # End active-workspace-surface
 st.markdown("<hr/>", unsafe_allow_html=True)
