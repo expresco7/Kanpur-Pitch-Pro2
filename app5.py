@@ -19,6 +19,21 @@ if "pitch_customized" not in st.session_state:
 if "splash_done" not in st.session_state:
     st.session_state.splash_done = False
 
+# Initialize dropdown session keys for dynamic clearing mechanics
+if "tech_errors_aligned_dropdown" not in st.session_state:
+    st.session_state["tech_errors_aligned_dropdown"] = "None"
+if "counter_objections_aligned_dropdown" not in st.session_state:
+    st.session_state["counter_objections_aligned_dropdown"] = "None"
+
+# Dropdown Mutual Exclusivity Core Callbacks
+def clear_objection_dropdown():
+    if st.session_state["tech_errors_aligned_dropdown"] != "None":
+        st.session_state["counter_objections_aligned_dropdown"] = "None"
+
+def clear_error_dropdown():
+    if st.session_state["counter_objections_aligned_dropdown"] != "None":
+        st.session_state["tech_errors_aligned_dropdown"] = "None"
+
 # Reset view metrics when toggling between operational nodes
 def reset_pitch_flow(target_module):
     st.session_state.selected_module = target_module
@@ -28,15 +43,23 @@ def reset_pitch_flow(target_module):
 # 2. CRED DESIGN SYSTEM & HIGH-CONTRAST INTERACTION ENGINE
 st.markdown("""
     <style>
-    /* Base Engine UI Configuration - Mobile Responsive Friendly */
+    /* Base Engine UI Configuration */
     html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
         background-color: #0A0A0C !important;
         color: #FFFFFF !important;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     
+    /* CRUCIAL TOP PADDING REMOVAL FOR MOBILE SCREENS */
+    [data-testid="stAppViewBlockContainer"] {
+        padding-top: 12px !important;
+        padding-bottom: 20px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+    
     /* Clean Top Header Space Clearances */
-    header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; }
+    header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; display: none !important; }
     
     /* Premium CRED Intro Transition Graphics Engine */
     @keyframes credTracking {
@@ -46,7 +69,7 @@ st.markdown("""
         100% { opacity: 0; letter-spacing: 0.2em; filter: blur(4px); }
     }
     @keyframes workspaceFadeUp {
-        0% { transform: translateY(20px); opacity: 0; }
+        0% { transform: translateY(15px); opacity: 0; }
         100% { transform: translateY(0); opacity: 1; }
     }
     
@@ -61,7 +84,7 @@ st.markdown("""
         align-items: center;
     }
     .cred-splash-logo {
-        font-size: 42px;
+        font-size: 36px;
         font-weight: 900;
         text-transform: uppercase;
         color: #FFFFFF;
@@ -70,8 +93,9 @@ st.markdown("""
     }
     
     .active-workspace-surface {
-        animation: workspaceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
-        margin-bottom: 80px;
+        animation: workspaceFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
+        margin-bottom: 24px;
+        padding: 0 4px;
     }
 
     /* Typography & Header Blocks */
@@ -84,44 +108,39 @@ st.markdown("""
         margin-bottom: 4px;
     }
     .app-main-title {
-        font-size: 26px;
+        font-size: 24px;
         font-weight: 800;
         letter-spacing: -0.02em;
         color: #FFFFFF;
-        margin-bottom: 24px;
+        margin-bottom: 18px;
     }
 
-    /* Market Share Analytics Telemetry Panel - Custom Mobile Optimization */
+    /* Market Share Analytics Telemetry Panel */
     .telemetry-card {
         background: linear-gradient(135deg, #121216 0%, #1C1C1E 100%);
         border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 20px;
+        border-radius: 16px;
         padding: 16px;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
     }
     .telemetry-grid {
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 8px;
     }
     .telemetry-item {
         text-align: center;
         flex: 1;
-        min-width: 70px;
+        min-width: 75px;
         border-right: 1px solid rgba(255,255,255,0.08);
     }
     .telemetry-item:last-child {
         border-right: none;
     }
-    @media (max-width: 480px) {
-        .telemetry-item {
-            border-right: none;
-        }
-    }
     .telemetry-val {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 800;
         color: #FFFFFF;
         letter-spacing: -0.02em;
@@ -139,138 +158,119 @@ st.markdown("""
         margin-top: 2px;
     }
     
-    /* Symmetrical Carousel Architecture */
-    .stHorizontalBlock {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        padding: 4px 4px 16px 4px;
-        gap: 12px;
+    /* Native Overrides for Mobile Container Consistency */
+    div[data-testid="stVComponentBlock"] div[data-testid="element-container"] {
+        margin-bottom: 0px !important;
     }
-    .stHorizontalBlock::-webkit-scrollbar { height: 6px; }
-    .stHorizontalBlock::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
-    .stHorizontalBlock::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
-    .stHorizontalBlock > div { min-width: 155px !important; max-width: 155px !important; flex: 0 0 auto !important; }
     
-    .carousel-card-shell {
-        background-color: #1C1C1E;
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 16px;
-        padding: 14px;
-        height: 150px;
+    /* Custom Styling injected directly into internal container components */
+    .mobile-card-header {
+        font-size: 13px !important;
+        font-weight: 800 !important;
+        color: #FFFFFF !important;
+        line-height: 1.3 !important;
+        margin-bottom: 12px !important;
+        min-height: 34px;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .carousel-card-shell:hover {
-        border-color: rgba(255,255,255,0.25);
-        background-color: #242426;
-        transform: translateY(-2px);
-    }
-    .carousel-card-title {
-        font-size: 13px;
-        font-weight: 800;
-        color: #FFFFFF;
-        line-height: 1.3;
-        margin-top: 4px;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        align-items: center;
     }
     
-    .carousel-card-shell div.stButton > button {
+    /* Unified Button Interface Configuration */
+    div.stButton > button {
         background-color: rgba(255,255,255,0.05) !important;
         border: 1px solid rgba(255,255,255,0.1) !important;
         border-radius: 8px !important;
         padding: 4px 10px !important;
-        min-height: 28px !important;
+        min-height: 32px !important;
         width: 100% !important;
+    }
+    div.stButton > button:hover { background-color: #00CD52 !important; border-color: #00CD52 !important; }
+    div.stButton > button p {
+        color: #FFFFFF !important; font-size: 10px !important; font-weight: 700 !important;
+        text-transform: uppercase !important; letter-spacing: 0.05em !important; margin: 0 auto !important;
+    }
+    div.stButton > button:hover p { color: #000000 !important; }
+
+    /* --- MOBILE STABILIZED CRUCIAL TRIAGE CONTAINER INTERFACE --- */
+    .illuminated-triage-panel {
+        background: linear-gradient(145deg, #0D0D11 0%, #14141A 100%) !important;
+        border: 1px solid rgba(255, 149, 0, 0.35) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 149, 0, 0.03) !important;
+        border-radius: 20px !important;
+        padding: 20px 16px !important;
+        margin-top: 40px !important;
+        margin-bottom: 25px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
         text-align: center !important;
     }
-    .carousel-card-shell div.stButton > button:hover { background-color: #00CD52 !important; border-color: #00CD52 !important; }
-    .carousel-card-shell div.stButton > button p {
-        color: #FFFFFF !important; font-size: 10px !important; font-weight: 700 !important;
-        text-transform: uppercase !important; letter-spacing: 0.05em !important; text-align: center !important; margin: 0 auto !important;
-    }
-    .carousel-card-shell div.stButton > button:hover p { color: #000000 !important; }
-
-    /* Balanced Illuminated Triage Troubleshooting Section Card */
-    .illuminated-triage-panel {
-        background: linear-gradient(180deg, #121215 0%, #0A0A0C 100%);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.02);
-        border-radius: 24px;
-        padding: 24px;
-        margin-top: 10px;
-        margin-bottom: 20px;
+    
+    /* Centered Command Terminal Headers Style Rule */
+    .terminal-main-header {
+        font-size: 13px !important;
+        font-weight: 900 !important;
+        letter-spacing: 0.1em !important;
+        text-transform: uppercase !important;
+        color: #FF9500 !important;
+        text-shadow: 0 0 15px rgba(255, 149, 0, 0.2);
+        margin: 0 auto !important;
+        display: inline-block !important;
+        text-align: center !important;
     }
     
-    .triage-header-text {
-        color: #FF9F0A !important;
-        font-weight: 800 !important;
-        font-size: 15px !important;
-        letter-spacing: 0.05em !important;
-        text-align: left !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-    
-    div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; text-align: center !important; min-height: auto !important; padding: 14px 20px !important; }
-    div.pitch-trigger-box button p { color: #000000 !important; text-align: center !important; font-weight: 700 !important; opacity: 1 !important; }
-    div.pitch-trigger-box button p::first-line { font-size: 14px !important; color: #000000 !important; }
+    div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 12px 16px !important; width: 100%; border-radius: 12px; }
+    div.pitch-trigger-box button p { color: #000000 !important; font-weight: 700 !important; font-size: 13px !important; }
 
     /* Fixed Floating Corner Back Button Interface Styles */
-    div.floating-back-container { position: fixed; bottom: 24px; left: 24px; z-index: 9999; }
+    div.floating-back-container { position: fixed; bottom: 16px; left: 16px; z-index: 9999; }
     div.floating-back-container button {
         background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.15) !important;
-        border-radius: 30px !important; padding: 8px 18px !important; box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important; min-height: auto !important; width: auto !important;
+        border-radius: 30px !important; padding: 6px 14px !important; box-shadow: 0 6px 20px rgba(0,0,0,0.5) !important;
     }
-    div.floating-back-container button:hover { background-color: #FFFFFF !important; border-color: #FFFFFF !important; }
-    div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; }
-    div.floating-back-container button:hover p { color: #000000 !important; }
+    div.floating-back-container button p { color: #FFFFFF !important; font-size: 10px !important; font-weight: 700 !important; text-transform: uppercase !important; }
     
-    /* Global Selectbox Label Custom Styling with Clear Margins */
+    /* Input headings with descriptive spacing */
     .custom-input-heading {
-        color: #8E8E93 !important;
+        color: #AEAEB2 !important;
         font-size: 11px !important;
         text-transform: uppercase !important;
-        letter-spacing: 0.07em !important;
+        letter-spacing: 0.08em !important;
         font-weight: 700 !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 8px !important;
         display: block !important;
+        text-align: left !important;
     }
     
-    div[data-testid="stSelectbox"] > div { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 14px !important; }
-    div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; }
+    div[data-testid="stSelectbox"] > div { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 12px !important; }
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; font-size: 14px !important; }
     
     /* Output Data Interface Modals */
-    .solution-popup-card { background: #FFFFFF; border-radius: 24px; padding: 22px; margin-top: 16px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+    .solution-popup-card { background: #FFFFFF; border-radius: 20px; padding: 20px; margin-top: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); }
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
     .solution-popup-card.obj-border { border-left: 6px solid #5856D6; }
     .solution-popup-card.flow-border { border-left: 6px solid #00CD52; }
     .solution-popup-card.ritual-border { border-left: 6px solid #FF9500; }
     
-    .status-pill { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 0.05em; padding: 5px 12px; border-radius: 50px; margin-bottom: 14px; }
+    .status-pill { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 50px; margin-bottom: 12px; }
     .status-pill.err-color { background: #FFEBEE; color: #D32F2F; }
     .status-pill.obj-color { background: #E8EAF6; color: #3F51B5; }
     .status-pill.flow-color { background: #E8F9EE; color: #007A31; }
     .status-pill.ritual-color { background: #FFF3E0; color: #E65100; }
     
-    .popup-title { color: #1C1C1E; font-size: 20px; font-weight: 800; margin: 0 0 16px 0; line-height: 1.3; }
-    .meta-label { font-size: 11px; color: #71717A; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; margin-top: 14px; }
-    .diagnostic-reason-text { background: #F4F4F5; color: #1C1C1E; padding: 14px 16px; border-radius: 14px; font-size: 14px; font-weight: 500; margin-bottom: 10px; }
-    .action-steps-box { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 14px; padding: 16px; }
+    .popup-title { color: #1C1C1E; font-size: 18px; font-weight: 800; margin: 0 0 12px 0; line-height: 1.3; }
+    .meta-label { font-size: 10px; color: #71717A; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; margin-top: 12px; }
+    .diagnostic-reason-text { background: #F4F4F5; color: #1C1C1E; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 500; margin-bottom: 10px; }
+    .action-steps-box { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 12px; padding: 12px; }
+    .action-steps-box ul { padding-left: 4px; margin: 0; list-style-type: none; }
     
-    /* Responsive Table Framework */
     .ritual-table { width: 100%; border-collapse: collapse; margin-top: 10px; color: #1C1C1E; }
-    .ritual-table th { background: #F4F4F5; text-align: left; padding: 10px; font-size: 11px; text-transform: uppercase; font-weight: 700; color: #71717A; border-bottom: 2px solid #E4E4E7; }
-    .ritual-table td { padding: 12px 10px; font-size: 13px; border-bottom: 1px solid #E4E4E7; vertical-align: top; }
+    .ritual-table th { background: #F4F4F5; text-align: left; padding: 8px; font-size: 11px; text-transform: uppercase; font-weight: 700; color: #71717A; border-bottom: 2px solid #E4E4E7; }
+    .ritual-table td { padding: 10px 8px; font-size: 13px; border-bottom: 1px solid #E4E4E7; vertical-align: top; }
     .ritual-table tr:last-child td { border-bottom: none; }
     .step-highlight { font-weight: 700; color: #000000; }
     
-    hr { border-color: rgba(255,255,255,0.08) !important; margin: 24px 0 !important; }
+    hr { border-color: rgba(255,255,255,0.08) !important; margin: 20px 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -283,11 +283,11 @@ if not st.session_state.splash_done:
                 <div class="cred-splash-logo">PITCH PRO</div>
             </div>
         """, unsafe_allow_html=True)
-    time.sleep(2.1)
+    time.sleep(1.5)
     splash_placeholder.empty()
     st.session_state.splash_done = True
 
-# 4. DATA MATRIX - ROOTED FILE ALIGNMENTS (NO 'audio/' PREFIX)
+# 4. DATA MATRIX - COMPREHENSIVE REPOSITORY SYNCHRONIZED ARCHITECTURE
 DATA_FLOW_MATRIX = {
     "Smart Speaker": {
         "Paytm": {
@@ -307,7 +307,7 @@ DATA_FLOW_MATRIX = {
                 "Pitch the reliable on-ground network: Local Sector Incharges stationed in every specific market zone.",
                 "Emphasize fast, direct human support over automated, slow online complaint portals."
             ],
-            "pitch": "Bhaiya, aap khud dekho, aapke dukaan par jitne bhi log aate hain, unmein se 70% se 80% log PhonePe use karte hain. Jab consumer hi PhonePe ka hai, toh aap BharatPe ke QR par ghumakar settlement kyun delay kar rahe ho? Seedha PhonePe ka Smart Speaker lagao. Customers ke liye bhi frictionless payment hoga aur isi transaction volume ke basis par aapka loan offer bhi raat-o-raat active ho jayega. Rahi baat service ki—toh BharatPe ka na toh koi on-ground aadmi milta hai aur na hi unka support system local hai. Humara Sector Incharge har waqt isi market mein rehta hai. Kal ko network ka ya payment ka koi bhi issue aaye, aapko kisi app par jaakar shikayat nahi darj karni. Aapke paas humare local team ka number hoga, direct phone milao aur on-the-spot tension saaf!",
+            "pitch": "Bhaiya, aap khud dekho, aapke dukaan par jitne bhi log aate hain, unmein se 70% se 80% log PhonePe use karte hain. Jab consumer hi PhonePe ka hai, toh aap BharatPe ke QR par ghumakar settlement kyun delay kar rahe ho? Seedha PhonePe का Smart Speaker lagao. Customers ke liye bhi frictionless payment hoga aur isi transaction volume ke basis par aapka loan offer bhi raat-o-raat active ho jayega. Rahi baat service ki—toh BharatPe ka na toh koi on-ground aadmi milta hai aur na hi unka support system local hai. Humara Sector Incharge har waqt isi market mein rehta hai. Kal ko network ka ya payment ka koi bhi issue aaye, aapko kisi app par jaakar shikayat nahi darj karni. Aapke paas humare local team ka number hoga, direct phone milao aur on-the-spot tension saaf!",
             "audio": "speaker_bharatpe.mp3"
         },
         "Google Pay": {
@@ -339,7 +339,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight the physical security of having an active ground layout asset checking processing parameters.",
                 "Avoid cold automated digital loops via dedicated human verification channels."
             ],
-            "pitch": "Bhaiya, agar aapne Paytm se loan lene ka socha hai ya liya hai, toh unka ek baar interest certificate nikal kar dekhiye. Woh upar se bolte hain 2% mahina, par hidden charges, processing fees aur GST milakar saal ka 36% se 37% tak baithta hai. Aap loot rahe ho wahan! Ek baar PhonePe ka loan banner check kariye, hum aapko pehli dafa mein hi 1.25% se 1.5% ke clear interest rate par loan de rahe hain. Koi hidden jhamela nahi hai. Aur sabse badhiya baat, Paytm par loan lene ke baad agar collection ya deduction ka koi confusion ho, toh aap chatbot se sarr marte reh jaoge. PhonePe par aapka bhai, humara local Sector Incharge hamesha aapke sath khada hai. Kuch bhi baat ho, direct usko phone lagao, woh aakar table par baith kar aapka hisab clear karega. Jab local support ka bharosa ho, toh dhandha fikar-mukt chalta hai.",
+            "pitch": "Bhaiya, agar aapne Paytm se loan lene ka socha hai ya liya hai, toh unka ek baar interest certificate nikal kar dekhiye. Woh upar se bolte hain 2% mahina, par hidden charges, processing fees aur GST milakar saal ka 36% se 37% tak baithta hai. Aap loot rahe ho wahan! Ek baar PhonePe ka loan banner check kariye, hum aapko pehli dafa mein hi 1.25% se 1.5% ke clear interest rate par loan de rahe hain. Koi hidden jhamela nahi hai. Aur sabse badhiya baat, Paytm par loan lene ke baad agar collection ya deduction ka koi confusion ho, toh aap chatbot se sarr marte reh jaoge. PhonePe par aapka bhai, humara local Sector Incharge hamesha aapke sath khada hai. Kuch bhi baat ho, direct usko phone lagao, woh aakar table par baith kar aapka hisab clear karega. Jag local support ka bharosa ho, toh dhandha fikar-mukt chalta hai.",
             "audio": "loan_paytm.mp3"
         },
         "BharatPe": {
@@ -349,7 +349,7 @@ DATA_FLOW_MATRIX = {
                 "Position the local Sector Incharge as an advocate who monitors your QR health to unlock bigger limits.",
                 "Emphasize that reliable, human ground-support is unmatched by corporate apps."
             ],
-            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, javascript aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai.",
+            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jab aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai.",
             "audio": "loan_bharatpe.mp3"
         },
         "Google Pay": {
@@ -369,7 +369,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se james aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jag bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jag aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
             "audio": "loan_bank.mp3"
         }
     }
@@ -424,30 +424,31 @@ if not st.session_state.selected_module:
                 </div>
                 <div class="telemetry-item">
                     <div class="telemetry-val">5.8%</div>
-                    <div class="telemetry-lbl">Google Pay</div>
+                    <div class="telemetry-lbl">GPay</div>
                 </div>
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-# Symmetrical Horizontal Carousel Grid
-carousel_cols = st.columns(4)
-modules = ["Smart Speaker", "Merchant Lending", "Gate Meeting Rituals", "Merchant Visit Rituals"]
-keys = ["mod_ecb", "mod_lending", "mod_gate", "mod_visit"]
+# 2x2 COMPACT GRID SETUP - OPTIMIZED FOR MOBILE TERMINALS
+if not st.session_state.selected_module:
+    modules = ["Smart Speaker", "Merchant Lending", "Gate Meeting Rituals", "Merchant Visit Rituals"]
+    keys = ["mod_ecb", "mod_lending", "mod_gate", "mod_visit"]
+    
+    # Generate 2 rows with 2 columns each
+    row1_cols = st.columns(2)
+    row2_cols = st.columns(2)
+    all_cols = row1_cols + row2_cols
+    
+    for i, col in enumerate(all_cols):
+        with col:
+            with st.container(border=True):
+                st.markdown(f'<div class="app-brand-tag" style="font-size:9px;">Module 0{i+1}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="mobile-card-header">{modules[i].upper()}</div>', unsafe_allow_html=True)
+                if st.button("Open", key=keys[i]):
+                    reset_pitch_flow(modules[i])
 
-for i, col in enumerate(carousel_cols):
-    with col:
-        st.markdown(f"""
-            <div class="carousel-card-shell">
-                <div>
-                    <div class="app-brand-tag" style="font-size:9px; margin-bottom:0px;">Module 0{i+1}</div>
-                    <div class="carousel-card-title">{modules[i].upper()}</div>
-                </div>
-        """, unsafe_allow_html=True)
-        if st.button("Open", key=keys[i]):
-            reset_pitch_flow(modules[i])
-        st.markdown('</div>', unsafe_allow_html=True)
-
+st.markdown('</div>', unsafe_allow_html=True) # End active-workspace-surface
 st.markdown("<hr/>", unsafe_allow_html=True)
 
 # 6. DYNAMIC DRILL-DOWN SUB WORKSPACES
@@ -509,7 +510,6 @@ if st.session_state.selected_module:
                 st.write("")
                 st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">🎙️ Training Audio Player:</div>', unsafe_allow_html=True)
                 
-                # Dynamic On-Demand Absolute Path Alignment Engine
                 base_dir = os.path.dirname(os.path.abspath(__file__))
                 absolute_audio_path = os.path.join(base_dir, node["audio"])
                 
@@ -517,7 +517,7 @@ if st.session_state.selected_module:
                     with open(absolute_audio_path, "rb") as audio_file:
                         st.audio(audio_file.read(), format="audio/mp3")
                 except FileNotFoundError:
-                    st.error(f"⚠️ Audio asset missing: Could not find '{node['audio']}' at root directory. Please upload this file to your GitHub repository.")
+                    st.error(f"⚠️ Audio asset missing: '{node['audio']}'")
 
     # System Interaction 3: Gate Meetings
     elif current_mod == "Gate Meeting Rituals":
@@ -525,21 +525,19 @@ if st.session_state.selected_module:
             <div class="solution-popup-card ritual-border">
                 <div class="status-pill ritual-color">GATE MEETING GUIDELINES</div>
                 <div class="popup-title">10 KA DUM</div>
-                <div class="table-container" style="overflow-x:auto;">
-                    <table class="ritual-table">
-                        <tr><th>Gate Meeting</th><th>Description</th></tr>
-                        <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Generation/Scanning<br>2-Selfie with Code (Mention AOP, Count of Active, Location)<br>3-Virtual GM Form</td></tr>
-                        <tr><td><span class="step-highlight">2. Team Grooming</span></td><td>Basic Hygiene - Dress, Bags, Helmet, Mobile Cover, Mobile Screen Guard, Torn Shoes or Slippers.</td></tr>
-                        <tr><td><span class="step-highlight">3. SKH</span></td><td>In-depth Discussion with help of Agent Activity & Tracker</td></tr>
-                        <tr><td><span class="step-highlight">4. DSR</span></td><td>1-Take Appointment during Morning calling activity<br>2-Visit Mx and Mark tasks with final remarks</td></tr>
-                        <tr><td><span class="step-highlight">5. Salary Discussion</span></td><td>Daily Salary Discussion with format to be done and Signed by Manager i.e. TSM, ASM, CSM.</td></tr>
-                        <tr><td><span class="step-highlight">6. TOD</span></td><td>1-Task of the Day Discussion<br>2-Open Smart Squad<br>3-Perform Ace Activities<br>4-TP Commitment for the Day on Sales Academy</td></tr>
-                        <tr><td><span class="step-highlight">7. Manager Inputs</span></td><td>How to Drive task of the Day, share inputs and create innovative drives.</td></tr>
-                        <tr><td><span class="step-highlight">8. Collateral Dist.</span></td><td>QR, A4, SS, RVP collection, distribution and submission.</td></tr>
-                        <tr><td><span class="step-highlight">9. Telecalling Activity</span></td><td>15 Appointments to be Booked before leaving.</td></tr>
-                        <tr><td><span class="step-highlight">11. Support Required</span></td><td>One on One support requirement discussion with Manager.</td></tr>
-                    </table>
-                </div>
+                <table class="ritual-table">
+                    <tr><th>Gate Meeting</th><th>Description</th></tr>
+                    <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Generation/Scanning<br>2-Selfie with Code (Mention AOP, Count of Active, Location)<br>3-Virtual GM Form</td></tr>
+                    <tr><td><span class="step-highlight">2. Team Grooming</span></td><td>Basic Hygiene - Dress, Bags, Helmet, Mobile Cover, Mobile Screen Guard, Torn Shoes or Slippers.</td></tr>
+                    <tr><td><span class="step-highlight">3. SKH</span></td><td>In-depth Discussion with help of Agent Activity & Tracker</td></tr>
+                    <tr><td><span class="step-highlight">4. DSR</span></td><td>1-Take Appointment during Morning calling activity<br>2-Visit Mx and Mark tasks with final remarks</td></tr>
+                    <tr><td><span class="step-highlight">5. Salary Discussion</span></td><td>Daily Salary Discussion with format to be done and Signed by Manager i.e. TSM, ASM, CSM.</td></tr>
+                    <tr><td><span class="step-highlight">6. TOD</span></td><td>1-Task of the Day Discussion<br>2-Open Smart Squad<br>3-Perform Ace Activities<br>4-TP Commitment for the Day on Sales Academy</td></tr>
+                    <tr><td><span class="step-highlight">7. Manager Inputs</span></td><td>How to Drive task of the Day, share inputs and create innovative drives.</td></tr>
+                    <tr><td><span class="step-highlight">8. Collateral Dist.</span></td><td>QR, A4, SS, RVP collection, distribution and submission.</td></tr>
+                    <tr><td><span class="step-highlight">9. Telecalling Activity</span></td><td>15 Appointments to be Booked before leaving.</td></tr>
+                    <tr><td><span class="step-highlight">10. Support Required</span></td><td>One on One support requirement discussion with Manager.</td></tr>
+                </table>
             </div>
         """, unsafe_allow_html=True)
 
@@ -549,109 +547,86 @@ if st.session_state.selected_module:
             <div class="solution-popup-card ritual-border">
                 <div class="status-pill ritual-color">STEP-BY-STEP GUIDE FOR SUCCESS</div>
                 <div class="popup-title">5 KA PUNCH</div>
-                <div class="table-container" style="overflow-x:auto;">
-                    <table class="ritual-table">
-                        <tr><th>Step</th><th>Task Objective</th><th>Action Roadmap</th></tr>
-                        <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test Transaction</b></td><td>Deploy minimum 3 QR codes and perform a small test transaction to confirm tracking ecosystem health.</td></tr>
-                        <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition QR</b></td><td>Locate and tag the specific competition QR active on counter inside analytics environment.</td></tr>
-                        <tr><td><span class="step-highlight">3</span></td><td><b>Show Transaction in App</b></td><td>Verify test transaction inside the PhonePe Business App. Click all visible structural banners and request Photo QR if available.</td></tr>
-                        <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity instruments (PAN, Aadhaar) on workspace dashboard.</td></tr>
-                        <tr><td><span class="step-highlight">5</span></td><td><b>Smartspeaker Activation</b></td><td>Plug in and charge smartspeaker. Share complete support line coordinates and localized contact details with the merchant.</td></tr>
-                    </table>
-                </div>
+                <table class="ritual-table">
+                    <tr><th>Step</th><th>Task Objective</th><th>Action Roadmap</th></tr>
+                    <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test Transaction</b></td><td>Deploy minimum 3 QR codes and perform a small test transaction to confirm tracking ecosystem health.</td></tr>
+                    <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition QR</b></td><td>Locate and tag the specific competition QR active on counter inside analytics environment.</td></tr>
+                    <tr><td><span class="step-highlight">3</span></td><td><b>Show Transaction in App</b></td><td>Verify test transaction inside the PhonePe Business App. Click all visible structural banners and request Photo QR if available.</td></tr>
+                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity instruments on workspace dashboard.</td></tr>
+                    <tr><td><span class="step-highlight">5</span></td><td><b>Smartspeaker Activation</b></td><td>Plug in and charge smartspeaker. Share complete support line coordinates and localized contact details with the merchant.</td></tr>
+                </table>
             </div>
         """, unsafe_allow_html=True)
 
     # Floating Back Button Action
     st.markdown('<div class="floating-back-container">', unsafe_allow_html=True)
-    if st.button("← Back to Dashboard", key="floating_back_nav_action"):
+    if st.button("← Back", key="floating_back_nav_action"):
         st.session_state.selected_module = None
         st.session_state.selected_competitor = "Select Competitor..."
         st.session_state.pitch_customized = False
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 7. MUTUAL RESET DROPDOWN ACTION MECHANISM
-if "prev_error" not in st.session_state:
-    st.session_state.prev_error = "None"
-if "prev_objection" not in st.session_state:
-    st.session_state.prev_objection = "None"
-
-# 8. BALANCED AND ALIGNED TROUBLESHOOTING INTERFACES
-st.markdown("""
-    <div class="illuminated-triage-panel">
-        <div class="triage-header-text">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
-    </div>
-""", unsafe_allow_html=True)
-
-# Symmetrical layout deployment
-triage_cols = st.columns(2)
-
-with triage_cols[0]:
-    st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
-    
-    # Check if the objection field just changed to reset this selection element 
-    if st.session_state.prev_objection != st.experimental_get_query_params().get("obj", ["None"])[0]:
-        pass
-
-    selected_err = st.selectbox(
-        "Technical Error Picker Selector Dropdown Key",
-        options=["None"] + list(TECHNICAL_ERRORS.keys()),
-        format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
-        key="tech_errors_aligned_dropdown",
-        label_visibility="collapsed"
-    )
-    
-with triage_cols[1]:
-    st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
-    selected_obj = st.selectbox(
-        "Counter Objection Picker Selector Dropdown Key",
-        options=["None"] + list(COUNTER_OBJECTIONS.keys()),
-        format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
-        key="counter_objections_aligned_dropdown",
-        label_visibility="collapsed"
-    )
-
-# Mutual Exclusive Cross-Reset Trigger Engine logic execution loop
-if selected_err != "None" and selected_err != st.session_state.prev_error:
-    st.session_state.prev_error = selected_err
-    st.session_state.prev_objection = "None"
-    st.session_state.counter_objections_aligned_dropdown = "None"
-    st.rerun()
-
-if selected_obj != "None" and selected_obj != st.session_state.prev_objection:
-    st.session_state.prev_objection = selected_obj
-    st.session_state.prev_error = "None"
-    st.session_state.tech_errors_aligned_dropdown = "None"
-    st.rerun()
-
-# Interface response render routine checks
-if selected_err != "None":
-    node = TECHNICAL_ERRORS[selected_err]
-    actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-    st.markdown(f"""
-        <div class="solution-popup-card err-border">
-            <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
-            <div class="popup-title">{node['title']}</div>
-            <div class="meta-label">Reason / क्यों होता hai</div>
-            <div class="diagnostic-reason-text">{node['reason']}</div>
-            <div class="meta-label">Immediate Solution / क्या करें</div>
-            <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
-        </div>
-    """, unsafe_allow_html=True)
-    
-elif selected_obj != "None":
-    node = COUNTER_OBJECTIONS[selected_obj]
-    actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-    st.markdown(f"""
-        <div class="solution-popup-card obj-border">
-            <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
-            <div class="popup-title">{node['title']}</div>
-            <div class="meta-label">Reason / क्यों होता hai</div>
-            <div class="diagnostic-reason-text">{node['reason']}</div>
-            <div class="meta-label">Immediate Action / क्या करें</div>
-            <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
+# 7. HIGHLY HIGHLIGHTED STANDALONE VERTICAL TRIAGE TERMINAL ENGINE
+if not st.session_state.selected_module:
+    # Centered illuminated header layout shell
+    st.markdown("""
+        <div class="illuminated-triage-panel">
+            <span class="terminal-main-header">⚡ INSTANT TROUBLESHOOTING TERMINAL</span>
         </div>
     """, unsafe_allow_html=True)
 
-st.markdown('</div>', unsafe_allow_html=True)
+    # Item Container Block 01: Technical Errors Selector Dropdown
+    with st.container():
+        st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
+        selected_err = st.selectbox(
+            "Technical Error Form Selector Tool",
+            options=["None"] + list(TECHNICAL_ERRORS.keys()),
+            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
+            key="tech_errors_aligned_dropdown",
+            label_visibility="collapsed",
+            on_change=clear_objection_dropdown
+        )
+    
+    st.markdown('<div style="margin-bottom: 20px;"></div>', unsafe_allow_html=True)
+    
+    # Item Container Block 02: Counter Objections Selector Dropdown
+    with st.container():
+        st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
+        selected_obj = st.selectbox(
+            "Counter Objection Form Selector Tool",
+            options=["None"] + list(COUNTER_OBJECTIONS.keys()),
+            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
+            key="counter_objections_aligned_dropdown",
+            label_visibility="collapsed",
+            on_change=clear_error_dropdown
+        )
+    
+    # Action result metrics outputs cards processing
+    if selected_err != "None":
+        node = TECHNICAL_ERRORS[selected_err]
+        actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px; font-size:13.5px;'>📍 {act}</li>" for act in node["actions"]])
+        st.markdown(f"""
+            <div class="solution-popup-card err-border">
+                <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
+                <div class="popup-title">{node['title']}</div>
+                <div class="meta-label">Reason / क्यों होता hai</div>
+                <div class="diagnostic-reason-text">{node['reason']}</div>
+                <div class="meta-label">Immediate Solution / क्या करें</div>
+                <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+    elif selected_obj != "None":
+        node = COUNTER_OBJECTIONS[selected_obj]
+        actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px; font-size:13.5px;'>📍 {act}</li>" for act in node["actions"]])
+        st.markdown(f"""
+            <div class="solution-popup-card obj-border">
+                <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
+                <div class="popup-title">{node['title']}</div>
+                <div class="meta-label">Reason / क्यों होता hai</div>
+                <div class="diagnostic-reason-text">{node['reason']}</div>
+                <div class="meta-label">Immediate Action / क्या करें</div>
+                <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
+            </div>
+        """, unsafe_allow_html=True)
