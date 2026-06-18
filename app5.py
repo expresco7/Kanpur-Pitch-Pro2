@@ -307,7 +307,7 @@ DATA_FLOW_MATRIX = {
                 "Pitch the reliable on-ground network: Local Sector Incharges stationed in every specific market zone.",
                 "Emphasize fast, direct human support over automated, slow online complaint portals."
             ],
-            "pitch": "Bhaiya, aap khud dekho, aapke dukaan par jitne bhi log aate hain, unmein se 70% se 80% log PhonePe use karte hain. Jab consumer hi PhonePe ka hai, toh aap BharatPe ke QR par ghumakar settlement kyun delay kar rahe ho? Seedha PhonePe का Smart Speaker lagao. Customers ke liye bhi frictionless payment hoga aur isi transaction volume ke basis par aapka loan offer bhi raat-o-raat active ho jayega. Rahi baat service ki—toh BharatPe ka na toh koi on-ground aadmi milta hai aur na hi unka support system local hai. Humara Sector Incharge har waqt isi market mein rehta hai. Kal ko network ka ya payment ka koi bhi issue aaye, aapko kisi app par jaakar shikayat nahi darj karni. Aapke paas humare local team ka number hoga, direct phone milao aur on-the-spot tension saaf!",
+            "pitch": "Bhaiya, aap khud dekho, aapke dukaan par jitne bhi log aate hain, unmein se 70% se 80% log PhonePe use karte hain. Jab consumer hi PhonePe ka hai, toh aap BharatPe ke QR par ghumakar settlement kyun delay kar rahe ho? Seedha PhonePe ka Smart Speaker lagao. Customers ke liye bhi frictionless payment hoga aur isi transaction volume ke basis par aapka loan offer bhi raat-o-raat active ho jayega. Rahi baat service ki—toh BharatPe ka na toh koi on-ground aadmi milta hai aur na hi unka support system local hai. Humara Sector Incharge har waqt isi market mein rehta hai. Kal ko network ka ya payment ka koi bhi issue aaye, aapko kisi app par jaakar shikayat nahi darj karni. Aapke paas humare local team ka number hoga, direct phone milao aur on-the-spot tension saaf!",
             "audio": "loan_bharatpe.mp3"
         },
         "Google Pay": {
@@ -384,7 +384,7 @@ TECHNICAL_ERRORS = {
     "digilocker_error": {"title": "DigiLocker Error", "reason": "UIDAI/DigiLocker ki taraf se Technical Issue hai.", "actions": ["2 ghante Wait kare aur fir se Try kare.", "Issue hone par War Room mein Raise kare."]},
     "unable_process_request": {"title": "Unable to Process Your Request", "reason": "System / Server Problem ya Lending Partner ki taraf se Temporary Issue hai.", "actions": ["Kuch samay baad Retry kare.", "Baar-baar Issue aane par War Room mein Raise kare."]},
     "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent mein Problem hai.", "actions": ["Bank Details dobara Check kare.", "Sahi Account Type (Savings) aur IFSC chune.", "Dobara Mandate Setup kare."]},
-    "upi_mandate_failed": {"title": "UPI Mandate Setup Failed", "reason": "UPI ID ya Bank se Mandate Setup nahi ho paya.", "actions": ["UPI ID Active aur Same Bank ki ho.", "Bank App/UPI App mein Mandate Approve kare."]},
+    "upi_mandate_failed": {"title": "UPI Mandate Setup Failed", "reason": "UPI ID ya Bank से Mandate Setup nahi ho paya.", "actions": ["UPI ID Active aur Same Bank ki ho.", "Bank App/UPI App mein Mandate Approve kare."]},
     "disbursement_failed": {"title": "Loan Disbursement Failed", "reason": "Bank Account, IFSC, KYC ya System issue ke karan Disbursement nahi ho paya.", "actions": ["Bank Details aur IFSC Verify kare.", "KYC Complete aur Approved hai ya nahi Check kare.", "Issue rahe toh War Room mein Raise kare."]}
 }
 
