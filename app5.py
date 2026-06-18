@@ -196,6 +196,7 @@ st.markdown("""
         border-radius: 24px;
         padding: 24px;
         margin-top: 10px;
+        margin-bottom: 20px;
     }
     
     div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; text-align: center !important; min-height: auto !important; padding: 14px 20px !important; }
@@ -212,11 +213,17 @@ st.markdown("""
     div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; }
     div.floating-back-container button:hover p { color: #000000 !important; }
     
-    /* Global Selectbox Styling */
-    div.stSelectbox > label {
-        color: #8E8E93 !important; font-size: 11px !important; text-transform: uppercase !important;
-        letter-spacing: 0.05em !important; font-weight: 700 !important; margin-bottom: 8px; white-space: nowrap !important;
+    /* Global Selectbox Label Custom Styling with Clear Margins */
+    .custom-input-heading {
+        color: #8E8E93 !important;
+        font-size: 11px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.07em !important;
+        font-weight: 700 !important;
+        margin-bottom: 10px !important;
+        display: block !important;
     }
+    
     div[data-testid="stSelectbox"] > div { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 14px !important; }
     div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; }
     
@@ -343,7 +350,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se james aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
             "audio": "loan_bank.mp3"
         }
     }
@@ -373,10 +380,10 @@ COUNTER_OBJECTIONS = {
 }
 
 # 5. CORE WORKSPACE SURFACE INTERFACES
-st.markdown("""<div class="active-workspace-surface">""", unsafe_allow_html=True)
+st.markdown('<div class="active-workspace-surface">', unsafe_allow_html=True)
 
-st.markdown("""<div class="app-brand-tag">Kanpur Division Module</div>""", unsafe_allow_html=True)
-st.markdown("""<div class="app-main-title">Pitch Pro</div>""", unsafe_allow_html=True)
+st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
+st.markdown('<div class="app-main-title">Pitch Pro Terminal</div>', unsafe_allow_html=True)
 
 # The Landing Telemetry Panel
 if not st.session_state.selected_module:
@@ -420,7 +427,7 @@ for i, col in enumerate(carousel_cols):
         """, unsafe_allow_html=True)
         if st.button("Open", key=keys[i]):
             reset_pitch_flow(modules[i])
-        st.markdown("""</div>""", unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("<hr/>", unsafe_allow_html=True)
 
@@ -430,7 +437,7 @@ if st.session_state.selected_module:
     
     # System Interaction 1 & 2: Strategic Playbooks
     if current_mod in ["Smart Speaker", "Merchant Lending"]:
-        st.markdown("""<div class="app-brand-tag" style="margin-bottom:6px;">Target Competition Matrices</div>""", unsafe_allow_html=True)
+        st.markdown('<div class="app-brand-tag" style="margin-bottom:6px;">Target Competition Matrices</div>', unsafe_allow_html=True)
         
         comp_options = ["Select Competitor...", "Paytm", "BharatPe", "Google Pay", "Banks"]
         
@@ -465,10 +472,10 @@ if st.session_state.selected_module:
                 )
                 
             st.write("")
-            st.markdown("""<div class="pitch-trigger-box">""", unsafe_allow_html=True)
+            st.markdown('<div class="pitch-trigger-box">', unsafe_allow_html=True)
             if st.button(f"Customize Active Pitch Script vs {comp_choice}", key="generate_pitch_btn"):
                 st.session_state.pitch_customized = True
-            st.markdown("""</div>""", unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
             
             if st.session_state.pitch_customized:
                 st.markdown(f"""
@@ -481,7 +488,7 @@ if st.session_state.selected_module:
                 """, unsafe_allow_html=True)
                 
                 st.write("")
-                st.markdown("""<div class="app-brand-tag" style="margin-bottom:8px;">🎙️ Training Audio Player:</div>""", unsafe_allow_html=True)
+                st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">🎙️ Training Audio Player:</div>', unsafe_allow_html=True)
                 
                 # Dynamic On-Demand Absolute Path Alignment Engine
                 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -533,67 +540,70 @@ if st.session_state.selected_module:
         """, unsafe_allow_html=True)
 
     # Floating Back Button Action
-    st.markdown("""<div class="floating-back-container">""", unsafe_allow_html=True)
+    st.markdown('<div class="floating-back-container">', unsafe_allow_html=True)
     if st.button("← Back to Dashboard", key="floating_back_nav_action"):
         st.session_state.selected_module = None
         st.session_state.selected_competitor = "Select Competitor..."
         st.session_state.pitch_customized = False
         st.rerun()
-    st.markdown("""</div>""", unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-# 7. SAFELY ESCAPED TROUBLESHOOTING INTERFACES
-if not st.session_state.selected_module:
-    st.markdown("""
-        <div class="illuminated-triage-panel">
-            <div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
+# 7. SAFELY ESCAPED TROUBLESHOOTING INTERFACES (ALWAYS VISIBLE OR FIXED AT BASE)
+st.markdown("""
+    <div class="illuminated-triage-panel">
+        <div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:4px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
+    </div>
+""", unsafe_allow_html=True)
+
+# Clean architectural separation using non-interfering Streamlit elements
+triage_cols = st.columns(2)
+
+with triage_cols[0]:
+    st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
+    selected_err = st.selectbox(
+        "Technical Error Picker Selector Dropdown Key",
+        options=["None"] + list(TECHNICAL_ERRORS.keys()),
+        format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
+        key="tech_errors_aligned_dropdown",
+        label_visibility="collapsed"
+    )
+    
+with triage_cols[1]:
+    st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
+    selected_obj = st.selectbox(
+        "Counter Objection Picker Selector Dropdown Key",
+        options=["None"] + list(COUNTER_OBJECTIONS.keys()),
+        format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
+        key="counter_objections_aligned_dropdown",
+        label_visibility="collapsed"
+    )
+    
+if selected_err != "None":
+    node = TECHNICAL_ERRORS[selected_err]
+    actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
+    st.markdown(f"""
+        <div class="solution-popup-card err-border">
+            <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
+            <div class="popup-title">{node['title']}</div>
+            <div class="meta-label">Reason / क्यों होता hai</div>
+            <div class="diagnostic-reason-text">{node['reason']}</div>
+            <div class="meta-label">Immediate Solution / क्या करें</div>
+            <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
         </div>
     """, unsafe_allow_html=True)
     
-    # Render Streamlit Selectbox Layout blocks entirely separated from internal html boundaries
-    triage_cols = st.columns(2)
-    
-    with triage_cols[0]:
-        selected_err = st.selectbox(
-            "Troubleshoot Technical Errors",
-            options=["None"] + list(TECHNICAL_ERRORS.keys()),
-            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
-            key="tech_errors_aligned_dropdown"
-        )
-        
-    with triage_cols[1]:
-        selected_obj = st.selectbox(
-            "Resolve Counter Objections",
-            options=["None"] + list(COUNTER_OBJECTIONS.keys()),
-            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
-            key="counter_objections_aligned_dropdown"
-        )
-        
-    if selected_err != "None":
-        node = TECHNICAL_ERRORS[selected_err]
-        actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-        st.markdown(f"""
-            <div class="solution-popup-card err-border">
-                <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
-                <div class="popup-title">{node['title']}</div>
-                <div class="meta-label">Reason / क्यों होता है</div>
-                <div class="diagnostic-reason-text">{node['reason']}</div>
-                <div class="meta-label">Immediate Solution / क्या करें</div>
-                <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
-            </div>
-        """, unsafe_allow_html=True)
-        
-    elif selected_obj != "None":
-        node = COUNTER_OBJECTIONS[selected_obj]
-        actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-        st.markdown(f"""
-            <div class="solution-popup-card obj-border">
-                <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
-                <div class="popup-title">{node['title']}</div>
-                <div class="meta-label">Reason / क्यों होता है</div>
-                <div class="diagnostic-reason-text">{node['reason']}</div>
-                <div class="meta-label">Immediate Action / क्या करें</div>
-                <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
-            </div>
-        """, unsafe_allow_html=True)
+elif selected_obj != "None":
+    node = COUNTER_OBJECTIONS[selected_obj]
+    actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
+    st.markdown(f"""
+        <div class="solution-popup-card obj-border">
+            <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
+            <div class="popup-title">{node['title']}</div>
+            <div class="meta-label">Reason / क्यों होता hai</div>
+            <div class="diagnostic-reason-text">{node['reason']}</div>
+            <div class="meta-label">Immediate Action / क्या करें</div>
+            <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
+        </div>
+    """, unsafe_allow_html=True)
 
-st.markdown("""</div>""", unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
