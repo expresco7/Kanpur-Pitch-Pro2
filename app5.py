@@ -25,7 +25,7 @@ def reset_pitch_flow(target_module):
     st.session_state.selected_competitor = "Select Competitor..."
     st.session_state.pitch_customized = False
 
-# 2. MOBILE-FIRST DESIGN SYSTEM (CRED STYLE SHEETS)
+# 2. MOBILE-FIRST DESIGN SYSTEM (CRED STYLE SHEETS WITH ZERO-PADDING FIXED HACK)
 st.markdown("""
     <style>
     /* Base Engine Mobile UI Configuration */
@@ -35,23 +35,63 @@ st.markdown("""
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     
-    /* Strict Mobile Viewport Padding Limits & High-Density Spacing */
+    /* RADICAL FIX: Force completely zeroed padding variables at top of screen */
     [data-testid="stAppViewContainer"] .main .block-container {
-        padding-top: 1rem !important;
+        padding-top: 0px !important;
+        margin-top: 4px !important;
         padding-bottom: 1rem !important;
-        max-width: 25rem !important; /* Locks layout to exact mobile device width bounds */
-        margin: 0 auto !important;
+        max-width: 25rem !important; /* Mobile fixed container sizing constraint template */
+        margin-left: auto !important;
+        margin-right: auto !important;
     }
     
-    /* Remove default element margins to reduce empty space */
+    /* Remove native container alignment cushion gaps */
+    [data-testid="stVerticalBlock"] {
+        gap: 0px !important;
+    }
     [data-testid="stVerticalBlock"] > div {
-        padding-bottom: 0.4rem !important;
+        padding-bottom: 0.3rem !important;
         margin-bottom: 0px !important;
     }
     
-    /* Invisible App Bars */
+    /* Invisible App Bars & Tab Cleansers */
     header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; display: none !important; }
     
+    /* Premium CRED Intro Transition Graphics Engine Setup */
+    @keyframes credTracking {
+        0% { letter-spacing: -0.2em; opacity: 0; filter: blur(12px); }
+        40% { opacity: 1; filter: blur(0px); }
+        70% { letter-spacing: 0.15em; opacity: 1; }
+        100% { opacity: 0; letter-spacing: 0.2em; filter: blur(4px); }
+    }
+    @keyframes workspaceFadeUp {
+        0% { transform: translateY(12px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+    
+    .cred-splash-container {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: #050507;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .cred-splash-logo {
+        font-size: 38px;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        animation: credTracking 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        text-shadow: 0 0 30px rgba(255,255,255,0.2);
+    }
+    
+    .active-workspace-surface {
+        animation: workspaceFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
+    }
+
     /* Symmetrical Carousel Architecture */
     .stHorizontalBlock {
         display: flex !important;
@@ -122,7 +162,7 @@ st.markdown("""
         border: 1px solid rgba(255,255,255,0.06);
         border-radius: 20px;
         padding: 16px;
-        margin-bottom: 12px !important;
+        margin-bottom: 8px !important;
     }
     .telemetry-grid {
         display: flex;
@@ -163,7 +203,7 @@ st.markdown("""
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 149, 0, 0.02) !important;
         border-radius: 22px !important;
         padding: 20px !important;
-        margin-top: 15px !important;
+        margin-top: 12px !important;
         margin-bottom: 10px !important;
     }
     .terminal-main-header {
@@ -206,18 +246,18 @@ st.markdown("""
     .action-steps-box { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 10px; padding: 14px; font-size: 13px; }
     
     /* General Utilities */
-    .app-brand-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8E8E93; margin-bottom: 2px; }
-    .app-main-title { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: #FFFFFF; margin-bottom: 16px; }
+    .app-brand-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8E8E93; margin-bottom: 1px; }
+    .app-main-title { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: #FFFFFF; margin-bottom: 12px; }
     div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 12px 16px !important; width: 100%; border-radius: 12px !important; }
     div.pitch-trigger-box button p { color: #000000 !important; font-weight: 700 !important; font-size: 13px !important; }
     div.floating-back-container { position: fixed; bottom: 20px; left: 20px; z-index: 9999; }
     div.floating-back-container button { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.12) !important; border-radius: 30px !important; padding: 6px 14px !important; }
     div.floating-back-container button p { color: #FFFFFF !important; font-size: 10px !important; font-weight: 700; text-transform: uppercase; }
-    hr { border-color: rgba(255,255,255,0.05) !important; margin: 12px 0 !important; }
+    hr { border-color: rgba(255,255,255,0.05) !important; margin: 10px 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. RUNTIME APP ENTRY TRANSITION (CRED SPLASH FLOW)
+# 3. PREMIUM CRED SCREEN SPLASH CYCLE RUNTIME INTRO (RE-ENABLED 🚀)
 if not st.session_state.splash_done:
     splash_placeholder = st.empty()
     with splash_placeholder.container():
@@ -226,7 +266,7 @@ if not st.session_state.splash_done:
                 <div class="cred-splash-logo">PITCH PRO</div>
             </div>
         """, unsafe_allow_html=True)
-    time.sleep(1.5)
+    time.sleep(2.2) # Synchronized tracking fluid delay cycle
     splash_placeholder.empty()
     st.session_state.splash_done = True
 
@@ -296,7 +336,7 @@ st.markdown('<div class="active-workspace-surface">', unsafe_allow_html=True)
 st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-main-title">Pitch Pro Terminal</div>', unsafe_allow_html=True)
 
-# Telemetry Matrix Layer (RESTORED TO ORIGINAL 4-COLUMN INLINE DESIGN)
+# Telemetry Matrix Layer
 if not st.session_state.selected_module:
     st.markdown("""
         <div class="telemetry-card">
@@ -413,7 +453,7 @@ if not st.session_state.selected_module:
         key="counter_objections_aligned_dropdown", label_visibility="collapsed"
     )
     
-    st.markdown('</div>', unsafe_allow_html=True) # Closes card wrapper cleanly around dropdown targets
+    st.markdown('</div>', unsafe_allow_html=True)
     
     if selected_err != "None":
         node = TECHNICAL_ERRORS[selected_err]
