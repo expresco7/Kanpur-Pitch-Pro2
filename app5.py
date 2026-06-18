@@ -50,8 +50,16 @@ st.markdown("""
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     
+    /* CRUCIAL TOP PADDING REMOVAL FOR MOBILE SCREENS */
+    [data-testid="stAppViewBlockContainer"] {
+        padding-top: 12px !important;
+        padding-bottom: 20px !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+    
     /* Clean Top Header Space Clearances */
-    header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; }
+    header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; display: none !important; }
     
     /* Premium CRED Intro Transition Graphics Engine */
     @keyframes credTracking {
@@ -299,7 +307,7 @@ DATA_FLOW_MATRIX = {
                 "Pitch the reliable on-ground network: Local Sector Incharges stationed in every specific market zone.",
                 "Emphasize fast, direct human support over automated, slow online complaint portals."
             ],
-            "pitch": "Bhaiya, aap khud dekho, aapke dukaan par jitne bhi log aate hain, unmein se 70% se 80% log PhonePe use karte hain. Jab consumer hi PhonePe ka hai, toh aap BharatPe ke QR par ghumakar settlement kyun delay kar rahe ho? Seedha PhonePe ka Smart Speaker lagao. Customers ke liye bhi frictionless payment hoga aur isi transaction volume ke basis par aapka loan offer bhi raat-o-raat active ho jayega. Rahi baat service ki—toh BharatPe ka na toh koi on-ground aadmi milta hai aur na hi unka support system local hai. Humara Sector Incharge har waqt isi market mein rehta hai. Kal ko network ka ya payment ka koi bhi issue aaye, aapko kisi app par jaakar shikayat nahi darj karni. Aapke paas humare local team ka number hoga, direct phone milao aur on-the-spot tension saaf!",
+            "pitch": "Bhaiya, aap khud dekho, aapke dukaan par jitne bhi log aate hain, unmein se 70% se 80% log PhonePe use karte hain. Jab consumer hi PhonePe ka hai, toh aap BharatPe ke QR par ghumakar settlement kyun delay kar rahe ho? Seedha PhonePe का Smart Speaker lagao. Customers ke liye bhi frictionless payment hoga aur isi transaction volume ke basis par aapka loan offer bhi raat-o-raat active ho jayega. Rahi baat service ki—toh BharatPe ka na toh koi on-ground aadmi milta hai aur na hi unka support system local hai. Humara Sector Incharge har waqt isi market mein rehta hai. Kal ko network ka ya payment ka koi bhi issue aaye, aapko kisi app par jaakar shikayat nahi darj karni. Aapke paas humare local team ka number hoga, direct phone milao aur on-the-spot tension saaf!",
             "audio": "loan_bharatpe.mp3"
         },
         "Google Pay": {
@@ -427,7 +435,7 @@ if not st.session_state.selected_module:
     modules = ["Smart Speaker", "Merchant Lending", "Gate Meeting Rituals", "Merchant Visit Rituals"]
     keys = ["mod_ecb", "mod_lending", "mod_gate", "mod_visit"]
     
-    # Generate 2 native rows with 2 columns each
+    # Generate 2 rows with 2 columns each
     row1_cols = st.columns(2)
     row2_cols = st.columns(2)
     all_cols = row1_cols + row2_cols
