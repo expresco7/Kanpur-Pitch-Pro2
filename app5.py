@@ -28,7 +28,7 @@ def reset_pitch_flow(target_module):
 # 2. CRED DESIGN SYSTEM & HIGH-CONTRAST INTERACTION ENGINE
 st.markdown("""
     <style>
-    /* Base Engine UI Configuration */
+    /* Base Engine UI Configuration - Mobile Responsive Friendly */
     html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
         background-color: #0A0A0C !important;
         color: #FFFFFF !important;
@@ -91,29 +91,37 @@ st.markdown("""
         margin-bottom: 24px;
     }
 
-    /* Market Share Analytics Telemetry Panel */
+    /* Market Share Analytics Telemetry Panel - Custom Mobile Optimization */
     .telemetry-card {
         background: linear-gradient(135deg, #121216 0%, #1C1C1E 100%);
         border: 1px solid rgba(255,255,255,0.06);
         border-radius: 20px;
-        padding: 20px;
+        padding: 16px;
         margin-bottom: 28px;
     }
     .telemetry-grid {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
     }
     .telemetry-item {
         text-align: center;
         flex: 1;
+        min-width: 70px;
         border-right: 1px solid rgba(255,255,255,0.08);
     }
     .telemetry-item:last-child {
         border-right: none;
     }
+    @media (max-width: 480px) {
+        .telemetry-item {
+            border-right: none;
+        }
+    }
     .telemetry-val {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 800;
         color: #FFFFFF;
         letter-spacing: -0.02em;
@@ -123,7 +131,7 @@ st.markdown("""
         text-shadow: 0 0 10px rgba(0,205,82,0.2);
     }
     .telemetry-lbl {
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -137,19 +145,19 @@ st.markdown("""
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
         padding: 4px 4px 16px 4px;
-        gap: 16px;
+        gap: 12px;
     }
     .stHorizontalBlock::-webkit-scrollbar { height: 6px; }
     .stHorizontalBlock::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
     .stHorizontalBlock::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
-    .stHorizontalBlock > div { min-width: 220px !important; max-width: 220px !important; flex: 0 0 auto !important; }
+    .stHorizontalBlock > div { min-width: 155px !important; max-width: 155px !important; flex: 0 0 auto !important; }
     
     .carousel-card-shell {
         background-color: #1C1C1E;
         border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 20px;
-        padding: 20px;
-        height: 180px;
+        border-radius: 16px;
+        padding: 14px;
+        height: 150px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -161,7 +169,7 @@ st.markdown("""
         transform: translateY(-2px);
     }
     .carousel-card-title {
-        font-size: 16px;
+        font-size: 13px;
         font-weight: 800;
         color: #FFFFFF;
         line-height: 1.3;
@@ -175,20 +183,20 @@ st.markdown("""
     .carousel-card-shell div.stButton > button {
         background-color: rgba(255,255,255,0.05) !important;
         border: 1px solid rgba(255,255,255,0.1) !important;
-        border-radius: 10px !important;
-        padding: 6px 12px !important;
-        min-height: 32px !important;
+        border-radius: 8px !important;
+        padding: 4px 10px !important;
+        min-height: 28px !important;
         width: 100% !important;
         text-align: center !important;
     }
     .carousel-card-shell div.stButton > button:hover { background-color: #00CD52 !important; border-color: #00CD52 !important; }
     .carousel-card-shell div.stButton > button p {
-        color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important;
+        color: #FFFFFF !important; font-size: 10px !important; font-weight: 700 !important;
         text-transform: uppercase !important; letter-spacing: 0.05em !important; text-align: center !important; margin: 0 auto !important;
     }
     .carousel-card-shell div.stButton > button:hover p { color: #000000 !important; }
 
-    /* Illuminated Triage Troubleshooting Section Card */
+    /* Balanced Illuminated Triage Troubleshooting Section Card */
     .illuminated-triage-panel {
         background: linear-gradient(180deg, #121215 0%, #0A0A0C 100%);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -197,6 +205,16 @@ st.markdown("""
         padding: 24px;
         margin-top: 10px;
         margin-bottom: 20px;
+    }
+    
+    .triage-header-text {
+        color: #FF9F0A !important;
+        font-weight: 800 !important;
+        font-size: 15px !important;
+        letter-spacing: 0.05em !important;
+        text-align: left !important;
+        display: flex !important;
+        align-items: center !important;
     }
     
     div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; text-align: center !important; min-height: auto !important; padding: 14px 20px !important; }
@@ -228,7 +246,7 @@ st.markdown("""
     div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; }
     
     /* Output Data Interface Modals */
-    .solution-popup-card { background: #FFFFFF; border-radius: 24px; padding: 26px; margin-top: 16px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+    .solution-popup-card { background: #FFFFFF; border-radius: 24px; padding: 22px; margin-top: 16px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
     .solution-popup-card.obj-border { border-left: 6px solid #5856D6; }
     .solution-popup-card.flow-border { border-left: 6px solid #00CD52; }
@@ -240,14 +258,15 @@ st.markdown("""
     .status-pill.flow-color { background: #E8F9EE; color: #007A31; }
     .status-pill.ritual-color { background: #FFF3E0; color: #E65100; }
     
-    .popup-title { color: #1C1C1E; font-size: 22px; font-weight: 800; margin: 0 0 16px 0; }
+    .popup-title { color: #1C1C1E; font-size: 20px; font-weight: 800; margin: 0 0 16px 0; line-height: 1.3; }
     .meta-label { font-size: 11px; color: #71717A; text-transform: uppercase; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; margin-top: 14px; }
-    .diagnostic-reason-text { background: #F4F4F5; color: #1C1C1E; padding: 14px 16px; border-radius: 14px; font-size: 15px; font-weight: 500; margin-bottom: 10px; }
+    .diagnostic-reason-text { background: #F4F4F5; color: #1C1C1E; padding: 14px 16px; border-radius: 14px; font-size: 14px; font-weight: 500; margin-bottom: 10px; }
     .action-steps-box { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 14px; padding: 16px; }
     
+    /* Responsive Table Framework */
     .ritual-table { width: 100%; border-collapse: collapse; margin-top: 10px; color: #1C1C1E; }
-    .ritual-table th { background: #F4F4F5; text-align: left; padding: 10px; font-size: 12px; text-transform: uppercase; font-weight: 700; color: #71717A; border-bottom: 2px solid #E4E4E7; }
-    .ritual-table td { padding: 12px 10px; font-size: 14px; border-bottom: 1px solid #E4E4E7; vertical-align: top; }
+    .ritual-table th { background: #F4F4F5; text-align: left; padding: 10px; font-size: 11px; text-transform: uppercase; font-weight: 700; color: #71717A; border-bottom: 2px solid #E4E4E7; }
+    .ritual-table td { padding: 12px 10px; font-size: 13px; border-bottom: 1px solid #E4E4E7; vertical-align: top; }
     .ritual-table tr:last-child td { border-bottom: none; }
     .step-highlight { font-weight: 700; color: #000000; }
     
@@ -506,19 +525,21 @@ if st.session_state.selected_module:
             <div class="solution-popup-card ritual-border">
                 <div class="status-pill ritual-color">GATE MEETING GUIDELINES</div>
                 <div class="popup-title">10 KA DUM</div>
-                <table class="ritual-table">
-                    <tr><th>Gate Meeting</th><th>Description</th></tr>
-                    <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Generation/Scanning<br>2-Selfie with Code (Mention AOP, Count of Active, Location)<br>3-Virtual GM Form</td></tr>
-                    <tr><td><span class="step-highlight">2. Team Grooming</span></td><td>Basic Hygiene - Dress, Bags, Helmet, Mobile Cover, Mobile Screen Guard, Torn Shoes or Slippers.</td></tr>
-                    <tr><td><span class="step-highlight">3. SKH</span></td><td>In-depth Discussion with help of Agent Activity & Tracker</td></tr>
-                    <tr><td><span class="step-highlight">4. DSR</span></td><td>1-Take Appointment during Morning calling activity<br>2-Visit Mx and Mark tasks with final remarks</td></tr>
-                    <tr><td><span class="step-highlight">5. Salary Discussion</span></td><td>Daily Salary Discussion with format to be done and Signed by Manager i.e. TSM, ASM, CSM.</td></tr>
-                    <tr><td><span class="step-highlight">6. TOD</span></td><td>1-Task of the Day Discussion<br>2-Open Smart Squad<br>3-Perform Ace Activities<br>4-TP Commitment for the Day on Sales Academy</td></tr>
-                    <tr><td><span class="step-highlight">7. Manager Inputs</span></td><td>How to Drive task of the Day, share inputs and create innovative drives.</td></tr>
-                    <tr><td><span class="step-highlight">8. Collateral Dist.</span></td><td>QR, A4, SS, RVP collection, distribution and submission.</td></tr>
-                    <tr><td><span class="step-highlight">9. Telecalling Activity</span></td><td>15 Appointments to be Booked before leaving.</td></tr>
-                    <tr><td><span class="step-highlight">11. Support Required</span></td><td>One on One support requirement discussion with Manager.</td></tr>
-                </table>
+                <div class="table-container" style="overflow-x:auto;">
+                    <table class="ritual-table">
+                        <tr><th>Gate Meeting</th><th>Description</th></tr>
+                        <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Generation/Scanning<br>2-Selfie with Code (Mention AOP, Count of Active, Location)<br>3-Virtual GM Form</td></tr>
+                        <tr><td><span class="step-highlight">2. Team Grooming</span></td><td>Basic Hygiene - Dress, Bags, Helmet, Mobile Cover, Mobile Screen Guard, Torn Shoes or Slippers.</td></tr>
+                        <tr><td><span class="step-highlight">3. SKH</span></td><td>In-depth Discussion with help of Agent Activity & Tracker</td></tr>
+                        <tr><td><span class="step-highlight">4. DSR</span></td><td>1-Take Appointment during Morning calling activity<br>2-Visit Mx and Mark tasks with final remarks</td></tr>
+                        <tr><td><span class="step-highlight">5. Salary Discussion</span></td><td>Daily Salary Discussion with format to be done and Signed by Manager i.e. TSM, ASM, CSM.</td></tr>
+                        <tr><td><span class="step-highlight">6. TOD</span></td><td>1-Task of the Day Discussion<br>2-Open Smart Squad<br>3-Perform Ace Activities<br>4-TP Commitment for the Day on Sales Academy</td></tr>
+                        <tr><td><span class="step-highlight">7. Manager Inputs</span></td><td>How to Drive task of the Day, share inputs and create innovative drives.</td></tr>
+                        <tr><td><span class="step-highlight">8. Collateral Dist.</span></td><td>QR, A4, SS, RVP collection, distribution and submission.</td></tr>
+                        <tr><td><span class="step-highlight">9. Telecalling Activity</span></td><td>15 Appointments to be Booked before leaving.</td></tr>
+                        <tr><td><span class="step-highlight">11. Support Required</span></td><td>One on One support requirement discussion with Manager.</td></tr>
+                    </table>
+                </div>
             </div>
         """, unsafe_allow_html=True)
 
@@ -528,14 +549,16 @@ if st.session_state.selected_module:
             <div class="solution-popup-card ritual-border">
                 <div class="status-pill ritual-color">STEP-BY-STEP GUIDE FOR SUCCESS</div>
                 <div class="popup-title">5 KA PUNCH</div>
-                <table class="ritual-table">
-                    <tr><th>Step</th><th>Task Objective</th><th>Action Roadmap</th></tr>
-                    <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test Transaction</b></td><td>Deploy minimum 3 QR codes and perform a small test transaction to confirm tracking ecosystem health.</td></tr>
-                    <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition QR</b></td><td>Locate and tag the specific competition QR active on counter inside analytics environment.</td></tr>
-                    <tr><td><span class="step-highlight">3</span></td><td><b>Show Transaction in App</b></td><td>Verify test transaction inside the PhonePe Business App. Click all visible structural banners and request Photo QR if available.</td></tr>
-                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity instruments (PAN, Aadhaar) on workspace dashboard.</td></tr>
-                    <tr><td><span class="step-highlight">5</span></td><td><b>Smartspeaker Activation</b></td><td>Plug in and charge smartspeaker. Share complete support line coordinates and localized contact details with the merchant.</td></tr>
-                </table>
+                <div class="table-container" style="overflow-x:auto;">
+                    <table class="ritual-table">
+                        <tr><th>Step</th><th>Task Objective</th><th>Action Roadmap</th></tr>
+                        <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test Transaction</b></td><td>Deploy minimum 3 QR codes and perform a small test transaction to confirm tracking ecosystem health.</td></tr>
+                        <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition QR</b></td><td>Locate and tag the specific competition QR active on counter inside analytics environment.</td></tr>
+                        <tr><td><span class="step-highlight">3</span></td><td><b>Show Transaction in App</b></td><td>Verify test transaction inside the PhonePe Business App. Click all visible structural banners and request Photo QR if available.</td></tr>
+                        <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity instruments (PAN, Aadhaar) on workspace dashboard.</td></tr>
+                        <tr><td><span class="step-highlight">5</span></td><td><b>Smartspeaker Activation</b></td><td>Plug in and charge smartspeaker. Share complete support line coordinates and localized contact details with the merchant.</td></tr>
+                    </table>
+                </div>
             </div>
         """, unsafe_allow_html=True)
 
@@ -548,18 +571,29 @@ if st.session_state.selected_module:
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 7. SAFELY ESCAPED TROUBLESHOOTING INTERFACES (ALWAYS VISIBLE OR FIXED AT BASE)
+# 7. MUTUAL RESET DROPDOWN ACTION MECHANISM
+if "prev_error" not in st.session_state:
+    st.session_state.prev_error = "None"
+if "prev_objection" not in st.session_state:
+    st.session_state.prev_objection = "None"
+
+# 8. BALANCED AND ALIGNED TROUBLESHOOTING INTERFACES
 st.markdown("""
     <div class="illuminated-triage-panel">
-        <div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:4px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
+        <div class="triage-header-text">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
     </div>
 """, unsafe_allow_html=True)
 
-# Clean architectural separation using non-interfering Streamlit elements
+# Symmetrical layout deployment
 triage_cols = st.columns(2)
 
 with triage_cols[0]:
     st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
+    
+    # Check if the objection field just changed to reset this selection element 
+    if st.session_state.prev_objection != st.experimental_get_query_params().get("obj", ["None"])[0]:
+        pass
+
     selected_err = st.selectbox(
         "Technical Error Picker Selector Dropdown Key",
         options=["None"] + list(TECHNICAL_ERRORS.keys()),
@@ -577,7 +611,21 @@ with triage_cols[1]:
         key="counter_objections_aligned_dropdown",
         label_visibility="collapsed"
     )
-    
+
+# Mutual Exclusive Cross-Reset Trigger Engine logic execution loop
+if selected_err != "None" and selected_err != st.session_state.prev_error:
+    st.session_state.prev_error = selected_err
+    st.session_state.prev_objection = "None"
+    st.session_state.counter_objections_aligned_dropdown = "None"
+    st.rerun()
+
+if selected_obj != "None" and selected_obj != st.session_state.prev_objection:
+    st.session_state.prev_objection = selected_obj
+    st.session_state.prev_error = "None"
+    st.session_state.tech_errors_aligned_dropdown = "None"
+    st.rerun()
+
+# Interface response render routine checks
 if selected_err != "None":
     node = TECHNICAL_ERRORS[selected_err]
     actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
