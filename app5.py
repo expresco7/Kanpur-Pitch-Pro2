@@ -35,12 +35,18 @@ st.markdown("""
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     
-    /* Strict Mobile Viewport Padding Limits */
+    /* Strict Mobile Viewport Padding Limits & High-Density Spacing */
     [data-testid="stAppViewContainer"] .main .block-container {
-        padding-top: 1.5rem !important;
-        padding-bottom: 2rem !important;
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
         max-width: 25rem !important; /* Locks layout to exact mobile device width bounds */
         margin: 0 auto !important;
+    }
+    
+    /* Remove default element margins to reduce empty space */
+    [data-testid="stVerticalBlock"] > div {
+        padding-bottom: 0.4rem !important;
+        margin-bottom: 0px !important;
     }
     
     /* Invisible App Bars */
@@ -51,13 +57,14 @@ st.markdown("""
         display: flex !important;
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
-        padding: 4px 4px 16px 4px;
-        gap: 14px;
+        padding: 4px 4px 10px 4px !important;
+        gap: 12px !important;
+        margin-bottom: 0px !important;
     }
     .stHorizontalBlock::-webkit-scrollbar { height: 4px; }
     .stHorizontalBlock::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.01); border-radius: 10px; }
     .stHorizontalBlock::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 10px; }
-    .stHorizontalBlock > div { min-width: 175px !important; max-width: 175px !important; flex: 0 0 auto !important; }
+    .stHorizontalBlock > div { min-width: 175px !important; max-width: 175px !important; flex: 0 0 auto !important; padding: 0 !important; }
     
     /* Advanced Interactive Card Shell Component */
     .carousel-card-shell {
@@ -102,13 +109,52 @@ st.markdown("""
     .carousel-card-shell div.stButton > button:active {
         background-color: rgba(255, 255, 255, 0.03) !important;
     }
-    /* Style button label text to look like a clean base call-to-action */
     .carousel-card-shell div.stButton > button p {
         color: #8E8E93 !important; font-size: 10px !important; font-weight: 700 !important;
         text-transform: uppercase !important; letter-spacing: 0.05em !important;
         position: absolute; bottom: 16px; left: 16px; margin: 0 !important;
     }
     .carousel-card-shell div.stButton > button:hover p { color: #FFFFFF !important; }
+
+    /* --- RESTORED ORIGINAL TELEMETRY CARD FRAMEWORK --- */
+    .telemetry-card {
+        background: linear-gradient(135deg, #121216 0%, #1C1C1E 100%);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 16px;
+        margin-bottom: 12px !important;
+    }
+    .telemetry-grid {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .telemetry-item {
+        text-align: center;
+        flex: 1;
+        border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .telemetry-item:last-child {
+        border-right: none;
+    }
+    .telemetry-val {
+        font-size: 18px;
+        font-weight: 800;
+        color: #FFFFFF;
+        letter-spacing: -0.02em;
+    }
+    .telemetry-val.leader-color {
+        color: #00CD52 !important;
+        text-shadow: 0 0 10px rgba(0,205,82,0.2);
+    }
+    .telemetry-lbl {
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #8E8E93;
+        margin-top: 2px;
+    }
 
     /* --- PREMIUM CRED GLASS ENCLOSED TROUBLESHOOTING DECK --- */
     .illuminated-triage-panel {
@@ -117,8 +163,8 @@ st.markdown("""
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 149, 0, 0.02) !important;
         border-radius: 22px !important;
         padding: 20px !important;
-        margin-top: 35px !important;
-        margin-bottom: 15px !important;
+        margin-top: 15px !important;
+        margin-bottom: 10px !important;
     }
     .terminal-main-header {
         font-size: 12px !important;
@@ -127,7 +173,7 @@ st.markdown("""
         text-transform: uppercase !important;
         color: #FF9500 !important;
         display: block !important;
-        margin-bottom: 18px !important;
+        margin-bottom: 14px !important;
     }
     .custom-input-heading {
         color: #8E8E93 !important;
@@ -136,16 +182,15 @@ st.markdown("""
         letter-spacing: 0.06em !important;
         font-weight: 700 !important;
         margin-bottom: 6px !important;
-        margin-top: 14px !important;
+        margin-top: 12px !important;
         display: block !important;
     }
-    .custom-input-heading:first-of-type { margin-top: 0 omportant; }
     
     div[data-testid="stSelectbox"] > div { background-color: #070709 !important; border: 1px solid rgba(255,255,255,0.05) !important; border-radius: 10px !important; }
     div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; font-size: 13px !important; }
     
     /* Output Data Interface Modals */
-    .solution-popup-card { background: #FFFFFF; border-radius: 20px; padding: 20px; margin-top: 16px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); }
+    .solution-popup-card { background: #FFFFFF; border-radius: 20px; padding: 20px; margin-top: 12px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); }
     .solution-popup-card.err-border { border-left: 5px solid #FF3B30; }
     .solution-popup-card.obj-border { border-left: 5px solid #5856D6; }
     .solution-popup-card.flow-border { border-left: 5px solid #00CD52; }
@@ -162,13 +207,13 @@ st.markdown("""
     
     /* General Utilities */
     .app-brand-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #8E8E93; margin-bottom: 2px; }
-    .app-main-title { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: #FFFFFF; margin-bottom: 20px; }
+    .app-main-title { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: #FFFFFF; margin-bottom: 16px; }
     div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 12px 16px !important; width: 100%; border-radius: 12px !important; }
     div.pitch-trigger-box button p { color: #000000 !important; font-weight: 700 !important; font-size: 13px !important; }
     div.floating-back-container { position: fixed; bottom: 20px; left: 20px; z-index: 9999; }
     div.floating-back-container button { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.12) !important; border-radius: 30px !important; padding: 6px 14px !important; }
     div.floating-back-container button p { color: #FFFFFF !important; font-size: 10px !important; font-weight: 700; text-transform: uppercase; }
-    hr { border-color: rgba(255,255,255,0.05) !important; margin: 16px 0 !important; }
+    hr { border-color: rgba(255,255,255,0.05) !important; margin: 12px 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -251,7 +296,7 @@ st.markdown('<div class="active-workspace-surface">', unsafe_allow_html=True)
 st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-main-title">Pitch Pro Terminal</div>', unsafe_allow_html=True)
 
-# Telemetry Matrix Layer
+# Telemetry Matrix Layer (RESTORED TO ORIGINAL 4-COLUMN INLINE DESIGN)
 if not st.session_state.selected_module:
     st.markdown("""
         <div class="telemetry-card">
@@ -279,7 +324,7 @@ for i, col in enumerate(carousel_cols):
                     <div class="carousel-card-title">{modules[i]}</div>
                 </div>
         """, unsafe_allow_html=True)
-        if st.button("Explore", key=keys[i]): # Placed inside the shell mapping architecture
+        if st.button("Explore", key=keys[i]): 
             reset_pitch_flow(modules[i])
         st.markdown('</div>', unsafe_allow_html=True)
 
