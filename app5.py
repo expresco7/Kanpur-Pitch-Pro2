@@ -25,27 +25,31 @@ def reset_pitch_flow(target_module):
     st.session_state.selected_competitor = "Select Competitor..."
     st.session_state.pitch_customized = False
 
-# 2. CRED DESIGN SYSTEM & HIGH-CONTRAST INTERACTION ENGINE
+# 2. CRED-INSPIRED UTILA-DESIGN SYSTEM ENGINE
 st.markdown("""
     <style>
-    /* Base Engine UI Configuration */
+    /* Base Engine UI & Absolute Spacing Alignments */
     html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
-        background-color: #0A0A0C !important;
+        background-color: #060608 !important;
         color: #FFFFFF !important;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     
-    /* FIX: Remove extra space at top of page and reduce bottom scrolling deadspace */
+    /* Eliminate Streamlit top layout margins & padding dead spaces */
     [data-testid="stAppViewContainer"] .main .block-container {
-        padding-top: 2rem !important;
-        padding-bottom: 2rem !important;
-        max-width: 46rem !important;
+        padding-top: 2.5rem !important;
+        padding-bottom: 3rem !important;
+        max-width: 44rem !important;
     }
     
-    /* Clean Top Header Space Clearances */
-    header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; display: none !important; }
+    /* Complete erasure of generic Streamlit header decor lines and footers */
+    header, [data-testid="stHeader"], footer, [data-testid="stDecoration"] { 
+        background: transparent !important; 
+        visibility: hidden !important; 
+        display: none !important; 
+    }
     
-    /* Premium CRED Intro Transition Graphics Engine */
+    /* Splash Graphics Engine animations */
     @keyframes credTracking {
         0% { letter-spacing: -0.2em; opacity: 0; filter: blur(12px); }
         40% { opacity: 1; filter: blur(0px); }
@@ -53,7 +57,7 @@ st.markdown("""
         100% { opacity: 0; letter-spacing: 0.2em; filter: blur(4px); }
     }
     @keyframes workspaceFadeUp {
-        0% { transform: translateY(20px); opacity: 0; }
+        0% { transform: translateY(15px); opacity: 0; }
         100% { transform: translateY(0); opacity: 1; }
     }
     
@@ -72,38 +76,39 @@ st.markdown("""
         font-weight: 900;
         text-transform: uppercase;
         color: #FFFFFF;
-        animation: credTracking 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: credTracking 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         text-shadow: 0 0 30px rgba(255,255,255,0.2);
     }
     
     .active-workspace-surface {
-        animation: workspaceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
+        animation: workspaceFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
     }
 
-    /* Typography & Header Blocks */
+    /* Top-Tier Workspace Typography */
     .app-brand-tag {
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
-        letter-spacing: 0.15em;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: #8E8E93;
-        margin-bottom: 4px;
+        color: #636366;
+        margin-bottom: 6px;
     }
     .app-main-title {
-        font-size: 28px;
+        font-size: 32px;
         font-weight: 800;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
         color: #FFFFFF;
-        margin-bottom: 24px;
+        margin-bottom: 28px;
     }
 
-    /* Market Share Analytics Telemetry Panel */
+    /* Telemetry Panel Dashboard Matrix */
     .telemetry-card {
-        background: linear-gradient(135deg, #121216 0%, #1C1C1E 100%);
-        border: 1px solid rgba(255,255,255,0.06);
+        background: linear-gradient(135deg, #121216 0%, #16161C 100%);
+        border: 1px solid rgba(255,255,255,0.05);
         border-radius: 20px;
-        padding: 20px;
-        margin-bottom: 28px;
+        padding: 22px;
+        margin-bottom: 32px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     .telemetry-grid {
         display: flex;
@@ -113,132 +118,138 @@ st.markdown("""
     .telemetry-item {
         text-align: center;
         flex: 1;
-        border-right: 1px solid rgba(255,255,255,0.08);
+        border-right: 1px solid rgba(255,255,255,0.06);
     }
     .telemetry-item:last-child {
         border-right: none;
     }
     .telemetry-val {
-        font-size: 20px;
+        font-size: 22px;
         font-weight: 800;
         color: #FFFFFF;
         letter-spacing: -0.02em;
     }
     .telemetry-val.leader-color {
         color: #00CD52 !important;
-        text-shadow: 0 0 10px rgba(0,205,82,0.2);
+        text-shadow: 0 0 12px rgba(0,205,82,0.25);
     }
     .telemetry-lbl {
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
         color: #8E8E93;
-        margin-top: 2px;
-    }
-    
-    /* Symmetrical Carousel Architecture */
-    .stHorizontalBlock {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        padding: 4px 4px 16px 4px;
-        gap: 16px;
-    }
-    .stHorizontalBlock::-webkit-scrollbar { height: 6px; }
-    .stHorizontalBlock::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); border-radius: 10px; }
-    .stHorizontalBlock::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
-    
-    .carousel-card-shell {
-        background-color: #1C1C1E;
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 20px;
-        padding: 20px;
-        height: 190px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .carousel-card-shell:hover {
-        border-color: rgba(255,255,255,0.25);
-        background-color: #242426;
-        transform: translateY(-2px);
-    }
-    .carousel-card-title {
-        font-size: 15px;
-        font-weight: 800;
-        color: #FFFFFF;
-        line-height: 1.3;
         margin-top: 4px;
     }
     
-    /* Fix floating buttons on landing carousel */
-    .carousel-card-shell div.stButton > button {
-        background-color: rgba(255,255,255,0.05) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        border-radius: 10px !important;
-        padding: 6px 12px !important;
-        min-height: 32px !important;
+    /* --- THE INTERACTIVE TILE RE-ENGINEERING ENGINE --- */
+    /* Forces Streamlit button to become the actual module card container element */
+    div.stButton > button {
+        background: linear-gradient(180deg, #131318 0%, #191922 100%) !important;
+        border: 1px solid rgba(255,255,255,0.06) !important;
+        border-radius: 22px !important;
+        padding: 24px 20px !important;
         width: 100% !important;
+        height: 155px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: space-between !important;
+        text-align: left !important;
+        box-shadow: 0 12px 24px rgba(0,0,0,0.2) !important;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    .carousel-card-shell div.stButton > button:hover { background-color: #FFFFFF !important; border-color: #FFFFFF !important; }
-    .carousel-card-shell div.stButton > button p {
-        color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important;
-        text-transform: uppercase !important; letter-spacing: 0.05em !important; margin: 0 auto !important;
+    div.stButton > button:hover {
+        border-color: rgba(255,255,255,0.2) !important;
+        background: linear-gradient(180deg, #1A1A22 0%, #22222E 100%) !important;
+        transform: translateY(-3px);
+        box-shadow: 0 16px 32px rgba(0,0,0,0.3) !important;
     }
-    .carousel-card-shell div.stButton > button:hover p { color: #000000 !important; }
+    div.stButton > button:active { transform: scale(0.98); }
+    
+    /* Re-formatting paragraph strings nested inside parent card buttons */
+    div.stButton > button p {
+        color: #FFFFFF !important;
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.01em !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        text-align: left !important;
+    }
+    div.stButton > button span.card-sub-tag {
+        font-size: 9px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.12em !important;
+        color: #8E8E93 !important;
+        display: block !important;
+        margin-bottom: 2px !important;
+    }
+    div.stButton > button div.card-action-trigger {
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        color: #FF9500 !important;
+        background: rgba(255, 149, 0, 0.08) !important;
+        padding: 4px 10px !important;
+        border-radius: 8px !important;
+        margin-top: auto !important;
+    }
+    div.stButton > button:hover div.card-action-trigger {
+        color: #000000 !important;
+        background: #FF9500 !important;
+    }
 
-    /* --- ENHANCED HIGH-HIGHLIGHT TRIAGE SECTION CHASSIS --- */
+    /* --- THE UNIFIED TERMINAL CONTROL DECK CHASSIS --- */
     .illuminated-triage-panel {
-        background: linear-gradient(145deg, #111115 0%, #1A1A22 100%) !important;
-        border: 1px solid rgba(255, 149, 0, 0.25) !important;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 149, 0, 0.03) !important;
-        border-radius: 24px !important;
-        padding: 24px !important;
-        margin-top: 30px !important;
+        background: linear-gradient(145deg, #0C0C0F 0%, #13131A 100%) !important;
+        border: 1px solid rgba(255, 149, 0, 0.22) !important;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 149, 0, 0.02) !important;
+        border-radius: 26px !important;
+        padding: 26px !important;
+        margin-top: 45px !important;
         margin-bottom: 20px !important;
     }
-    
     .terminal-main-header {
-        font-size: 14px !important;
+        font-size: 13px !important;
         font-weight: 800 !important;
-        letter-spacing: 0.1em !important;
+        letter-spacing: 0.12em !important;
         text-transform: uppercase !important;
         color: #FF9500 !important;
         display: block !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 24px !important;
+        text-shadow: 0 0 15px rgba(255, 149, 0, 0.15);
     }
-    
-    div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 14px 20px !important; width: 100%; }
-    div.pitch-trigger-box button p { color: #000000 !important; font-weight: 700 !important; font-size: 14px !important; }
-
-    /* Fixed Floating Corner Back Button Interface Styles */
-    div.floating-back-container { position: fixed; bottom: 24px; left: 24px; z-index: 9999; }
-    div.floating-back-container button {
-        background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.15) !important;
-        border-radius: 30px !important; padding: 8px 18px !important; box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
-    }
-    div.floating-back-container button:hover { background-color: #FFFFFF !important; border-color: #FFFFFF !important; }
-    div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; }
-    div.floating-back-container button:hover p { color: #000000 !important; }
-    
     .custom-input-heading {
         color: #8E8E93 !important;
         font-size: 10px !important;
         text-transform: uppercase !important;
         letter-spacing: 0.08em !important;
         font-weight: 700 !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 10px !important;
         display: block !important;
-        text-align: left !important;
     }
     
-    div[data-testid="stSelectbox"] > div { background-color: #0A0A0C !important; border: 1px solid rgba(255,255,255,0.06) !important; border-radius: 12px !important; }
-    div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; }
+    /* Floating Corner Navigation Items */
+    div.floating-back-container { position: fixed; bottom: 24px; left: 24px; z-index: 9999; }
+    div.floating-back-container button {
+        background-color: #16161C !important; border: 1px solid rgba(255,255,255,0.1) !important;
+        border-radius: 30px !important; padding: 10px 20px !important; box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+    }
+    div.floating-back-container button:hover { background-color: #FFFFFF !important; border-color: #FFFFFF !important; }
+    div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase; }
+    div.floating-back-container button:hover p { color: #000000 !important; }
     
-    /* Output Data Interface Modals */
-    .solution-popup-card { background: #FFFFFF; border-radius: 24px; padding: 26px; margin-top: 16px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); }
+    /* Global Selectbox & Input Dropdown UI Customization Layer */
+    div[data-testid="stSelectbox"] > div { background-color: #070709 !important; border: 1px solid rgba(255,255,255,0.06) !important; border-radius: 14px !important; height: 46px !important; }
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; padding-left: 6px !important; }
+    div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 14px 20px !important; width: 100%; border-radius: 14px !important; }
+    div.pitch-trigger-box button p { color: #000000 !important; font-weight: 700 !important; font-size: 14px !important; }
+
+    /* Output Modals & Operational Popups */
+    .solution-popup-card { background: #FFFFFF; border-radius: 24px; padding: 26px; margin-top: 20px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); }
     .solution-popup-card.err-border { border-left: 6px solid #FF3B30; }
     .solution-popup-card.obj-border { border-left: 6px solid #5856D6; }
     .solution-popup-card.flow-border { border-left: 6px solid #00CD52; }
@@ -261,7 +272,7 @@ st.markdown("""
     .ritual-table tr:last-child td { border-bottom: none; }
     .step-highlight { font-weight: 700; color: #000000; }
     
-    hr { border-color: rgba(255,255,255,0.06) !important; margin: 20px 0 !important; }
+    hr { border-color: rgba(255,255,255,0.06) !important; margin: 24px 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -278,7 +289,7 @@ if not st.session_state.splash_done:
     splash_placeholder.empty()
     st.session_state.splash_done = True
 
-# 4. DATA MATRIX - COMPREHENSIVE REPOSITORY SYNCHRONIZED ARCHITECTURE
+# 4. ACTIVE DATA STRUCTURAL CONSOLE CORE DATA
 DATA_FLOW_MATRIX = {
     "Smart Speaker": {
         "Paytm": {
@@ -381,11 +392,11 @@ st.markdown('<div class="active-workspace-surface">', unsafe_allow_html=True)
 st.markdown('<div class="app-brand-tag">Kanpur Division Module</div>', unsafe_allow_html=True)
 st.markdown('<div class="app-main-title">Pitch Pro Terminal</div>', unsafe_allow_html=True)
 
-# The Landing Telemetry Panel
+# The Landing Telemetry Panel Snapshot
 if not st.session_state.selected_module:
     st.markdown("""
         <div class="telemetry-card">
-            <div class="app-brand-tag" style="font-size:10px; margin-bottom:12px; color:rgba(255,255,255,0.4);">Territory Market Share Snapshot</div>
+            <div class="app-brand-tag" style="font-size:9px; margin-bottom:12px; color:rgba(255,255,255,0.3);">Territory Market Share Snapshot</div>
             <div class="telemetry-grid">
                 <div class="telemetry-item">
                     <div class="telemetry-val leader-color">38.6%</div>
@@ -407,26 +418,26 @@ if not st.session_state.selected_module:
         </div>
     """, unsafe_allow_html=True)
 
-# Carousel columns loop processing framework
+# Symmetrical Horizontal Carousel Block
 carousel_cols = st.columns(4)
 modules = ["Smart Speaker", "Merchant Lending", "Gate Meeting Rituals", "Merchant Visit Rituals"]
-keys = ["mod_ecb", "mod_lending", "mod_gate", "mod_visit"]
 
-for i, col in enumerate(carousel_cols):
-    with col:
-        st.markdown(f"""
-            <div class="carousel-card-shell">
-                <div>
-                    <div class="app-brand-tag" style="font-size:9px; margin-bottom:0px;">Module 0{i+1}</div>
-                    <div class="carousel-card-title">{modules[i].upper()}</div>
-                </div>
-        """, unsafe_allow_html=True)
-        if st.button("Open", key=keys[i]):
-            reset_pitch_flow(modules[i])
-        st.markdown('</div>', unsafe_allow_html=True)
+# Re-engineered Native Buttons serving as full geometric card containers
+if st.session_state.selected_module is None:
+    with carousel_cols[0]:
+        if st.button("<span class='card-sub-tag'>Module 01</span><br/><b>SMART SPEAKER</b><br/><div class='card-action-trigger'>Open Deck</div>", key="mod_ecb"):
+            reset_pitch_flow("Smart Speaker")
+    with carousel_cols[1]:
+        if st.button("<span class='card-sub-tag'>Module 02</span><br/><b>LENDING</b><br/><div class='card-action-trigger'>Open Deck</div>", key="mod_lending"):
+            reset_pitch_flow("Merchant Lending")
+    with carousel_cols[2]:
+        if st.button("<span class='card-sub-tag'>Module 03</span><br/><b>GATE MEETING</b><br/><div class='card-action-trigger'>Open Deck</div>", key="mod_gate"):
+            reset_pitch_flow("Gate Meeting Rituals")
+    with carousel_cols[3]:
+        if st.button("<span class='card-sub-tag'>Module 04</span><br/><b>MX VISITS</b><br/><div class='card-action-trigger'>Open Deck</div>", key="mod_visit"):
+            reset_pitch_flow("Merchant Visit Rituals")
 
-st.markdown('</div>', unsafe_allow_html=True) # End active-workspace-surface
-st.markdown("<hr/>", unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # 6. DYNAMIC DRILL-DOWN SUB WORKSPACES
 if st.session_state.selected_module:
@@ -544,14 +555,14 @@ if st.session_state.selected_module:
         st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-# 7. HIGHLY HIGHLIGHTED STANDALONE VERTICAL TRIAGE TERMINAL ENGINE
+# 7. MONOLITHIC UNIFIED TRIAGE COMMAND DECK
 if not st.session_state.selected_module:
     st.markdown("""
         <div class="illuminated-triage-panel">
             <span class="terminal-main-header">⚡ INSTANT TROUBLESHOOTING TERMINAL</span>
     """, unsafe_allow_html=True)
 
-    # Item Container Block 01: Technical Errors Selector Dropdown
+    # Nested perfectly inside the continuous highlighted glass shell container card
     st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
     selected_err = st.selectbox(
         "Technical Error Form Selector Tool",
@@ -563,7 +574,6 @@ if not st.session_state.selected_module:
     
     st.markdown('<div style="margin-bottom: 24px;"></div>', unsafe_allow_html=True)
     
-    # Item Container Block 02: Counter Objections Selector Dropdown
     st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
     selected_obj = st.selectbox(
         "Counter Objection Form Selector Tool",
@@ -573,9 +583,9 @@ if not st.session_state.selected_module:
         label_visibility="collapsed"
     )
     
-    st.markdown('</div>', unsafe_allow_html=True) # Safe terminal container seal close
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    # Action result metrics outputs cards processing
+    # Action result metrics outputs diagnostics cards processing
     if selected_err != "None":
         node = TECHNICAL_ERRORS[selected_err]
         actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
