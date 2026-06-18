@@ -272,7 +272,7 @@ DATA_FLOW_MATRIX = {
                 "Zero online customer care dependency; direct call to the local executive for instant resolution."
             ],
             "pitch": "Bhaiya, ek minute dijiye, main aapko aapke Paytm Business app mein ek cheez dikhata hoon. Aap bol rahe ho na ki sirf ₹1 kat ta hai? Yeh dekho, app ke 'Soundbox History' aur 'Filters' mein jaakar—yeh har mahine ka hidden rental kat raha hai aapka. PhonePe par humare purane merchants ke liye abhi ek special offer chal raha hai jismein setup fee par bhari discount hai (sirf ₹99/₹149 LTV ke hisab se). Aur sabse badi baat—Paytm mein agar speaker kharab ho jaye, toh unke customer care par robot se chat karte-karte thak jaoge, koi sunne wala nahi hota. PhonePe par humara system bilkul alag hai. Humne aapke Kanpur ke isi market area mein ek dedicated Sector Incharge bitha rakha hai. Koi online ticket-vicket raising ka jhamela nahi hai. Ek call ghumao, humara ladka turant aapki dukaan par hazir hoga. Agar daily target hit kar lete ho, toh rental bhi zero aur service bhi top class!",
-            "audio": "speaker_paytm.mp3"  # 👈 Root alignment matching your GitHub structure
+            "audio": "speaker_paytm.mp3"
         },
         "BharatPe": {
             "points": [
@@ -314,7 +314,7 @@ DATA_FLOW_MATRIX = {
                 "Avoid cold automated digital loops via dedicated human verification channels."
             ],
             "pitch": "Bhaiya, agar aapne Paytm se loan lene ka socha hai ya liya hai, toh unka ek baar interest certificate nikal kar dekhiye. Woh upar se bolte hain 2% mahina, par hidden charges, processing fees aur GST milakar saal ka 36% se 37% tak baithta hai. Aap loot rahe ho wahan! Ek baar PhonePe ka loan banner check kariye, hum aapko pehli dafa mein hi 1.25% se 1.5% ke clear interest rate par loan de rahe hain. Koi hidden jhamela nahi hai. Aur sabse badhiya baat, Paytm par loan lene ke baad agar collection ya deduction ka koi confusion ho, toh aap chatbot se sarr marte reh jaoge. PhonePe par aapka bhai, humara local Sector Incharge hamesha aapke sath khada hai. Kuch bhi baat ho, direct usko phone lagao, woh aakar table par baith kar aapka hisab clear karega. Jab local support ka bharosa ho, toh dhandha fikar-mukt chalta hai.",
-            "audio": "loan_paytm.mp3"  # 👈 Matches your actual file 'loan_paytm.mp3' exactly
+            "audio": "loan_paytm.mp3"
         },
         "BharatPe": {
             "points": [
@@ -343,7 +343,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se github jab aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap paisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
             "audio": "loan_bank.mp3"
         }
     }
@@ -544,53 +544,4 @@ if st.session_state.selected_module:
 # 7. ILLUMINATED ASSISTANCE PORTALS
 if not st.session_state.selected_module:
     st.markdown('<div class="illuminated-triage-panel">', unsafe_allow_html=True)
-    st.markdown('<div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>', unsafe_allow_html=True)
-    
-    triage_cols = st.columns([1.2, 1.0])
-    
-    with triage_cols[0]:
-        selected_err = st.selectbox(
-            "Troubleshoot Technical Errors",
-            options=["None"] + list(TECHNICAL_ERRORS.keys()),
-            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
-            key="tech_errors_aligned_dropdown"
-        )
-        
-    with triage_cols[1]:
-        selected_obj = st.selectbox(
-            "Resolve Counter Objections",
-            options=["None"] + list(COUNTER_OBJECTIONS.keys()),
-            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
-            key="counter_objections_aligned_dropdown"
-        )
-        
-    if selected_err != "None":
-        node = TECHNICAL_ERRORS[selected_err]
-        actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-        st.markdown(f"""
-            <div class="solution-popup-card err-border">
-                <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
-                <div class="popup-title">{node['title']}</div>
-                <div class="meta-label">Reason / क्यों होता है</div>
-                <div class="diagnostic-reason-text">{node['reason']}</div>
-                <div class="meta-label">Immediate Solution / क्या करें</div>
-                <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
-            </div>
-        """, unsafe_allow_html=True)
-        
-    elif selected_obj != "None":
-        node = COUNTER_OBJECTIONS[selected_obj]
-        actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
-        st.markdown(f"""
-            <div class="solution-popup-card obj-border">
-                <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
-                <div class="popup-title">{node['title']}</div>
-                <div class="meta-label">Reason / क्यों होता है</div>
-                <div class="diagnostic-reason-text">{node['reason']}</div>
-                <div class="meta-label">Immediate Action / क्या करें</div>
-                <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
-            </div>
-        """, unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<div class="app-brand-tag" style="color:
