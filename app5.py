@@ -191,8 +191,8 @@ st.markdown("""
     /* Illuminated Triage Troubleshooting Section Card */
     .illuminated-triage-panel {
         background: linear-gradient(180deg, #121215 0%, #0A0A0C 100%);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.02);
         border-radius: 24px;
         padding: 24px;
         margin-top: 10px;
@@ -323,7 +323,7 @@ DATA_FLOW_MATRIX = {
                 "Position the local Sector Incharge as an advocate who monitors your QR health to unlock bigger limits.",
                 "Emphasize that reliable, human ground-support is unmatched by corporate apps."
             ],
-            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, jab aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai.",
+            "pitch": "Bhaiya, BharatPe loan deta hai, thik hai. Par PhonePe aapko 'Continuous Eligibility' deta hai. Iska matlab yeh hai ki agar aapka loan chal raha hai aur aapko beech mein paise ki zaroorat padi, toh aapko live Top-Up ka option mil jata hai. Aur jaise hi aap purana loan close karte ho, within 1 week aapko naya repeat loan ka banner mil jata hai. Itna hi nahi, javascript aap humare sath 3-4 loan cycle poori kar lete ho, toh aapki processing fee bhi bilkul zero ho jaati hai. Sabse bada fayda pata hai kya hai? BharatPe mein sab kuch digital machine par chalta hai, unka koi local chehra nahi hai aapse baat karne ke liye. PhonePe par humara Sector Incharge aapke touch mein rehta hai. Woh aapke QR ka health aur volume track karke system se aapki limit badhwane mein khud madad karta hai. Yeh machine ka nahi, bharose aur asli insani service ka rishta hai.",
             "audio": "loan_bharatpe.mp3"
         },
         "Google Pay": {
@@ -343,7 +343,7 @@ DATA_FLOW_MATRIX = {
                 "Highlight that local financiers attack a merchant's local reputation if collections dip.",
                 "Position the PhonePe automated EOD tracking and local Sector Incharge backing as a total peace-of-mind shield."
             ],
-            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jacob bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se james aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
+            "pitch": "Bhaiya, bank se loan lene par ya bank ka QR chalane par sabse badi dikkat yeh hai ki har ek transaction seedha aapke bank account mein credit hota hai. Isse mahine mein hazaron entries ho jaati hain aur bank ledger itna tedious ho jata hai ki ek-ek entry ko verify karna aur hisab rakhna sir-dard ban jata hai. Jab bank ka bada manager aapki passbook mein yeh kachra dekhega na, toh badi loan file reject kar dega. PhonePe par kya hota hai—din bhar ka jitna bhi collection hai, woh raat ko sirf ek single unified settlement entry ke roop mein bank mein jata hai. Mahine mein sirf 30 entries! Aapka bank statement bilkul premium aur clean rahega. Aur doosra bada khatra—market ke local financiers se jab aap kaisa uthate ho, toh mandi aane par woh dukaan par aakar khade ho jaate hain. Kanpur market mein dhandhe se badi apni izzat hoti hai—baat seedhe izzat par aa jaati hai! PhonePe par aapka loan chalega toh digital automatic settlement se chalega. Koi aapke counter par aakar tamasha nahi korega. Aur kisi bhi tarah ke manual verification ya madad ke liye humara area Sector Incharge hamesha available hai. Na manager ke chakkar katna, na online ticket raise karna, bilkul izzat aur shanti se apna dhandha bada karo!",
             "audio": "loan_bank.mp3"
         }
     }
@@ -539,3 +539,61 @@ if st.session_state.selected_module:
         st.session_state.selected_competitor = "Select Competitor..."
         st.session_state.pitch_customized = False
         st.rerun()
+    st.markdown("""</div>""", unsafe_allow_html=True)
+
+# 7. SAFELY ESCAPED TROUBLESHOOTING INTERFACES
+if not st.session_state.selected_module:
+    st.markdown("""
+        <div class="illuminated-triage-panel">
+            <div class="app-brand-tag" style="color: #FFFFFF; font-weight:800; margin-bottom:14px; letter-spacing:0.05em;">⚡ INSTANT TROUBLESHOOTING TERMINAL</div>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    # Render Streamlit Selectbox Layout blocks entirely separated from internal html boundaries
+    triage_cols = st.columns(2)
+    
+    with triage_cols[0]:
+        selected_err = st.selectbox(
+            "Troubleshoot Technical Errors",
+            options=["None"] + list(TECHNICAL_ERRORS.keys()),
+            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
+            key="tech_errors_aligned_dropdown"
+        )
+        
+    with triage_cols[1]:
+        selected_obj = st.selectbox(
+            "Resolve Counter Objections",
+            options=["None"] + list(COUNTER_OBJECTIONS.keys()),
+            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
+            key="counter_objections_aligned_dropdown"
+        )
+        
+    if selected_err != "None":
+        node = TECHNICAL_ERRORS[selected_err]
+        actions_html = "".join([f"<li style='color:#721c24; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
+        st.markdown(f"""
+            <div class="solution-popup-card err-border">
+                <div class="status-pill err-color">LENDING ERROR DIAGNOSTIC</div>
+                <div class="popup-title">{node['title']}</div>
+                <div class="meta-label">Reason / क्यों होता है</div>
+                <div class="diagnostic-reason-text">{node['reason']}</div>
+                <div class="meta-label">Immediate Solution / क्या करें</div>
+                <div class="action-steps-box" style="background:#FFF0F2; border-color:#FFD2D7;"><ul>{actions_html}</ul></div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+    elif selected_obj != "None":
+        node = COUNTER_OBJECTIONS[selected_obj]
+        actions_html = "".join([f"<li style='color:#1a2556; margin-bottom:6px;'>📍 {act}</li>" for act in node["actions"]])
+        st.markdown(f"""
+            <div class="solution-popup-card obj-border">
+                <div class="status-pill obj-color">OBJECTION RESOLUTION ENGINE</div>
+                <div class="popup-title">{node['title']}</div>
+                <div class="meta-label">Reason / क्यों होता है</div>
+                <div class="diagnostic-reason-text">{node['reason']}</div>
+                <div class="meta-label">Immediate Action / क्या करें</div>
+                <div class="action-steps-box" style="background:#EEF0FC; border-color:#D2D7FA;"><ul>{actions_html}</ul></div>
+            </div>
+        """, unsafe_allow_html=True)
+
+st.markdown("""</div>""", unsafe_allow_html=True)
