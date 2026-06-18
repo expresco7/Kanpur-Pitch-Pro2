@@ -35,15 +35,8 @@ st.markdown("""
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     }
     
-    /* FIX: Remove extra space at top of page and reduce bottom scrolling deadspace */
-    [data-testid="stAppViewContainer"] .main .block-container {
-        padding-top: 2rem !important;
-        padding-bottom: 2rem !important;
-        max-width: 46rem !important;
-    }
-    
     /* Clean Top Header Space Clearances */
-    header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; display: none !important; }
+    header, [data-testid="stHeader"], footer { background: transparent !important; visibility: hidden; }
     
     /* Premium CRED Intro Transition Graphics Engine */
     @keyframes credTracking {
@@ -78,6 +71,7 @@ st.markdown("""
     
     .active-workspace-surface {
         animation: workspaceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) normal forwards;
+        margin-bottom: 40px;
     }
 
     /* Typography & Header Blocks */
@@ -90,7 +84,7 @@ st.markdown("""
         margin-bottom: 4px;
     }
     .app-main-title {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 800;
         letter-spacing: -0.02em;
         color: #FFFFFF;
@@ -154,7 +148,7 @@ st.markdown("""
         border: 1px solid rgba(255,255,255,0.08);
         border-radius: 20px;
         padding: 20px;
-        height: 190px;
+        height: 180px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -166,14 +160,13 @@ st.markdown("""
         transform: translateY(-2px);
     }
     .carousel-card-title {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 800;
         color: #FFFFFF;
         line-height: 1.3;
         margin-top: 4px;
     }
     
-    /* Fix floating buttons on landing carousel */
     .carousel-card-shell div.stButton > button {
         background-color: rgba(255,255,255,0.05) !important;
         border: 1px solid rgba(255,255,255,0.1) !important;
@@ -182,32 +175,34 @@ st.markdown("""
         min-height: 32px !important;
         width: 100% !important;
     }
-    .carousel-card-shell div.stButton > button:hover { background-color: #FFFFFF !important; border-color: #FFFFFF !important; }
+    .carousel-card-shell div.stButton > button:hover { background-color: #00CD52 !important; border-color: #00CD52 !important; }
     .carousel-card-shell div.stButton > button p {
         color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important;
         text-transform: uppercase !important; letter-spacing: 0.05em !important; margin: 0 auto !important;
     }
     .carousel-card-shell div.stButton > button:hover p { color: #000000 !important; }
 
-    /* --- ENHANCED HIGH-HIGHLIGHT TRIAGE SECTION CHASSIS --- */
+    /* --- PREMIUM HIGH-HIGHLIGHT CRUCIAL TRIAGE CONTAINER INTERFACE --- */
     .illuminated-triage-panel {
-        background: linear-gradient(145deg, #111115 0%, #1A1A22 100%) !important;
-        border: 1px solid rgba(255, 149, 0, 0.25) !important;
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 149, 0, 0.03) !important;
-        border-radius: 24px !important;
-        padding: 24px !important;
-        margin-top: 30px !important;
-        margin-bottom: 20px !important;
+        background: linear-gradient(145deg, #0D0D11 0%, #14141A 100%) !important;
+        border: 1px solid rgba(255, 149, 0, 0.35) !important;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 149, 0, 0.05) !important;
+        border-radius: 28px !important;
+        padding: 30px !important;
+        margin-top: 60px !important;
+        margin-bottom: 35px !important;
     }
     
+    /* Dedicated Style Scale Rule for Command Terminal Headers */
     .terminal-main-header {
-        font-size: 14px !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.1em !important;
+        font-size: 15px !important;
+        font-weight: 900 !important;
+        letter-spacing: 0.12em !important;
         text-transform: uppercase !important;
-        color: #FF9500 !important;
+        color: #FF9500 !important; /* Vivid active amber profile color */
+        text-shadow: 0 0 15px rgba(255, 149, 0, 0.2);
+        margin-bottom: 4px !important;
         display: block !important;
-        margin-bottom: 20px !important;
     }
     
     div.pitch-trigger-box button { background-color: #00CD52 !important; border: none !important; padding: 14px 20px !important; width: 100%; }
@@ -223,18 +218,19 @@ st.markdown("""
     div.floating-back-container button p { color: #FFFFFF !important; font-size: 11px !important; font-weight: 700 !important; text-transform: uppercase !important; }
     div.floating-back-container button:hover p { color: #000000 !important; }
     
+    /* Input headings with descriptive spacing */
     .custom-input-heading {
-        color: #8E8E93 !important;
-        font-size: 10px !important;
+        color: #AEAEB2 !important;
+        font-size: 11px !important;
         text-transform: uppercase !important;
         letter-spacing: 0.08em !important;
         font-weight: 700 !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 10px !important;
         display: block !important;
         text-align: left !important;
     }
     
-    div[data-testid="stSelectbox"] > div { background-color: #0A0A0C !important; border: 1px solid rgba(255,255,255,0.06) !important; border-radius: 12px !important; }
+    div[data-testid="stSelectbox"] > div { background-color: #1C1C1E !important; border: 1px solid rgba(255,255,255,0.08) !important; border-radius: 14px !important; }
     div[data-testid="stSelectbox"] div[data-baseweb="select"] { color: white !important; }
     
     /* Output Data Interface Modals */
@@ -261,7 +257,7 @@ st.markdown("""
     .ritual-table tr:last-child td { border-bottom: none; }
     .step-highlight { font-weight: 700; color: #000000; }
     
-    hr { border-color: rgba(255,255,255,0.06) !important; margin: 20px 0 !important; }
+    hr { border-color: rgba(255,255,255,0.08) !important; margin: 24px 0 !important; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -278,7 +274,7 @@ if not st.session_state.splash_done:
     splash_placeholder.empty()
     st.session_state.splash_done = True
 
-# 4. DATA MATRIX - COMPREHENSIVE REPOSITORY SYNCHRONIZED ARCHITECTURE
+# 4. DATA MATRIX - COMPREHENSIVE REPOSITORY SYNCHRONIZED ARCHITECTURE (.mp3 EXTENSIONS)
 DATA_FLOW_MATRIX = {
     "Smart Speaker": {
         "Paytm": {
@@ -368,11 +364,25 @@ DATA_FLOW_MATRIX = {
 
 TECHNICAL_ERRORS = {
     "pan_mismatch": {"title": "PAN Name Mismatch", "reason": "PAN Card aur Aadhaar Card mein naam alag hai.", "actions": ["Sahi naam update karayen.", "PAN mein naam sudharkar fir se KYC karen."]},
-    "kyc_failed_link": {"title": "KYC Verification Failed", "reason": "PAN aur Aadhaar aapas mein Link nahi hai.", "actions": ["PAN ko Aadhaar se Link karwaen (NSDL/UTI Portal ya Bank/CSC ke madhyam se).", "Link hone ke baad 24 ghante baad Retry karen."]}
+    "kyc_failed_link": {"title": "KYC Verification Failed", "reason": "PAN aur Aadhaar aapas mein Link nahi hai.", "actions": ["PAN ko Aadhaar se Link karwaen (NSDL/UTI Portal ya Bank/CSC ke madhyam se).", "Link hone ke baad 24 ghante baad Retry karen."]},
+    "kyc_incomplete": {"title": "Unable to Verify Your KYC", "reason": "KYC Process beech mein ruk gaya / poora nahi ho paya.", "actions": ["Kuch samay (TAT) intezar karen.", "TAT poora hone ke baad bhi issue rahe toh War Room mein Raise karen."]},
+    "face_match_failed": {"title": "Face Match Failed", "reason": "Selfie aur Aadhaar/PAN Photo Match nahi hui.", "actions": ["Bright Light mein Clear Selfie le.", "Chashma/Cap hatakar try kare.", "Chehra Frame mein Proper rakhe aur dobara Retry kare."]},
+    "kyc_failed_docs": {"title": "KYC Failed", "reason": "Di gayi Details Verification Document se Match nahi hui.", "actions": ["Di gayi jankari (Name, DOB, Address, aadi) sahi bhare.", "Documents sahi aur Clear Upload kare.", "Fir bhi Fail ho toh yeh Terminal Error hai - Next Merchant par Move kare."]},
+    "digilocker_error": {"title": "DigiLocker Error", "reason": "UIDAI/DigiLocker ki taraf se Technical Issue hai.", "actions": ["2 ghante Wait kare aur fir se Try kare.", "Issue hone par War Room mein Raise kare."]},
+    "unable_process_request": {"title": "Unable to Process Your Request", "reason": "System / Server Problem ya Lending Partner ki taraf se Temporary Issue hai.", "actions": ["Kuch samay baad Retry kare.", "Baar-baar Issue aane par War Room mein Raise kare."]},
+    "enacht_failed": {"title": "Unable to Process Your E-NACH Mandate", "reason": "Bank Details, IFSC, Account Type ya E-NACH Consent mein Problem hai.", "actions": ["Bank Details dobara Check kare.", "Sahi Account Type (Savings) aur IFSC chune.", "Dobara Mandate Setup kare."]},
+    "upi_mandate_failed": {"title": "UPI Mandate Setup Failed", "reason": "UPI ID ya Bank se Mandate Setup nahi ho paya.", "actions": ["UPI ID Active aur Same Bank ki ho.", "Bank App/UPI App mein Mandate Approve kare."]},
+    "disbursement_failed": {"title": "Loan Disbursement Failed", "reason": "Bank Account, IFSC, KYC ya System issue ke karan Disbursement nahi ho paya.", "actions": ["Bank Details aur IFSC Verify kare.", "KYC Complete aur Approved hai ya nahi Check kare.", "Issue rahe toh War Room mein Raise kare."]}
 }
 
 COUNTER_OBJECTIONS = {
-    "eligibility": {"title": "Mere paas PhonePe QR hai, par Loan ke liye Eligible kaise banu?", "reason": "Merchant dwara niyamit aur sahi vyavahar badhana aavashyak hai.", "actions": ["Rojana PhonePe QR par jyada se jyada UPI Payments le."]}
+    "eligibility": {"title": "Mere paas PhonePe QR hai, par Loan ke liye Eligible kaise banu?", "reason": "Merchant dwara niyamit aur sahi vyavahar badhana aavashyak hai.", "actions": ["Rojana PhonePe QR par jyada se jyada UPI Payments le.", "Aapki lagatar Transaction History hi aapko Loan ke liye Eligible banati hai.", "Jitna jyada aur Regular istemal, utni jaldi Loan Offer!"]},
+    "higher_offer": {"title": "Mujhe Higher Loan Offer kaise milega?", "reason": "Loan ki rashi mukhya roop se lenden aur cibil par aadharit hai.", "actions": ["Loan Amount mukhya roop se aapke PhonePe QR Transactions aur CIBIL Score par nirbhar karta hai.", "Samay par EDI Repayment karne se aapka CIBIL sudharta hai aur agla Higher Loan Slab swatah khul jata hai.", "Acche Business Performance se Loan Offer badhta hai."]},
+    "edi_miss": {"title": "Agar mein EDI Miss kar du toh kya hoga?", "reason": "E-NACH bounce hone par credit score aur future metrics par bura asar padta hai.", "actions": ["Hum E-NACH ke madhyam se Due aur Overdue Amount ko aapke Bank Account se Auto-Debit kar sakte hain.", "Baar-baar Default karne se aapka CIBIL Score kharab hota hai.", "Isse bhavishya mein Loan milna mushkil ho sakta hai."]},
+    "loan_reject": {"title": "Loan Banner dikha, fir bhi mera Loan Reject kyun ho gaya?", "reason": "Banner eligible criteria dikhata hai par final approval partner assessment par hota hai.", "actions": ["Loan Offer Eligibility aapki Activity ke aadhar par hoti hai.", "Lekin Final Approval Lending Partner dwara kiya jata hai.", "Kuch Internal Parameters mein kami hone par Loan Reject ho sakta hai.", "Aap QR Usage jaari rakhe aur CIBIL sudhare, fir dobara koshish kare."]},
+    "competitor_more_offer": {"title": "Doosre Merchant ko mujhse jyada Loan Amount kyun offer hua?", "reason": "Lending risk assessment engines multiple variable parameters par matrix evaluation karte hain.", "actions": ["Lending Company aapke Business ko kareeb 20 alag-alag Parameters par Evaluate karti hai.", "Jaise: Transaction Volume, Consistency, Business Vintage, Ticket Size, Refund Ratio, CIBIL Score, KYC Quality aadi.", "Har Merchant ke yeh Parameters alag hote hain, isliye Offer bhi alag hote hain."]},
+    "loan_benefit": {"title": "Loan lene ka mere liye kya fayda hai?", "reason": "Business scaling capital metrics validation.", "actions": ["Loan se aap Inventory bada sakte hain, Business Expand kar sakte hain.", "Jyada Stock = Jyada Sales aur jyada Profit kama sakte hain.", "Samay par Repayment karne se CIBIL Score improve hota hai.", "Bhavishya mein aapko Higher Loan Amount kam Interest Rate par milega."]},
+    "edi_vs_emi": {"title": "Main EMI ki bajay EDI kyun lu?", "reason": "Vyavasay ke cashflow par bina dabav dale aasan dainik adayegi framework.", "actions": ["EMI mein har mahine badi Fixed Amount deni padti hai.", "EDI mein aapki Daily Sales se chhoti-chhoti Amount katti hai, jisse Repayment aasan ho jata hai.", "Business Cash Flow mein koi dabav nahi padta."]}
 }
 
 # 5. CORE WORKSPACE SURFACE INTERFACES
@@ -407,7 +417,7 @@ if not st.session_state.selected_module:
         </div>
     """, unsafe_allow_html=True)
 
-# Carousel columns loop processing framework
+# Symmetrical Horizontal Carousel Grid
 carousel_cols = st.columns(4)
 modules = ["Smart Speaker", "Merchant Lending", "Gate Meeting Rituals", "Merchant Visit Rituals"]
 keys = ["mod_ecb", "mod_lending", "mod_gate", "mod_visit"]
@@ -487,6 +497,7 @@ if st.session_state.selected_module:
                 st.write("")
                 st.markdown('<div class="app-brand-tag" style="margin-bottom:8px;">🎙️ Training Audio Player:</div>', unsafe_allow_html=True)
                 
+                # Dynamic Execution Absolute Path Map (.mp3 asset routing directly from repository root)
                 base_dir = os.path.dirname(os.path.abspath(__file__))
                 absolute_audio_path = os.path.join(base_dir, node["audio"])
                 
@@ -546,34 +557,36 @@ if st.session_state.selected_module:
 
 # 7. HIGHLY HIGHLIGHTED STANDALONE VERTICAL TRIAGE TERMINAL ENGINE
 if not st.session_state.selected_module:
+    # Upgraded standalone shell with amplified header tracking style properties
     st.markdown("""
         <div class="illuminated-triage-panel">
             <span class="terminal-main-header">⚡ INSTANT TROUBLESHOOTING TERMINAL</span>
+        </div>
     """, unsafe_allow_html=True)
 
     # Item Container Block 01: Technical Errors Selector Dropdown
-    st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
-    selected_err = st.selectbox(
-        "Technical Error Form Selector Tool",
-        options=["None"] + list(TECHNICAL_ERRORS.keys()),
-        format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
-        key="tech_errors_aligned_dropdown",
-        label_visibility="collapsed"
-    )
+    with st.container():
+        st.markdown('<span class="custom-input-heading">Troubleshoot Technical Errors</span>', unsafe_allow_html=True)
+        selected_err = st.selectbox(
+            "Technical Error Form Selector Tool",
+            options=["None"] + list(TECHNICAL_ERRORS.keys()),
+            format_func=lambda x: "Select Merchant Error..." if x == "None" else TECHNICAL_ERRORS[x]["title"],
+            key="tech_errors_aligned_dropdown",
+            label_visibility="collapsed"
+        )
     
-    st.markdown('<div style="margin-bottom: 24px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="margin-bottom: 30px;"></div>', unsafe_allow_html=True)
     
     # Item Container Block 02: Counter Objections Selector Dropdown
-    st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
-    selected_obj = st.selectbox(
-        "Counter Objection Form Selector Tool",
-        options=["None"] + list(COUNTER_OBJECTIONS.keys()),
-        format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
-        key="counter_objections_aligned_dropdown",
-        label_visibility="collapsed"
-    )
-    
-    st.markdown('</div>', unsafe_allow_html=True) # Safe terminal container seal close
+    with st.container():
+        st.markdown('<span class="custom-input-heading">Resolve Counter Objections</span>', unsafe_allow_html=True)
+        selected_obj = st.selectbox(
+            "Counter Objection Form Selector Tool",
+            options=["None"] + list(COUNTER_OBJECTIONS.keys()),
+            format_func=lambda x: "Select Merchant Objection..." if x == "None" else COUNTER_OBJECTIONS[x]["title"],
+            key="counter_objections_aligned_dropdown",
+            label_visibility="collapsed"
+        )
     
     # Action result metrics outputs cards processing
     if selected_err != "None":
