@@ -447,6 +447,7 @@ if not st.session_state.selected_module:
                 st.markdown(f'<div class="mobile-card-header">{modules[i].upper()}</div>', unsafe_allow_html=True)
                 if st.button("Open", key=keys[i]):
                     reset_pitch_flow(modules[i])
+                    st.rerun() # Critical refresh directive ensures landing workspace disappears instantly
 
 st.markdown('</div>', unsafe_allow_html=True) # End active-workspace-surface
 st.markdown("<hr/>", unsafe_allow_html=True)
@@ -527,16 +528,16 @@ if st.session_state.selected_module:
                 <div class="popup-title">10 KA DUM</div>
                 <table class="ritual-table">
                     <tr><th>Gate Meeting</th><th>Description</th></tr>
-                    <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Generation/Scanning<br>2-Selfie with Code (Mention AOP, Count of Active, Location)<br>3-Virtual GM Form</td></tr>
-                    <tr><td><span class="step-highlight">2. Team Grooming</span></td><td>Basic Hygiene - Dress, Bags, Helmet, Mobile Cover, Mobile Screen Guard, Torn Shoes or Slippers.</td></tr>
-                    <tr><td><span class="step-highlight">3. SKH</span></td><td>In-depth Discussion with help of Agent Activity & Tracker</td></tr>
-                    <tr><td><span class="step-highlight">4. DSR</span></td><td>1-Take Appointment during Morning calling activity<br>2-Visit Mx and Mark tasks with final remarks</td></tr>
-                    <tr><td><span class="step-highlight">5. Salary Discussion</span></td><td>Daily Salary Discussion with format to be done and Signed by Manager i.e. TSM, ASM, CSM.</td></tr>
-                    <tr><td><span class="step-highlight">6. TOD</span></td><td>1-Task of the Day Discussion<br>2-Open Smart Squad<br>3-Perform Ace Activities<br>4-TP Commitment for the Day on Sales Academy</td></tr>
-                    <tr><td><span class="step-highlight">7. Manager Inputs</span></td><td>How to Drive task of the Day, share inputs and create innovative drives.</td></tr>
-                    <tr><td><span class="step-highlight">8. Collateral Dist.</span></td><td>QR, A4, SS, RVP collection, distribution and submission.</td></tr>
-                    <tr><td><span class="step-highlight">9. Telecalling Activity</span></td><td>15 Appointments to be Booked before leaving.</td></tr>
-                    <tr><td><span class="step-highlight">10. Support Required</span></td><td>One on One support requirement discussion with Manager.</td></tr>
+                    <tr><td><span class="step-highlight">1. Attendance</span></td><td>1-QR Gen/Scanning<br>2-Selfie with Code<br>3-Virtual GM Form</td></tr>
+                    <tr><td><span class="step-highlight">2. Grooming</span></td><td>Dress, Bags, Helmet, Mobile Screen Guard, Shoes.</td></tr>
+                    <tr><td><span class="step-highlight">3. SKH</span></td><td>Discussion via Agent Tracker</td></tr>
+                    <tr><td><span class="step-highlight">4. DSR</span></td><td>Visit Mx and Mark tasks with final remarks</td></tr>
+                    <tr><td><span class="step-highlight">5. Salary</span></td><td>Daily Salary Discussion signed by Manager.</td></tr>
+                    <tr><td><span class="step-highlight">6. TOD</span></td><td>Task of the Day & Ace Activities</td></tr>
+                    <tr><td><span class="step-highlight">7. Inputs</span></td><td>Manager Innovative drives.</td></tr>
+                    <tr><td><span class="step-highlight">8. Collateral</span></td><td>QR, A4, SS, RVP distribution.</td></tr>
+                    <tr><td><span class="step-highlight">9. Telecalling</span></td><td>15 Appointments Booked.</td></tr>
+                    <tr><td><span class="step-highlight">11. Support</span></td><td>One on One support request.</td></tr>
                 </table>
             </div>
         """, unsafe_allow_html=True)
@@ -549,11 +550,11 @@ if st.session_state.selected_module:
                 <div class="popup-title">5 KA PUNCH</div>
                 <table class="ritual-table">
                     <tr><th>Step</th><th>Task Objective</th><th>Action Roadmap</th></tr>
-                    <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test Transaction</b></td><td>Deploy minimum 3 QR codes and perform a small test transaction to confirm tracking ecosystem health.</td></tr>
-                    <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition QR</b></td><td>Locate and tag the specific competition QR active on counter inside analytics environment.</td></tr>
-                    <tr><td><span class="step-highlight">3</span></td><td><b>Show Transaction in App</b></td><td>Verify test transaction inside the PhonePe Business App. Click all visible structural banners and request Photo QR if available.</td></tr>
-                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete Merchant KYC</b></td><td>Collect valid verification documentation details. Securely verify account identity instruments on workspace dashboard.</td></tr>
-                    <tr><td><span class="step-highlight">5</span></td><td><b>Smartspeaker Activation</b></td><td>Plug in and charge smartspeaker. Share complete support line coordinates and localized contact details with the merchant.</td></tr>
+                    <tr><td><span class="step-highlight">1</span></td><td><b>QR Deployment & Test</b></td><td>Deploy min 3 QRs and perform small test transaction.</td></tr>
+                    <tr><td><span class="step-highlight">2</span></td><td><b>Tag Competition</b></td><td>Locate and tag specific competition QR active on counter.</td></tr>
+                    <tr><td><span class="step-highlight">3</span></td><td><b>Show Trans in App</b></td><td>Verify transaction inside PhonePe Business App.</td></tr>
+                    <tr><td><span class="step-highlight">4</span></td><td><b>Complete KYC</b></td><td>Securely verify account identity instruments (PAN, Aadhaar).</td></tr>
+                    <tr><td><span class="step-highlight">5</span></td><td><b>Speaker Activation</b></td><td>Plug in smartspeaker. Share complete support coordinates.</td></tr>
                 </table>
             </div>
         """, unsafe_allow_html=True)
