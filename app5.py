@@ -537,7 +537,7 @@ if st.session_state.selected_module:
                     <tr><td><span class="step-highlight">7. Inputs</span></td><td>Manager Innovative drives.</td></tr>
                     <tr><td><span class="step-highlight">8. Collateral</span></td><td>QR, A4, SS, RVP distribution.</td></tr>
                     <tr><td><span class="step-highlight">9. Telecalling</span></td><td>15 Appointments Booked.</td></tr>
-                    <tr><td><span class="step-highlight">11. Support</span></td><td>One on One support request.</td></tr>
+                    <tr><td><span class="step-highlight">10. Support</span></td><td>One on One support request.</td></tr>
                 </table>
             </div>
         """, unsafe_allow_html=True)
