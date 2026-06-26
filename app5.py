@@ -332,7 +332,7 @@ DATA_FLOW_MATRIX = {
         }
     },
     "Merchant Lending": {
-        "Competition": {
+        "Paytm": {
             "points": [
                 "Expose true Annual Percentage Rate (APR) of 36%–37% hidden under processing blocks and processing premiums.",
                 "Pitch clear, low monthly interest matrix rates of 1.25%–1.5%.",
@@ -477,7 +477,7 @@ if st.session_state.selected_module:
             st.markdown(f"""
                 <div class="solution-popup-card flow-border">
                     <div class="status-pill flow-color">COMPETITIVE OUTLET PLAYBOOK: {comp_choice.upper()}</div>
-                    <div class="popup-title">{current_mod} Strategy vs {comp_choice}</div>
+                    <div class="popup-title">{current_mod} Strategy vs Competition </div>
                     <div class="meta-label">Actual Points to Discuss / मुख्य बातें</div>
                 </div>
             """, unsafe_allow_html=True)
