@@ -476,7 +476,7 @@ if st.session_state.selected_module:
             
             st.markdown(f"""
                 <div class="solution-popup-card flow-border">
-                    <div class="status-pill flow-color">COMPETITIVE OUTLET PLAYBOOK: {comp_choice.upper()}</div>
+                    <div class="status-pill flow-color">COMPETITIVE OUTLET PLAYBOOK: </div>
                     <div class="popup-title">{current_mod} Strategy vs Competition </div>
                     <div class="meta-label">Actual Points to Discuss / मुख्य बातें</div>
                 </div>
@@ -494,7 +494,7 @@ if st.session_state.selected_module:
                 
             st.write("")
             st.markdown('<div class="pitch-trigger-box">', unsafe_allow_html=True)
-            if st.button(f"Customize Active Pitch Script vs {comp_choice}", key="generate_pitch_btn"):
+            if st.button(f"Customize Pitch ", key="generate_pitch_btn"):
                 st.session_state.pitch_customized = True
             st.markdown('</div>', unsafe_allow_html=True)
             
